@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Teko', 'sans-serif'],
-        body: ['Satoshi', 'sans-serif'],
+        display: ['"Bebas Neue"', 'sans-serif'],
+        body: ['"Inter"', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,6 +51,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        dark: {
+          DEFAULT: "hsl(var(--dark-bg))",
+          card: "hsl(var(--dark-card))",
+          foreground: "hsl(var(--dark-foreground))",
+          muted: "hsl(var(--dark-muted))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -77,16 +83,12 @@ export default {
           to: { height: "0" },
         },
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        "count-up": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsla(350, 100%, 60%, 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsla(350, 100%, 60%, 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsla(355, 78%, 56%, 0.25)" },
+          "50%": { boxShadow: "0 0 40px hsla(355, 78%, 56%, 0.5)" },
         },
       },
       animation: {

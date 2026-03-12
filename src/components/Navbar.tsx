@@ -26,14 +26,17 @@ const Navbar = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-background/90 backdrop-blur-md shadow-lg" : "bg-transparent"
+          scrolled
+            ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
+            : "bg-transparent"
         }`}
       >
         <div className="section-container flex items-center justify-between h-16 md:h-20">
-          <a href="#hero" className="font-display text-2xl md:text-3xl font-bold tracking-tight">
-            <span className="gradient-text">POWER</span>
-            <span className="text-foreground">FIT</span>
+          <a href="#hero" className="font-display text-3xl md:text-4xl tracking-tight">
+            <span className={scrolled ? "text-primary" : "text-primary"}>POWER</span>
+            <span className={scrolled ? "text-foreground" : "text-dark-foreground"}>FIT</span>
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -41,7 +44,9 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="label-text text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className={`label-text transition-colors duration-200 hover:text-primary ${
+                  scrolled ? "text-muted-foreground" : "text-dark-foreground/70 hover:text-dark-foreground"
+                }`}
               >
                 {link.label}
               </a>
@@ -53,7 +58,7 @@ const Navbar = () => {
               href="#contact"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-full label-text text-sm font-bold"
+              className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-full label-text font-bold transition-shadow hover:shadow-lg hover:shadow-primary/25"
             >
               Join Now
             </motion.a>
@@ -61,7 +66,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-foreground"
+            className={`md:hidden ${scrolled ? "text-foreground" : "text-dark-foreground"}`}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -74,7 +79,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-lg pt-20 px-6"
+            className="fixed inset-0 z-40 bg-background pt-20 px-6"
           >
             <div className="flex flex-col gap-6">
               {navLinks.map((link) => (
@@ -91,7 +96,7 @@ const Navbar = () => {
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
                 whileTap={{ scale: 0.96 }}
-                className="mt-4 inline-block text-center bg-primary text-primary-foreground px-8 py-4 rounded-full label-text text-base font-bold"
+                className="mt-4 inline-block text-center bg-primary text-primary-foreground px-8 py-4 rounded-full label-text font-bold"
               >
                 Join Now
               </motion.a>
@@ -100,15 +105,15 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Mobile sticky Join Now */}
+      {/* Mobile sticky CTA */}
       <motion.div
         initial={{ y: 100 }}
         animate={{ y: scrolled ? 0 : 100 }}
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden p-4 bg-background/90 backdrop-blur-md border-t border-border"
+        className="fixed bottom-0 left-0 right-0 z-50 md:hidden p-3 bg-background/95 backdrop-blur-md border-t border-border"
       >
         <a
           href="#contact"
-          className="block text-center bg-primary text-primary-foreground py-3 rounded-full label-text text-sm font-bold animate-pulse-glow"
+          className="block text-center bg-primary text-primary-foreground py-3 rounded-full label-text font-bold animate-pulse-glow"
         >
           Start Free Trial
         </a>

@@ -14,7 +14,7 @@ const GallerySection = () => {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <section id="gallery" className="py-20 md:py-32 bg-secondary/30">
+    <section id="gallery" className="section-light py-20 md:py-32">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,9 +22,9 @@ const GallerySection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="label-text text-sm text-primary mb-4 tracking-widest">Gallery</p>
-          <h2 className="font-display text-5xl md:text-7xl lg:text-8xl gradient-text">
-            Inside PowerFit
+          <p className="label-text text-primary mb-3">Gallery</p>
+          <h2 className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground">
+            Inside <span className="gradient-text">PowerFit</span>
           </h2>
         </motion.div>
 
@@ -36,22 +36,20 @@ const GallerySection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              whileHover={{ scale: 1.03 }}
               onClick={() => setSelected(i)}
-              className="relative overflow-hidden rounded-2xl aspect-square cursor-pointer group"
+              className="relative overflow-hidden rounded-2xl aspect-square cursor-pointer group shadow-sm"
             >
               <img
                 src={img}
                 alt={`PowerFit gallery ${i + 1}`}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {selected !== null && (
           <motion.div
@@ -59,10 +57,10 @@ const GallerySection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelected(null)}
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-md flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-foreground/90 backdrop-blur-md flex items-center justify-center p-4"
           >
             <motion.button
-              className="absolute top-6 right-6 text-foreground"
+              className="absolute top-6 right-6 text-background"
               whileHover={{ scale: 1.1 }}
               onClick={() => setSelected(null)}
             >
