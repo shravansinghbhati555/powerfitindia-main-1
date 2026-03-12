@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 import { Award, ClipboardList, Apple, Cpu, Heart, TrendingUp } from "lucide-react";
 
 const features = [
-  { icon: Award, title: "Certified Trainers" },
-  { icon: ClipboardList, title: "Customized Training Programs" },
-  { icon: Apple, title: "Nutrition Guidance" },
-  { icon: Cpu, title: "Advanced Gym Equipment" },
-  { icon: Heart, title: "Community Environment" },
-  { icon: TrendingUp, title: "Result-Driven Fitness Plans" },
+  { icon: Award, title: "Certified Trainers", desc: "Industry-certified coaches who understand your body." },
+  { icon: ClipboardList, title: "Customized Workout Plans", desc: "Personalized routines for your specific goals." },
+  { icon: Apple, title: "Nutrition Guidance", desc: "Expert diet plans for optimal performance." },
+  { icon: Cpu, title: "Advanced Equipment", desc: "State-of-the-art machines and free weights." },
+  { icon: Heart, title: "Supportive Community", desc: "Train alongside people who push you forward." },
+  { icon: TrendingUp, title: "Result-Oriented Programs", desc: "Track progress and see real changes." },
 ];
 
 const WhyPowerfitSection = () => (
-  <section className="py-20 md:py-32 bg-secondary/30">
+  <section className="section-light py-20 md:py-32">
     <div className="section-container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -19,9 +19,9 @@ const WhyPowerfitSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <p className="label-text text-sm text-primary mb-4 tracking-widest">Why Us</p>
-        <h2 className="font-display text-5xl md:text-7xl lg:text-8xl gradient-text">
-          Why PowerFit Hits Different
+        <p className="label-text text-primary mb-3">Why Us</p>
+        <h2 className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground">
+          Why Choose <span className="gradient-text">PowerFit</span>
         </h2>
       </motion.div>
 
@@ -33,14 +33,13 @@ const WhyPowerfitSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            whileHover={{ y: -4, scale: 1.02 }}
-            className="card-glow bg-card rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer group"
-            style={{ boxShadow: "0 0 0 1px hsla(220,15%,50%,0.1), 0 4px 8px -2px hsla(0,0%,0%,0.2)" }}
+            className="card-lift bg-background rounded-2xl p-8 text-center cursor-pointer group border border-border shadow-sm"
           >
             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-primary/20 transition-colors">
-              <f.icon className="text-primary" size={32} />
+              <f.icon className="text-primary" size={30} />
             </div>
-            <h3 className="font-display text-xl text-foreground">{f.title}</h3>
+            <h3 className="font-display text-xl text-foreground mb-2">{f.title}</h3>
+            <p className="font-body text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
           </motion.div>
         ))}
       </div>

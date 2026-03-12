@@ -4,13 +4,13 @@ import trainer2 from "@/assets/trainer-2.jpg";
 import trainer3 from "@/assets/trainer-3.jpg";
 
 const trainers = [
-  { img: trainer1, name: "Arjun Mehta", spec: "Strength & Conditioning", desc: "10+ years of powerlifting and athletic performance coaching." },
-  { img: trainer2, name: "Priya Sharma", spec: "HIIT & Group Fitness", desc: "Certified group instructor specializing in high-intensity metabolic training." },
-  { img: trainer3, name: "Vikram Singh", spec: "Bodybuilding & Nutrition", desc: "Competition-level bodybuilding coach with expertise in sports nutrition." },
+  { img: trainer1, name: "Arjun Mehta", spec: "Strength & Conditioning", exp: "10+ Years", desc: "Powerlifting coach specializing in athletic performance." },
+  { img: trainer2, name: "Priya Sharma", spec: "HIIT & Group Fitness", exp: "8+ Years", desc: "Certified group instructor with expertise in metabolic training." },
+  { img: trainer3, name: "Vikram Singh", spec: "Bodybuilding & Nutrition", exp: "12+ Years", desc: "Competition-level bodybuilding coach and sports nutritionist." },
 ];
 
 const TrainersSection = () => (
-  <section id="trainers" className="py-20 md:py-32 bg-secondary/30">
+  <section id="trainers" className="section-light py-20 md:py-32">
     <div className="section-container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -18,9 +18,9 @@ const TrainersSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <p className="label-text text-sm text-primary mb-4 tracking-widest">Coaches</p>
-        <h2 className="font-display text-5xl md:text-7xl lg:text-8xl gradient-text">
-          Meet The Coaches
+        <p className="label-text text-primary mb-3">Our Team</p>
+        <h2 className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground">
+          Meet Our <span className="gradient-text">Expert Trainers</span>
         </h2>
       </motion.div>
 
@@ -28,12 +28,11 @@ const TrainersSection = () => (
         {trainers.map((t, i) => (
           <motion.div
             key={t.name}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="card-glow bg-card rounded-2xl overflow-hidden group cursor-pointer"
-            style={{ boxShadow: "0 0 0 1px hsla(220,15%,50%,0.1), 0 4px 8px -2px hsla(0,0%,0%,0.2)" }}
+            className="card-lift bg-background rounded-2xl overflow-hidden group cursor-pointer border border-border shadow-sm"
           >
             <div className="relative overflow-hidden aspect-[3/4]">
               <img
@@ -41,10 +40,15 @@ const TrainersSection = () => (
                 alt={t.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <span className="inline-block bg-primary text-primary-foreground px-3 py-1 rounded-full label-text text-[10px]">
+                  {t.exp}
+                </span>
+              </div>
             </div>
-            <div className="p-6 -mt-12 relative z-10">
-              <p className="label-text text-xs text-primary mb-1">{t.spec}</p>
+            <div className="p-6">
+              <p className="label-text text-primary text-[10px] mb-1">{t.spec}</p>
               <h3 className="font-display text-3xl text-foreground">{t.name}</h3>
               <p className="font-body text-muted-foreground text-sm mt-2">{t.desc}</p>
             </div>

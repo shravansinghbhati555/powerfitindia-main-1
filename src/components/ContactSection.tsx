@@ -1,42 +1,58 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     alert("Thank you! We'll be in touch soon.");
     setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32">
+    <section id="contact" className="section-light py-20 md:py-32">
       <div className="section-container">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <p className="label-text text-sm text-primary mb-4 tracking-widest">Get Started</p>
-            <h2 className="font-display text-5xl md:text-7xl gradient-text leading-none">
-              Not Sure Yet? Try Us For Free
+            <p className="label-text text-primary mb-3">Get Started</p>
+            <h2 className="font-display text-5xl md:text-7xl text-foreground leading-none">
+              Start Your
+              <br />
+              <span className="gradient-text">Fitness Journey Today</span>
             </h2>
             <p className="font-body text-muted-foreground text-base md:text-lg mt-6 leading-relaxed max-w-md">
-              Book a free trial session and experience what makes PowerFit India different. No commitment required.
+              Book a free trial session and experience what makes PowerFit India the best choice for your fitness goals. No commitment required.
             </p>
+
+            <div className="mt-8 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Send className="text-primary" size={18} />
+                </div>
+                <span className="font-body text-sm text-foreground">hello@powerfitindia.com</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <MessageCircle className="text-primary" size={18} />
+                </div>
+                <span className="font-body text-sm text-foreground">+91 99999 99999</span>
+              </div>
+            </div>
           </motion.div>
 
           <motion.form
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.15 }}
             onSubmit={handleSubmit}
-            className="space-y-5"
+            className="bg-background rounded-2xl p-8 border border-border shadow-lg space-y-4"
           >
             {[
               { name: "name", placeholder: "Your Name", type: "text" },
@@ -50,8 +66,7 @@ const ContactSection = () => {
                 required
                 value={formData[field.name as keyof typeof formData]}
                 onChange={(e) => setFormData((prev) => ({ ...prev, [field.name]: e.target.value }))}
-                className="w-full bg-input text-foreground px-5 py-4 rounded-lg font-body text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
-                style={{ boxShadow: "0 0 0 1px hsl(210,8%,20%)" }}
+                className="w-full bg-secondary text-foreground px-5 py-3.5 rounded-xl font-body text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border transition-shadow"
               />
             ))}
             <textarea
@@ -59,16 +74,15 @@ const ContactSection = () => {
               rows={4}
               value={formData.message}
               onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
-              className="w-full bg-input text-foreground px-5 py-4 rounded-lg font-body text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow resize-none"
-              style={{ boxShadow: "0 0 0 1px hsl(210,8%,20%)" }}
+              className="w-full bg-secondary text-foreground px-5 py-3.5 rounded-xl font-body text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border transition-shadow resize-none"
             />
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.96 }}
-              className="w-full bg-primary text-primary-foreground py-4 rounded-full label-text text-sm font-bold shadow-lg"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="w-full bg-primary text-primary-foreground py-4 rounded-full label-text font-bold shadow-lg shadow-primary/20 transition-shadow hover:shadow-xl hover:shadow-primary/30"
             >
-              Start My Fitness Journey
+              Get Started
             </motion.button>
           </motion.form>
         </div>
@@ -82,9 +96,9 @@ const ContactSection = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="fixed bottom-20 md:bottom-8 right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
-        style={{ background: "hsl(142, 70%, 45%)" }}
+        style={{ background: "#25D366" }}
       >
-        <MessageCircle className="text-foreground" size={24} />
+        <MessageCircle className="text-primary-foreground" size={24} />
       </motion.a>
     </section>
   );
