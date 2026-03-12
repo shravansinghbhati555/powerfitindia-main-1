@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,48 +6,50 @@
 
 @layer base {
   :root {
-    --background: 220 15% 8%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
 
-    --card: 220 15% 12%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
 
-    --popover: 220 15% 10%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 350 100% 60%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 355 78% 56%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 16%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 220 15% 16%;
-    --muted-foreground: 220 10% 65%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 15 100% 55%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 18 100% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 210 8% 20%;
-    --input: 220 15% 10%;
-    --ring: 350 100% 70%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 355 78% 56%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    --accent-gradient: linear-gradient(90deg, hsl(15, 100%, 55%), hsl(350, 100%, 60%), hsl(280, 100%, 65%));
-    --glow-red: 0 0 40px hsla(350, 100%, 60%, 0.3);
-    --glow-accent: 0 0 60px hsla(350, 100%, 60%, 0.15);
+    /* Dark section tokens */
+    --dark-bg: 0 0% 7%;
+    --dark-card: 0 0% 12%;
+    --dark-foreground: 0 0% 98%;
+    --dark-muted: 0 0% 55%;
 
-    --sidebar-background: 220 15% 10%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 350 100% 60%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 220 15% 16%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 210 8% 20%;
-    --sidebar-ring: 350 100% 70%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 7%;
+    --sidebar-primary: 355 78% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 355 78% 56%;
   }
 }
 
@@ -59,66 +60,88 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Teko', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
-    line-height: 0.9;
+    font-family: 'Bebas Neue', 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  .font-body {
+    font-family: 'Inter', sans-serif;
   }
 }
 
 @layer components {
-  .gradient-text {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .card-glow {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card-glow::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: var(--accent-gradient);
-    border-radius: inherit;
-    opacity: 0;
-    filter: blur(20px);
-    transform: scale(0.95);
-    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: -1;
-  }
-
-  .card-glow:hover::before {
-    opacity: 0.6;
-    transform: scale(1.05);
-  }
-
-  .scrolling-strip {
-    animation: scroll-strip 20s linear infinite;
-  }
-
-  @keyframes scroll-strip {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   .label-text {
-    font-family: 'Satoshi', sans-serif;
-    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+  }
+
+  /* Dark section utility */
+  .section-dark {
+    background-color: hsl(var(--dark-bg));
+    color: hsl(var(--dark-foreground));
+  }
+
+  .section-light {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  .section-grey {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+  }
+
+  /* Gradient accent text */
+  .gradient-text {
+    background: linear-gradient(90deg, hsl(355, 78%, 56%), hsl(18, 100%, 60%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card glow for dark sections */
+  .card-glow {
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  }
+  .card-glow:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -12px hsla(355, 78%, 56%, 0.15), 0 8px 16px -4px hsla(0, 0%, 0%, 0.1);
+  }
+
+  /* Light card hover */
+  .card-lift {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -12px hsla(0, 0%, 0%, 0.12);
+  }
+
+  /* Scrolling strip */
+  .scrolling-strip {
+    animation: scroll-strip 25s linear infinite;
+  }
+
+  @keyframes scroll-strip {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 }
