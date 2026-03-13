@@ -105,6 +105,14 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
+              <Link
+                to="/shop"
+                onClick={() => setMobileOpen(false)}
+                className="font-display text-4xl text-foreground hover:text-primary transition-colors"
+              >
+                Shop
+              </Link>
+              ))}
               <motion.a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
