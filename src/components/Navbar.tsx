@@ -53,9 +53,20 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
+            <Link
+              to="/shop"
+              className={`label-text transition-colors duration-200 hover:text-primary ${
+                scrolled ? "text-muted-foreground" : "text-dark-foreground/70 hover:text-dark-foreground"
+              }`}
+            >
+              Shop
+            </Link>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <div className={scrolled ? "text-foreground" : "text-dark-foreground"}>
+              <CartDrawer />
+            </div>
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.03 }}
