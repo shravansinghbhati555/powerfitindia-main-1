@@ -112,7 +112,6 @@ const Navbar = () => {
               >
                 Shop
               </Link>
-              ))}
               <motion.a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
