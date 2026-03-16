@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 const Footer = () => (
   <footer className="section-dark border-t border-dark-foreground/10 py-12">
     <div className="section-container">

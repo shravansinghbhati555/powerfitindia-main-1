@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CartDrawer } from "@/components/CartDrawer";
 
 const navLinks = [
@@ -31,14 +31,14 @@ const Navbar = () => {
         transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
+            ? "bg-dark/95 backdrop-blur-md shadow-lg border-b border-dark-foreground/10"
             : "bg-transparent"
         }`}
       >
         <div className="section-container flex items-center justify-between h-16 md:h-20">
           <a href="#hero" className="font-display text-3xl md:text-4xl tracking-tight">
-            <span className={scrolled ? "text-primary" : "text-primary"}>POWER</span>
-            <span className={scrolled ? "text-foreground" : "text-dark-foreground"}>FIT</span>
+            <span className="text-primary">POWER</span>
+            <span className="text-dark-foreground">FIT</span>
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -46,40 +46,36 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className={`label-text transition-colors duration-200 hover:text-primary ${
-                  scrolled ? "text-muted-foreground" : "text-dark-foreground/70 hover:text-dark-foreground"
-                }`}
+                className="label-text text-dark-foreground/60 hover:text-dark-foreground transition-colors duration-200"
               >
                 {link.label}
               </a>
             ))}
             <Link
               to="/shop"
-              className={`label-text transition-colors duration-200 hover:text-primary ${
-                scrolled ? "text-muted-foreground" : "text-dark-foreground/70 hover:text-dark-foreground"
-              }`}
+              className="label-text text-dark-foreground/60 hover:text-dark-foreground transition-colors duration-200"
             >
               Shop
             </Link>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            <div className={scrolled ? "text-foreground" : "text-dark-foreground"}>
+            <div className="text-dark-foreground">
               <CartDrawer />
             </div>
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-full label-text font-bold transition-shadow hover:shadow-lg hover:shadow-primary/25"
+              className="inline-block border border-dark-foreground/30 text-dark-foreground px-6 py-2.5 rounded-full label-text font-bold hover:bg-dark-foreground hover:text-dark transition-all"
             >
-              Join Now
+              Get in Touch
             </motion.a>
           </div>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden ${scrolled ? "text-foreground" : "text-dark-foreground"}`}
+            className="md:hidden text-dark-foreground"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -92,7 +88,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background pt-20 px-6"
+            className="fixed inset-0 z-40 bg-dark pt-20 px-6"
           >
             <div className="flex flex-col gap-6">
               {navLinks.map((link) => (
@@ -100,7 +96,7 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-display text-4xl text-foreground hover:text-primary transition-colors"
+                  className="font-display text-4xl text-dark-foreground hover:text-primary transition-colors"
                 >
                   {link.label}
                 </a>
@@ -108,7 +104,7 @@ const Navbar = () => {
               <Link
                 to="/shop"
                 onClick={() => setMobileOpen(false)}
-                className="font-display text-4xl text-foreground hover:text-primary transition-colors"
+                className="font-display text-4xl text-dark-foreground hover:text-primary transition-colors"
               >
                 Shop
               </Link>
@@ -118,7 +114,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.96 }}
                 className="mt-4 inline-block text-center bg-primary text-primary-foreground px-8 py-4 rounded-full label-text font-bold"
               >
-                Join Now
+                Get in Touch
               </motion.a>
             </div>
           </motion.div>
@@ -129,7 +125,7 @@ const Navbar = () => {
       <motion.div
         initial={{ y: 100 }}
         animate={{ y: scrolled ? 0 : 100 }}
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden p-3 bg-background/95 backdrop-blur-md border-t border-border"
+        className="fixed bottom-0 left-0 right-0 z-50 md:hidden p-3 bg-dark/95 backdrop-blur-md border-t border-dark-foreground/10"
       >
         <a
           href="#contact"
