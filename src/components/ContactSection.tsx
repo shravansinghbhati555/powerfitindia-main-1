@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle, Send } from "lucide-react";
+import { MessageCircle, Send, MapPin, Phone } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
@@ -12,7 +12,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-light py-20 md:py-32">
+    <section id="contact" className="section-dark py-20 md:py-32 border-t border-dark-foreground/10">
       <div className="section-container">
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <motion.div
@@ -20,29 +20,29 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <p className="label-text text-primary mb-3">Get Started</p>
-            <h2 className="font-display text-5xl md:text-7xl text-foreground leading-none">
+            <p className="label-text text-primary mb-4 tracking-[0.2em]">Get Started</p>
+            <h2 className="font-display text-5xl md:text-7xl text-dark-foreground leading-[0.9]">
               Start Your
               <br />
-              <span className="gradient-text">Fitness Journey Today</span>
+              <span className="gradient-text">Fitness Journey</span>
             </h2>
-            <p className="font-body text-muted-foreground text-base md:text-lg mt-6 leading-relaxed max-w-md">
-              Book a free trial session and experience what makes PowerFit India the best choice for your fitness goals. No commitment required.
+            <p className="font-body text-dark-muted text-base md:text-lg mt-6 leading-relaxed max-w-md">
+              Book a free trial session and experience what makes PowerFit India the best choice for your fitness goals.
             </p>
 
             <div className="mt-8 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Send className="text-primary" size={18} />
+              {[
+                { icon: Send, text: "hello@powerfitindia.com" },
+                { icon: Phone, text: "+91 99999 99999" },
+                { icon: MapPin, text: "Mumbai, India" },
+              ].map((item) => (
+                <div key={item.text} className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-dark-card border border-dark-foreground/10 flex items-center justify-center">
+                    <item.icon className="text-primary" size={18} />
+                  </div>
+                  <span className="font-body text-sm text-dark-foreground">{item.text}</span>
                 </div>
-                <span className="font-body text-sm text-foreground">hello@powerfitindia.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <MessageCircle className="text-primary" size={18} />
-                </div>
-                <span className="font-body text-sm text-foreground">+91 99999 99999</span>
-              </div>
+              ))}
             </div>
           </motion.div>
 
@@ -52,7 +52,7 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
             onSubmit={handleSubmit}
-            className="bg-background rounded-2xl p-8 border border-border shadow-lg space-y-4"
+            className="bg-dark-card rounded-2xl p-8 md:p-10 border border-dark-foreground/10 space-y-4"
           >
             {[
               { name: "name", placeholder: "Your Name", type: "text" },
@@ -66,7 +66,7 @@ const ContactSection = () => {
                 required
                 value={formData[field.name as keyof typeof formData]}
                 onChange={(e) => setFormData((prev) => ({ ...prev, [field.name]: e.target.value }))}
-                className="w-full bg-secondary text-foreground px-5 py-3.5 rounded-xl font-body text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border transition-shadow"
+                className="w-full bg-dark text-dark-foreground px-5 py-4 rounded-xl font-body text-sm placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-primary/50 border border-dark-foreground/10 transition-shadow"
               />
             ))}
             <textarea
@@ -74,7 +74,7 @@ const ContactSection = () => {
               rows={4}
               value={formData.message}
               onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
-              className="w-full bg-secondary text-foreground px-5 py-3.5 rounded-xl font-body text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border transition-shadow resize-none"
+              className="w-full bg-dark text-dark-foreground px-5 py-4 rounded-xl font-body text-sm placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-primary/50 border border-dark-foreground/10 transition-shadow resize-none"
             />
             <motion.button
               type="submit"

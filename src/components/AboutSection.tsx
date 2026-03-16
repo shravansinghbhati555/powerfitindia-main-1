@@ -1,67 +1,74 @@
 import { motion } from "framer-motion";
-import { Dumbbell, Flame, Users, Zap } from "lucide-react";
+import { Dumbbell, Cpu, Heart } from "lucide-react";
 import aboutBg from "@/assets/about-bg.jpg";
 
-const highlights = [
-  { icon: Dumbbell, label: "Strength Training" },
-  { icon: Flame, label: "Fat Loss Programs" },
-  { icon: Users, label: "Group Classes" },
-  { icon: Zap, label: "Bootcamps" },
+const features = [
+  { icon: Dumbbell, title: "Professional Training", desc: "Train with certified coaches who create structured programs based on your goals, fitness level, and progress." },
+  { icon: Cpu, title: "Modern Equipment", desc: "Our gym is equipped with state-of-the-art machines and functional training areas that support strength and mobility." },
+  { icon: Heart, title: "Motivating Environment", desc: "Train in an energetic, clean, and supportive atmosphere that keeps you inspired and motivated every day." },
 ];
 
 const AboutSection = () => {
   return (
-    <section id="about" className="section-light py-20 md:py-32">
+    <section id="about" className="section-dark py-20 md:py-32 overflow-hidden">
       <div className="section-container">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-          {/* Image */}
+        {/* Top label + heading */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-20 items-end mb-16 md:mb-24">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative rounded-2xl overflow-hidden aspect-[4/3]"
           >
-            <img src={aboutBg} alt="PowerFit gym interior" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-dark/30 to-transparent" />
-          </motion.div>
-
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            <p className="label-text text-primary mb-3">About Us</p>
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground leading-none">
-              More Than A Gym.
+            <p className="label-text text-primary mb-4 tracking-[0.2em]">More Than a Gym</p>
+            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl text-dark-foreground leading-[0.9]">
+              Our Space Builds
               <br />
-              <span className="gradient-text">A Fitness Community.</span>
+              <span className="gradient-text">Champions.</span>
             </h2>
-            <p className="font-body text-muted-foreground text-base md:text-lg mt-6 leading-relaxed max-w-lg">
-              PowerFit India believes fitness is more than workouts — it's about building discipline,
-              improving health, and becoming the strongest version of yourself.
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 mt-8">
-              {highlights.map((h, i) => (
-                <motion.div
-                  key={h.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.08 }}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-secondary"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <h.icon className="text-primary" size={20} />
-                  </div>
-                  <span className="font-body text-sm font-semibold text-foreground">{h.label}</span>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="font-body text-dark-muted text-base md:text-lg leading-relaxed max-w-lg"
+          >
+            Our space combines professional equipment, expert coaches, and a motivating
+            atmosphere to help you train smarter, move better, and grow stronger—every day.
+          </motion.p>
+        </div>
+
+        {/* Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative rounded-3xl overflow-hidden aspect-[21/9] mb-16 md:mb-24"
+        >
+          <img src={aboutBg} alt="PowerFit gym interior" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent" />
+        </motion.div>
+
+        {/* 3 Feature cards */}
+        <div className="grid sm:grid-cols-3 gap-6 md:gap-8">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12 }}
+              className="group p-8 md:p-10 rounded-2xl border border-dark-foreground/8 bg-dark-card hover:border-primary/30 transition-all duration-500"
+            >
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                <f.icon className="text-primary" size={28} />
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl text-dark-foreground mb-4">{f.title}</h3>
+              <p className="font-body text-dark-muted text-sm leading-relaxed">{f.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
