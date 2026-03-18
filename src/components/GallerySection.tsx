@@ -9,12 +9,12 @@ import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
 
 const items = [
-  { img: gallery1, title: "Sustainable Fat Loss", tags: ["Equipment", "Fitness"] },
-  { img: gallery2, title: "Visible Results", tags: ["CrossFit"] },
-  { img: gallery3, title: "Busy But Fit", tags: ["Gym", "Training"] },
-  { img: gallery4, title: "Athlete Reborn", tags: ["Gym", "Training"] },
-  { img: gallery5, title: "Personal Training", tags: ["Equipment", "Fitness"] },
-  { img: gallery6, title: "Group Training", tags: ["CrossFit", "Training"] },
+  { img: gallery1, title: "Iron Temple", tags: ["Strength"] },
+  { img: gallery2, title: "Cardio Zone", tags: ["Endurance"] },
+  { img: gallery3, title: "Team Spirit", tags: ["Community"] },
+  { img: gallery4, title: "Beast Mode", tags: ["Training"] },
+  { img: gallery5, title: "Personal Best", tags: ["Coaching"] },
+  { img: gallery6, title: "Group Power", tags: ["Classes"] },
 ];
 
 const GallerySection = () => {
@@ -29,7 +29,7 @@ const GallerySection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="label-text text-primary mb-4 tracking-[0.2em]">Portfolio</p>
+          <p className="label-text text-primary mb-4 tracking-[0.3em]">Gallery</p>
           <h2 className="font-display text-5xl md:text-7xl lg:text-8xl text-dark-foreground">
             Inside <span className="gradient-text">PowerFit</span>
           </h2>
@@ -39,24 +39,27 @@ const GallerySection = () => {
           {items.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
               onClick={() => setSelected(i)}
-              className="relative overflow-hidden rounded-2xl aspect-square cursor-pointer group"
+              className="relative overflow-hidden rounded-2xl aspect-square cursor-pointer group shutter-flash"
             >
               <img
                 src={item.img}
                 alt={item.title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-dark/0 group-hover:bg-dark/60 transition-colors duration-500" />
+              {/* Red overlay on hover */}
+              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-dark/0 group-hover:bg-dark/40 transition-colors duration-500" />
               <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-4">
                 <h4 className="font-display text-2xl md:text-3xl text-dark-foreground text-center">{item.title}</h4>
                 <div className="flex gap-2 mt-3">
                   {item.tags.map(tag => (
-                    <span key={tag} className="label-text text-[10px] text-primary">{tag}</span>
+                    <span key={tag} className="label-text text-[10px] text-primary bg-primary/10 px-2 py-1 rounded-full">{tag}</span>
                   ))}
                 </div>
               </div>
