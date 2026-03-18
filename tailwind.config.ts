@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Bebas Neue"', 'sans-serif'],
+        display: ['"Bebas Neue"', '"Oswald"', 'sans-serif'],
         body: ['"Inter"', 'sans-serif'],
       },
       colors: {
@@ -88,7 +88,7 @@ export default {
         },
         "pulse-glow": {
           "0%, 100%": { boxShadow: "0 0 20px hsla(355, 78%, 56%, 0.25)" },
-          "50%": { boxShadow: "0 0 40px hsla(355, 78%, 56%, 0.5)" },
+          "50%": { boxShadow: "0 0 50px hsla(355, 78%, 56%, 0.5)" },
         },
       },
       animation: {
