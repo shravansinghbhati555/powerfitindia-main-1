@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState, useMemo } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Play, X } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /* ---- Stamped text animation ---- */
 const StampedText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
@@ -102,6 +104,87 @@ const EKGLine = () => {
   );
 };
 
+/* ---- Lazy Video with IntersectionObserver ---- */
+const LazyHeroVideo = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isVisible && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [isVisible]);
+
+  return (
+    <div ref={containerRef} className="w-full h-full">
+      {/* Mobile: static poster image only */}
+      <img
+        src="https://assets.mixkit.co/videos/23635/23635-thumb-720-0.jpg"
+        alt="Dark gym with fitness equipment"
+        className="block md:hidden w-full h-full object-cover"
+        loading="lazy"
+      />
+      {/* Desktop: lazy-loaded video */}
+      <video
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        preload="none"
+        poster="https://assets.mixkit.co/videos/23635/23635-thumb-720-0.jpg"
+        className="hidden md:block w-full h-full object-cover"
+      >
+        {isVisible && (
+          <source
+            src="https://assets.mixkit.co/videos/23635/23635-720.mp4"
+            type="video/mp4"
+          />
+        )}
+      </video>
+    </div>
+  );
+};
+
+/* ---- YouTube Modal ---- */
+const YouTubeModal = ({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) => {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent
+        className="max-w-[900px] w-[95vw] p-0 bg-dark border border-primary/40 rounded-xl overflow-hidden gap-0"
+        style={{ backgroundColor: "hsl(var(--dark))" }}
+      >
+        <DialogTitle className="sr-only">Watch Our Story</DialogTitle>
+        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+          {open && (
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/g-vHB84qRXY?autoplay=1&rel=0&modestbranding=1"
+              title="PowerFit India — Our Story"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+            />
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const stats = [
   { value: 500, suffix: "+", label: "Members" },
   { value: 15, suffix: "+", label: "Locations" },
@@ -112,6 +195,8 @@ const stats = [
 const marqueeText = "500+ Members · 15+ Locations · 7+ Years · Expanding Globally · Open a Franchise · Forever Fit Forever Strong · ";
 
 const HeroSection = () => {
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+
   return (
     <section id="hero" className="relative min-h-screen flex flex-col section-dark overflow-hidden">
       {/* Main hero content */}
@@ -175,13 +260,13 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.1, duration: 0.5 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-4"
             >
               <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
-                className="group flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:shadow-xl hover:shadow-primary/30 animate-pulse-glow"
+                className="group flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:shadow-xl hover:shadow-primary/30 animate-pulse-glow"
               >
                 Start Free Trial
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -190,11 +275,21 @@ const HeroSection = () => {
                 href="#programs"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
-                className="group flex items-center gap-3 border border-dark-foreground/20 text-dark-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:border-primary hover:text-primary"
+                className="group flex items-center justify-center gap-3 border border-dark-foreground/20 text-dark-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:border-primary hover:text-primary"
               >
-                <Play size={14} className="text-primary" />
-                Watch Video
+                Explore Programs
               </motion.a>
+              <motion.button
+                onClick={() => setVideoModalOpen(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group flex items-center justify-center gap-3 text-dark-muted hover:text-primary label-text font-bold transition-colors cursor-pointer"
+              >
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-primary/60 bg-primary/10 group-hover:bg-primary/20 transition-all">
+                  <Play size={14} className="text-primary ml-0.5" fill="hsl(355, 78%, 56%)" />
+                </span>
+                Watch Our Story
+              </motion.button>
             </motion.div>
           </motion.div>
         </div>
@@ -206,19 +301,9 @@ const HeroSection = () => {
           transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
           className="relative h-[50vh] lg:h-screen overflow-hidden"
         >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            poster=""
-          >
-            <source src="https://cdn.shopify.com/videos/c/o/v/9f21690ab3414272bf7d8c88732b3bdb.mp4" type="video/mp4" />
-          </video>
+          <LazyHeroVideo />
           <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent" />
-          {/* Red edge glow */}
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-dark to-transparent" />
         </motion.div>
       </div>
@@ -245,6 +330,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* YouTube Modal */}
+      <YouTubeModal open={videoModalOpen} onOpenChange={setVideoModalOpen} />
     </section>
   );
 };
