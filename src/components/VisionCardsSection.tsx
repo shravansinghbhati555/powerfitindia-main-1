@@ -195,89 +195,99 @@ const VisionCardsSection = () => {
           </div>
 
           {/* ─── CENTER PANEL: Dumbbell Spine ─── */}
-          <div className="hidden lg:flex flex-col items-center justify-center relative py-8">
-            {/* Radial glow */}
+          <div className="hidden lg:flex items-center justify-center relative">
+            {/* Radial glow behind dumbbell */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div
-                className="w-48 h-48 rounded-full opacity-20"
+                className="w-64 h-64 rounded-full opacity-15"
                 style={{
-                  background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)",
+                  background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)",
                 }}
               />
             </div>
 
-            {/* Dumbbell SVG — stroke only, breathing rotation */}
-            <motion.svg
-              viewBox="0 0 80 320"
-              className="w-16 relative z-10"
+            {/* Full-height SVG with dumbbell + dots + connector lines */}
+            <svg
+              viewBox="0 0 200 420"
+              className="w-full h-full relative z-10"
               fill="none"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              initial={{ opacity: 0 }}
-              animate={
-                inView
-                  ? {
-                      opacity: 1,
-                      rotate: [0, 5, 0, -5, 0],
-                    }
-                  : {}
-              }
-              transition={{
-                opacity: { duration: 0.6, delay: 0.3 },
-                rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-              }}
-              style={{ strokeDasharray: dumbbellDrawn ? "none" : "1000", strokeDashoffset: dumbbellDrawn ? "0" : "1000", transition: "stroke-dashoffset 1s ease-out" }}
+              style={{ minHeight: "380px" }}
             >
-              {/* Top plate */}
-              <rect x="20" y="10" width="40" height="50" rx="6" />
-              <rect x="26" y="4" width="28" height="62" rx="4" />
-              {/* Bar */}
-              <rect x="34" y="66" width="12" height="188" rx="4" />
-              {/* Bottom plate */}
-              <rect x="20" y="260" width="40" height="50" rx="6" />
-              <rect x="26" y="254" width="28" height="62" rx="4" />
+              {/* Breathing rotation group */}
+              <motion.g
+                style={{ transformOrigin: "100px 210px" }}
+                animate={inView ? { rotate: [0, 5, 0, -5, 0] } : {}}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                {/* Dumbbell — stroke only, elegant */}
+                <motion.g
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="2"
+                  fill="none"
+                  initial={{ strokeDasharray: 1200, strokeDashoffset: 1200 }}
+                  animate={inView ? { strokeDashoffset: 0 } : {}}
+                  transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+                >
+                  {/* Top plate outer */}
+                  <rect x="70" y="20" width="60" height="60" rx="8" />
+                  {/* Top plate inner */}
+                  <rect x="78" y="12" width="44" height="76" rx="6" />
+                  {/* Bar */}
+                  <rect x="92" y="88" width="16" height="244" rx="6" />
+                  {/* Bottom plate outer */}
+                  <rect x="70" y="340" width="60" height="60" rx="8" />
+                  {/* Bottom plate inner */}
+                  <rect x="78" y="332" width="44" height="76" rx="6" />
+                </motion.g>
 
-              {/* Connector dots */}
-              <motion.circle
-                cx="40" cy="100"
-                r="5"
-                fill="hsl(var(--primary))"
-                stroke="none"
-                initial={{ scale: 0 }}
-                animate={inView ? { scale: 1 } : {}}
-                transition={{ delay: 0.8 }}
-              />
-              <motion.circle
-                cx="40" cy="160"
-                r="5"
-                fill="hsl(var(--primary))"
-                stroke="none"
-                initial={{ scale: 0 }}
-                animate={inView ? { scale: 1 } : {}}
-                transition={{ delay: 0.9 }}
-              />
-              <motion.circle
-                cx="40" cy="220"
-                r="5"
-                fill="hsl(var(--primary))"
-                stroke="none"
-                initial={{ scale: 0 }}
-                animate={inView ? { scale: 1 } : {}}
-                transition={{ delay: 1.0 }}
-              />
-            </motion.svg>
+                {/* 3 red dots on the bar */}
+                {[{ cy: 140 }, { cy: 210 }, { cy: 280 }].map((dot, i) => (
+                  <motion.circle
+                    key={i}
+                    cx="100"
+                    cy={dot.cy}
+                    r="6"
+                    fill="hsl(var(--primary))"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="2"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={inView ? { scale: 1, opacity: 1 } : {}}
+                    transition={{ delay: 1.0 + i * 0.12, duration: 0.3, type: "spring" }}
+                  />
+                ))}
+              </motion.g>
 
-            {/* Connector lines to right cards */}
-            {[100, 160, 220].map((cy, i) => (
-              <motion.div
-                key={i}
-                className="absolute h-[2px] bg-primary/40"
-                style={{ top: `calc(${(cy / 320) * 100}% + 1rem)`, left: "60%", width: 0 }}
-                initial={{ width: 0 }}
-                animate={inView ? { width: "40%" } : {}}
-                transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
-              />
-            ))}
+              {/* Connector lines — from dots to right edge, pointing toward cards */}
+              {[140, 210, 280].map((cy, i) => (
+                <motion.line
+                  key={i}
+                  x1="106"
+                  y1={cy}
+                  x2="200"
+                  y2={cy}
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="1.5"
+                  strokeDasharray="4 4"
+                  strokeOpacity="0.5"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={inView ? { pathLength: 1, opacity: 1 } : {}}
+                  transition={{ delay: 1.1 + i * 0.12, duration: 0.5 }}
+                />
+              ))}
+
+              {/* Small arrowheads at the end of each connector */}
+              {[140, 210, 280].map((cy, i) => (
+                <motion.polygon
+                  key={`arrow-${i}`}
+                  points={`196,${cy - 4} 200,${cy} 196,${cy + 4}`}
+                  fill="hsl(var(--primary))"
+                  fillOpacity="0.5"
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : {}}
+                  transition={{ delay: 1.4 + i * 0.12, duration: 0.3 }}
+                />
+              ))}
+            </svg>
           </div>
 
           {/* ─── RIGHT PANEL: 3 Vision Cards ─── */}
