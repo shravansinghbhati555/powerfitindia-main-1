@@ -8,6 +8,7 @@ import Index from "./pages/Index.tsx";
 import ShopPage from "./pages/ShopPage.tsx";
 import ProductDetailPage from "./pages/ProductDetailPage.tsx";
 import FranchisePage from "./pages/FranchisePage.tsx";
+import GymSetupPage from "./pages/GymSetupPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
