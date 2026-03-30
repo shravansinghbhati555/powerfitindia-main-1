@@ -34,6 +34,7 @@ const AppContent = () => {
       <Route path="/programs/cardio" element={<CardioPage />} />
       <Route path="/programs/mind-body" element={<MindBodyPage />} />
       <Route path="/programs/specialty" element={<SpecialtyPage />} />
+      <Route path="/programs/:slug" element={<ProgramDetailPage />} />
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
