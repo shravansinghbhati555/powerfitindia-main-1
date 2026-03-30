@@ -29,8 +29,8 @@ export interface ProgramVisual {
     badge?: string;
   }[];
   programFAQ: { q: string; a: string }[];
-  testimonials: ProgramTestimonial[];
-  aiSeoContext: string;
+  testimonials?: ProgramTestimonial[];
+  aiSeoContext?: string;
 }
 
 export const programVisuals: Record<string, ProgramVisual> = {
