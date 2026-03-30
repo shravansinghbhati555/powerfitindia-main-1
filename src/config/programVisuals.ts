@@ -1,4 +1,39 @@
-export const programVisuals = {
+export interface ProgramTestimonial {
+  quote: string;
+  name: string;
+  location: string;
+  rating: number;
+}
+
+export interface ProgramVisual {
+  heroVideo: string | null;
+  heroVideoPoster?: string;
+  heroBg: string;
+  galleryImages: { url: string; alt: string }[];
+  bgParticle: string;
+  accentAnimation: string;
+  colorOverlay: string;
+  journeyMilestones: { day: number; title: string; desc: string; icon: string }[];
+  trainerProfile: {
+    title: string;
+    certifications: string[];
+    philosophy: string;
+    yearsExp: string;
+    photoUrl?: string;
+  };
+  membershipPlans: {
+    name: string;
+    sessions: string;
+    features: string[];
+    highlighted: boolean;
+    badge?: string;
+  }[];
+  programFAQ: { q: string; a: string }[];
+  testimonials?: ProgramTestimonial[];
+  aiSeoContext?: string;
+}
+
+export const programVisuals: Record<string, ProgramVisual> = {
 
     'strength-training': {
       heroVideo: null,

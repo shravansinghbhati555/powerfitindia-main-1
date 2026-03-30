@@ -312,3 +312,9 @@
     100% { transform: translateX(-33.333%); }
   }
 }
+
+@keyframes wa-bounce {
+  0%, 90%, 100% { transform: translateY(0); }
+  93% { transform: translateY(-4px); }
+  96% { transform: translateY(0); }
+}
