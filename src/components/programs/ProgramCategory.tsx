@@ -189,7 +189,7 @@ export default function ProgramCategory({
                 initial={intro.initial}
                 whileInView={intro.animate}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={intro.transition}
+                transition={intro.transition as any}
                 style={{ ...(intro.style ?? {}), boxShadow: glow }}
               >
                 <ProgramCard program={p} index={i} categoryColor={category.color} onOpen={onOpen} />
