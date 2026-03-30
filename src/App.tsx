@@ -11,7 +11,6 @@ import ProductDetailPage from "./pages/ProductDetailPage.tsx";
 import FranchisePage from "./pages/FranchisePage.tsx";
 import GymSetupPage from "./pages/GymSetupPage.tsx";
 import Programs from "./pages/Programs.tsx";
-import ProgramDetailPage from "./pages/ProgramDetailPage.tsx"
 import StrengthPage from "./pages/programs/StrengthPage.tsx";
 import CardioPage from "./pages/programs/CardioPage.tsx";
 import MindBodyPage from "./pages/programs/MindBodyPage.tsx";
@@ -34,7 +33,6 @@ const AppContent = () => {
       <Route path="/programs/cardio" element={<CardioPage />} />
       <Route path="/programs/mind-body" element={<MindBodyPage />} />
       <Route path="/programs/specialty" element={<SpecialtyPage />} />
-      <Route path="/programs/detail/:slug" element={<ProgramDetailPage />} />
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
