@@ -89,12 +89,12 @@ export default function ProgramCard({ program, index, categoryColor, onOpen }: P
           </span>
         </div>
 
-        <button
+        <a href={`/program/${program.slug}`}
           type="button"
           className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
         >
           View Program Details <span className="group-hover:translate-x-1 transition-transform">→</span>
-        </button>
+        </a>
       </div>
 
       <span className="sr-only" itemProp="provider">

@@ -125,7 +125,7 @@ const ProgramsSection = () => (
                 </h3>
                 <p className="font-body text-dark-muted text-sm leading-relaxed mb-6">{p.desc}</p>
                 <motion.a
-                  href={`/programs/${p.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  href={`/program/${p.title.toLowerCase().replace(/\s+/g, '-')}`}
                   whileHover={{ x: 4 }}
                   className="inline-flex items-center gap-2 label-text text-primary hover:text-accent transition-colors"
                 >

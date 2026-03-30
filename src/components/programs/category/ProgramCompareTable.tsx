@@ -42,7 +42,7 @@ export default function ProgramCompareTable({ programs }: { programs: Program[] 
                     className={`text-left text-white font-black px-5 py-4 border border-white/10 ${i === columns.length - 1 ? "rounded-tr-2xl" : ""}`}
                     style={{ background: theme.accent }}
                   >
-                    <a href={`/programs/${p.slug}`} className="hover:underline underline-offset-4">
+                    <a href={`/program/${p.slug}`} className="hover:underline underline-offset-4">
                       {p.name}
                     </a>
                   </th>
