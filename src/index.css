@@ -182,6 +182,22 @@
     }
   }
 
+  /* Program card pulse (Programs Hub) */
+  .program-card-pulse {
+    animation: program-heartbeat 3s ease-in-out infinite;
+  }
+  .program-card-pulse:hover {
+    animation: none;
+  }
+  @keyframes program-heartbeat {
+    0%, 100% {
+      box-shadow: 0 0 0px rgba(232, 0, 14, 0);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(232, 0, 14, 0.3);
+    }
+  }
+
   .red-glow-text {
     animation: red-glow-text 2.5s ease-in-out infinite;
   }

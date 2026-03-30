@@ -9,15 +9,14 @@ const navLinks = [
   { label: "Gym Setup", href: "/gym-setup" },
   {
     label: "Programs",
-    href: "#programs",
+    href: "/programs",
     mega: true,
     items: [
-      { label: "Strength Training", href: "/programs/strength" },
-      { label: "Cardio & HIIT", href: "/programs/cardio" },
-      { label: "Yoga & Flexibility", href: "/programs/yoga" },
-      { label: "CrossFit", href: "/programs/crossfit" },
-      { label: "Functional Training", href: "/programs/functional" },
-      { label: "Personal Training", href: "/programs/personal" },
+      { label: "Strength & Muscle", href: "/programs/strength" },
+      { label: "Cardio & Endurance", href: "/programs/cardio" },
+      { label: "Mind & Body", href: "/programs/mind-body" },
+      { label: "Specialty", href: "/programs/specialty" },
+      { label: "Online Coaching", href: "/programs/online" },
     ],
   },
   { label: "Our Gyms", href: "/gyms" },
@@ -69,7 +68,7 @@ const Navbar = () => {
         />
 
         <div className="section-container flex items-center justify-between h-14 md:h-16">
-          <a href="#hero" className="font-display text-2xl md:text-3xl tracking-tight relative z-10">
+          <a href="/" className="font-display text-2xl md:text-3xl tracking-tight relative z-10">
             <span className="text-primary red-glow-text">POWER</span>
             <span className="text-dark-foreground">FIT</span>
           </a>

@@ -272,7 +272,7 @@ const HeroSection = () => {
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </motion.a>
               <motion.a
-                href="#programs"
+                href="/programs"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
                 className="group flex items-center justify-center gap-3 border border-dark-foreground/20 text-dark-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:border-primary hover:text-primary"

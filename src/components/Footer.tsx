@@ -49,7 +49,7 @@ const Footer = () => (
               {[
                 { label: "Franchise", href: "/franchise" },
                 { label: "Gym Setup", href: "/gym-setup" },
-                { label: "Programs", href: "#programs" },
+                { label: "Programs", href: "/programs" },
                 { label: "Our Gyms", href: "/gyms" },
                 { label: "About", href: "#about" },
                 { label: "Blog", href: "/blog" },
