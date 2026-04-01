@@ -55,7 +55,7 @@ export default function StrengthPage() {
       position: i + 1,
       name: p.name,
       description: p.tagline,
-      url: `https://powerfitindia.com/programs/${p.slug}`,
+      url: `https://powerfitindia.com/program/${p.slug}`,
     })),
   };
 

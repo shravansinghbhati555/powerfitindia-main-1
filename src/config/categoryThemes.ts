@@ -1,4 +1,4 @@
-export type CategoryThemeId = "strength" | "cardio" | "mind-body" | "specialty";
+export type CategoryThemeId = "strength" | "cardio" | "mind-body" | "specialty" | "online";
 
 export type ThemeFaqItem = { q: string; a: string };
 
@@ -197,6 +197,35 @@ export const categoryThemes: Record<CategoryThemeId, CategoryTheme> = {
         q: "Do you offer a Women's Fitness trial class?",
         a: "Yes — all programs including Women's Fitness offer a free trial class. WhatsApp us to book your slot at a Jaipur or Sikar studio.",
       },
+    ],
+  },
+
+  online: {
+    id: "online",
+    label: "Online Coaching",
+    accent: "#2563EB",
+    accentDim: "#0b2a6e",
+    accentGlow: "rgba(37,99,235,0.25)",
+    bgTexture: "digital-grid",
+    heroTagline: "Anywhere. Anytime. PowerFit.",
+    heroHeadline: "Train With PowerFit — From Any Location.",
+    heroSub:
+      "Online Coaching brings PowerFit trainers to your screen with live sessions, personalized plans, and weekly check-ins. Real outcomes tracked across 10,000+ journeys.",
+    heroImage: "https://images.unsplash.com/photo-1588286840104-8957b019727f?q=80&w=1470&auto=format&fit=crop",
+    icon: "💻",
+    animationStyle: "pulse",
+    particleStyle: "digital-grid",
+    programs: ["online-coaching"],
+    whatsappText: "Hi! I want to know more about Online Coaching at PowerFit.",
+    metaTitle: "Online Fitness Coaching in India | 1-on-1 Live Sessions | PowerFit India",
+    metaDesc:
+      "PowerFit Online Coaching brings certified trainers to you with live 1-on-1 sessions, custom plans, and WhatsApp check-ins. Join from anywhere in India. Free trial available.",
+    faqItems: [
+      { q: "Do I need equipment for online coaching?", a: "No. We design your plan around what you have. A mat is enough to start; dumbbells/bands can be added later." },
+      { q: "Are results comparable to in-studio?", a: "Yes. Our outcome tracking shows online coaching achieves 91% comparable results to in-studio for most goals when consistency is maintained." },
+      { q: "How does form correction work online?", a: "Live video sessions with real-time cues, plus optional form check videos for detailed feedback." },
+      { q: "Can I join from outside Jaipur/Rajasthan?", a: "Yes. Online coaching is available across India (and internationally for some clients)." },
+      { q: "What if I miss a session?", a: "Sessions can be rescheduled within the week. Your coach adjusts the plan so momentum never breaks." },
     ],
   },
 };

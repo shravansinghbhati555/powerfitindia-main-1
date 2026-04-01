@@ -39,7 +39,7 @@ export default function ProgramDetailPage() {
     "@type": "Course",
     name: program.name,
     description: program.description,
-    url: `https://powerfitindia.com/programs/${program.slug}`,
+    url: `https://powerfitindia.com/program/${program.slug}`,
     image: visuals.heroBg,
     provider: {
       "@type": "Organization",
@@ -68,7 +68,7 @@ export default function ProgramDetailPage() {
       <Helmet>
         <title>{program.name} Program | PowerFit India — {program.category}</title>
         <meta name="description" content={`${program.tagline} ${program.description.slice(0, 120)}… Join PowerFit's ${program.name} program in Jaipur & Sikar.`} />
-        <link rel="canonical" href={`https://powerfitindia.com/programs/${program.slug}`} />
+        <link rel="canonical" href={`https://powerfitindia.com/program/${program.slug}`} />
         <script type="application/ld+json">{JSON.stringify(courseSchema)}</script>
       </Helmet>
 

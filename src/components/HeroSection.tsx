@@ -234,7 +234,7 @@ const HeroSection = () => {
             </motion.div>
 
             <h1
-              className="font-display text-dark-foreground leading-[0.9] tracking-tight mb-6"
+              className="font-display text-dark-foreground leading-[0.9]  mb-6"
               style={{ fontSize: "clamp(2.5rem, 5vw + 1rem, 5rem)" }}
             >
               <StampedText text="India's Fastest" />

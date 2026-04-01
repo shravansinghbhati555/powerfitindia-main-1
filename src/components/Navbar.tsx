@@ -68,7 +68,7 @@ const Navbar = () => {
         />
 
         <div className="section-container flex items-center justify-between h-14 md:h-16">
-          <a href="/" className="font-display text-2xl md:text-3xl tracking-tight relative z-10">
+          <a href="/" className="font-display text-2xl md:text-3xl  relative z-10">
             <span className="text-primary red-glow-text">POWER</span>
             <span className="text-dark-foreground">FIT</span>
           </a>

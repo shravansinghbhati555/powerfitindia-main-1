@@ -5,6 +5,7 @@ const blurb: Record<CategoryThemeId, string> = {
   cardio: "HIIT, Functional Fitness & Weight Loss — burn fat, boost endurance.",
   "mind-body": "Yoga, Zumba & Meditation — sleep better, stress less, move freely.",
   specialty: "Women's, Senior, Kids Fitness & Kickboxing — tailored programs.",
+  online: "Online Coaching — live 1-on-1 sessions anywhere in India.",
 };
 
 export default function ExploreOtherCategories({ current }: { current: CategoryThemeId }) {

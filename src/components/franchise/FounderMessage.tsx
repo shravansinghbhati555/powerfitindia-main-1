@@ -37,7 +37,7 @@ const FounderMessage = () => {
             <motion.img
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              src="https://powerfitindia.com/cdn/shop/files/WhatsApp_Image_2026-02-02_at_8.02.42_PM.jpg"
+              src="https://powerfitindia.com/cdn/shop/files/WhatsApp_Image_2026-02-07_at_10.42.21_PM.jpg?v=1770614966&width=700"
               alt="Founder of PowerFit India"
               className="w-full h-[400px] object-cover"
             />

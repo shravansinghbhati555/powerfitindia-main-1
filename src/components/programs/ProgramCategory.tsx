@@ -17,38 +17,38 @@ function getCardIntro(categoryId: string, i: number) {
       return {
         initial: { opacity: 0, y: -28, scale: 1.02 },
         animate: { opacity: 1, y: 0, scale: 1 },
-        transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
       };
     case "cardio":
       return {
         initial: { opacity: 0, scale: 0.7, filter: "blur(4px)" },
         animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
-        transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
       };
     case "mind-body":
       return {
         initial: { opacity: 0, y: 30 },
         animate: { opacity: 1, y: 0 },
-        transition: { delay: i * 0.08, duration: 0.65, ease: "easeOut" },
+        transition: { delay: i * 0.08, duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
       };
     case "weight-management":
       return {
         initial: { opacity: 0, x: i % 2 === 0 ? -36 : 36 },
         animate: { opacity: 1, x: 0 },
-        transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
       };
     case "specialty":
       return {
         initial: { opacity: 0, rotateY: 90 },
         animate: { opacity: 1, rotateY: 0 },
-        transition: { delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+        transition: { delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
         style: { transformStyle: "preserve-3d" as const },
       };
     case "online":
       return {
         initial: { opacity: 0, rotateY: 90 },
         animate: { opacity: 1, rotateY: 0 },
-        transition: { delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+        transition: { delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
         style: { transformStyle: "preserve-3d" as const },
       };
     default:
@@ -189,7 +189,7 @@ export default function ProgramCategory({
                 initial={intro.initial}
                 whileInView={intro.animate}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={intro.transition as any}
+                transition={intro.transition}
                 style={{ ...(intro.style ?? {}), boxShadow: glow }}
               >
                 <ProgramCard program={p} index={i} categoryColor={category.color} onOpen={onOpen} />

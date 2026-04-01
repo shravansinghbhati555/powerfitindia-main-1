@@ -33,6 +33,37 @@ export interface ProgramVisual {
   aiSeoContext?: string;
 }
 
+const testimonialsByCategory: Record<
+  "strength" | "cardio" | "mindBody" | "specialty" | "online",
+  ProgramTestimonial[]
+> = {
+  strength: [
+    { quote: "Week 4 and my lifts moved up fast — the coaching is precise, not random.", name: "Vikram S.", location: "Jaipur", rating: 5 },
+    { quote: "I finally learned proper form. My back feels better and I’m stronger than ever.", name: "Rahul K.", location: "Sikar", rating: 5 },
+    { quote: "Data + discipline. The tracking kept me consistent and the results followed.", name: "Aman P.", location: "Mansarovar, Jaipur", rating: 5 },
+  ],
+  cardio: [
+    { quote: "The sessions are short but brutal — and my stamina exploded in a month.", name: "Priya M.", location: "Jaipur", rating: 5 },
+    { quote: "Fat loss felt systematic. Every week had a clear plan and checkpoints.", name: "Neha J.", location: "Sikar", rating: 5 },
+    { quote: "My resting heart rate dropped and I stopped feeling tired all day.", name: "Rohit G.", location: "Jaipur", rating: 5 },
+  ],
+  mindBody: [
+    { quote: "Better sleep, calmer mind, and my body feels lighter — in the best way.", name: "Anjali S.", location: "Jaipur", rating: 5 },
+    { quote: "I never stuck to exercise before. This is the first thing I actually enjoy.", name: "Megha R.", location: "Sikar", rating: 5 },
+    { quote: "Stress down, focus up. It changed my routine outside the gym too.", name: "Kunal V.", location: "Jaipur", rating: 5 },
+  ],
+  specialty: [
+    { quote: "The program is tailored. You can feel it’s built for your specific goal.", name: "Pooja T.", location: "Jaipur", rating: 5 },
+    { quote: "Supportive coaching and real structure — not just a class.", name: "Sandeep B.", location: "Sikar", rating: 5 },
+    { quote: "Confidence went up fast. This is more than fitness.", name: "Ritika M.", location: "Jaipur", rating: 5 },
+  ],
+  online: [
+    { quote: "Online sessions still feel personal — form corrections are real-time.", name: "Nitin S.", location: "Remote", rating: 5 },
+    { quote: "The plan fits my schedule. The check-ins kept me accountable.", name: "Shreya K.", location: "Remote", rating: 5 },
+    { quote: "I travel often. This is the only way I’ve stayed consistent.", name: "Arjun R.", location: "Remote", rating: 5 },
+  ],
+};
+
 export const programVisuals: Record<string, ProgramVisual> = {
 
     'strength-training': {
@@ -40,7 +71,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
       heroBg: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470',
       galleryImages: [
         { url: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=870', alt: 'Strength training barbell at PowerFit Jaipur' },
-        { url: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=870', alt: 'PowerFit strength coach guiding member' },
+        { url: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'PowerFit strength coach guiding member' },
         { url: 'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=869', alt: 'Deadlift session PowerFit gym' },
         { url: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=870', alt: 'Bench press strength training PowerFit' },
       ],
@@ -60,6 +91,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['NSCA-CSCS', 'CrossFit L1', 'CPR/AED Certified'],
         philosophy: 'Strength is the foundation of all fitness. Every program I design is built on progressive overload, proper mechanics, and data — not guesswork.',
         yearsExp: '5+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Starter', sessions: '3x/week', features: ['Group sessions', 'Basic program', 'WhatsApp support'], highlighted: false },
@@ -73,6 +105,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'What equipment is used?', a: 'Barbells, dumbbells, cable machines, squat racks, benches, and functional equipment like kettlebells and resistance bands. All available at every PowerFit studio.' },
         { q: 'Can I join if I have a previous injury?', a: 'Yes, with clearance from your doctor. Our coaches design around limitations and often help rehabilitate old injuries through proper strength work.' },
       ],
+      testimonials: testimonialsByCategory.strength,
     },
   
     'crossfit': {
@@ -100,6 +133,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['CrossFit L2', 'Olympic Weightlifting Coach', 'Gymnastics Foundations'],
         philosophy: 'Every WOD is scalable. Every athlete is capable. The only thing between you and results is showing up and trusting the process.',
         yearsExp: '6+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Foundations', sessions: '3x/week', features: ['Beginner-only class', 'Movement coaching', 'WOD scaling guidance'], highlighted: false },
@@ -113,6 +147,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Can overweight people do CrossFit?', a: 'Absolutely. Every movement is scalable. Many members begin their weight loss journey with CrossFit and it\'s highly effective — 4.1% average body fat reduction in 90 days.' },
         { q: 'Is there a community aspect?', a: 'Yes — it\'s one of CrossFit\'s greatest strengths. Our members have a 91% retention rate partly because of the tight-knit group culture that PowerFit CrossFit has built.' },
       ],
+      testimonials: testimonialsByCategory.strength,
     },
   
     'muscle-gain': {
@@ -140,6 +175,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['NASM-CPT', 'Precision Nutrition L1', 'Advanced Hypertrophy Specialist'],
         philosophy: 'Building muscle is a science, not a mystery. The right stimulus, the right nutrition, the right recovery — repeat. I make sure all three are dialed in.',
         yearsExp: '7+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Build', sessions: '4x/week', features: ['Hypertrophy program', 'Basic nutrition guide', 'Monthly scan'], highlighted: false },
@@ -153,6 +189,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Is the 6.1kg muscle gain stat realistic for me?', a: 'It\'s an average across all members over 120 days. Beginners often gain more (8–10kg), advanced lifters less (3–4kg). Your coach will set realistic expectations after your assessment.' },
         { q: 'Do I need supplements?', a: 'Basic protein supplementation helps — but it\'s optional. Your coach will advise based on your food intake and budget. We never push supplements — food first, always.' },
       ],
+      testimonials: testimonialsByCategory.strength,
     },
   
     'hiit': {
@@ -180,6 +217,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['ACE-CPT', 'HIIT Specialist Certification', 'Nutrition Coach Level 1'],
         philosophy: 'You don\'t need hours in the gym. You need the right intensity for the right duration. HIIT is the most honest workout you\'ll ever do.',
         yearsExp: '4+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Burn', sessions: '3x/week', features: ['Group HIIT classes', 'Basic tracking', 'Weekly schedule'], highlighted: false },
@@ -193,6 +231,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Do I need any equipment for HIIT?', a: 'In-studio: no personal equipment needed — everything is provided. Online: a mat and your bodyweight is enough to start. We scale equipment requirements per session.' },
         { q: 'Can HIIT improve heart health?', a: 'Yes, significantly. Our members average an 11 BPM resting heart rate reduction in 90 days. Resting heart rate is one of the strongest indicators of cardiovascular health.' },
       ],
+      testimonials: testimonialsByCategory.cardio,
     },
   
     'functional-fitness': {
@@ -220,6 +259,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['FMS Level 2', 'NASM-Corrective Exercise Specialist', 'Kettlebell Specialist (RKC)'],
         philosophy: 'The gym should make your life outside the gym better. If your training isn\'t transferring to real life — climbing stairs, carrying groceries, playing with your kids — we\'re doing it wrong.',
         yearsExp: '6+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Move', sessions: '3x/week', features: ['FMS screening', 'Group functional classes', 'Basic corrective plan'], highlighted: false },
@@ -233,6 +273,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Can I do Functional Fitness at home?', a: 'Yes — our Home Visit option brings the coach to you. We also design bodyweight and resistance band programs for home practice between studio sessions.' },
         { q: 'Is it suitable for older adults?', a: 'Functional Fitness is ideal for older adults. The emphasis on balance, mobility, and injury prevention directly addresses the challenges of aging. Many members in their 50s–70s do this program.' },
       ],
+      testimonials: testimonialsByCategory.cardio,
     },
   
     'weight-loss': {
@@ -260,6 +301,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['NASM-CPT', 'Precision Nutrition L2', 'Behavior Change Specialist'],
         philosophy: 'Sustainable fat loss is 70% nutrition, 30% training, and 100% mindset. I coach all three because one without the others doesn\'t work long-term.',
         yearsExp: '8+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Slim', sessions: '4x/week', features: ['Group fat-loss classes', 'Basic nutrition guide', 'Monthly weigh-in'], highlighted: false },
@@ -273,6 +315,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Will I regain the weight after the 90 days?', a: '78% of our members maintain their weight loss at 6-month follow-up. The program builds habits, not dependency. You learn how to eat and train sustainably for life.' },
         { q: 'Is online weight loss coaching effective?', a: 'Yes. Our online weight loss members get the same nutrition coaching, InBody scan analysis (via photos and submitted data), and WhatsApp accountability as in-studio members — with 91% comparable results.' },
       ],
+      testimonials: testimonialsByCategory.cardio,
     },
   
     'yoga': {
@@ -300,6 +343,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['Yoga Alliance RYT-200', 'Prenatal Yoga Certified', 'Pranayama & Meditation Specialist'],
         philosophy: 'Yoga is not about touching your toes. It\'s about what you learn on the way down. Every body is a yoga body — I meet you exactly where you are.',
         yearsExp: '9+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Hatha', sessions: '3x/week', features: ['Beginner-friendly classes', 'Basic breathwork', 'Pose library access'], highlighted: false },
@@ -313,6 +357,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Is yoga a real workout or just stretching?', a: 'Power Yoga and Vinyasa are genuine cardiovascular and strength workouts. Advanced yoga poses require significant upper body, core, and leg strength. It\'s far more than stretching.' },
         { q: 'Can men benefit from yoga?', a: 'Enormously — particularly for flexibility, injury prevention, recovery, and mental clarity. Many PowerFit male members combine yoga with strength training for optimal results.' },
       ],
+      testimonials: testimonialsByCategory.mindBody,
     },
   
     'zumba': {
@@ -340,6 +385,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['Zumba SYNC License', 'Zumba Gold Certified', 'Group Fitness Instructor (ACE)'],
         philosophy: 'I want you to leave every class feeling like you just came from the best party of your life — and only realize you burned 600 calories when you get home.',
         yearsExp: '5+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Dance', sessions: '2x/week', features: ['Weekend Zumba classes', 'Beginner-friendly', 'Community access'], highlighted: false },
@@ -353,6 +399,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Can I do Zumba if I have joint pain?', a: 'Zumba is low-to-medium impact. Our instructors provide low-impact modifications for all jumping movements. Many members with knee or hip conditions enjoy Zumba comfortably.' },
         { q: 'Is online Zumba as fun as in-studio?', a: 'It\'s different but genuinely effective. Live online classes with the same instructors maintain the energy and real-time correction. Perfect for days you can\'t make it to the studio.' },
       ],
+      testimonials: testimonialsByCategory.mindBody,
     },
   
     'meditation': {
@@ -380,6 +427,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['MBSR Certified (Jon Kabat-Zinn lineage)', 'Pranayama Teacher Training', 'Positive Psychology Coach'],
         philosophy: 'Meditation is the most underrated performance enhancer in fitness. The athletes who meditate recover faster, train harder, and quit less. I help people discover this for themselves.',
         yearsExp: '10+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Still', sessions: '3x/week', features: ['Group meditation sessions', 'Basic breathwork guide', 'Home practice audio'], highlighted: false },
@@ -393,6 +441,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Can meditation help with anxiety and depression?', a: 'Research strongly supports meditation for anxiety management. Our GAD-7 assessments show 44% anxiety score reduction in 60 days. For depression, we coordinate with mental health professionals where appropriate.' },
         { q: 'How is this different from just using a meditation app?', a: 'Live coaching provides real-time guidance, personalized technique adjustment, accountability, and a structured progressive curriculum. Apps are good for daily maintenance but can\'t replace the depth of coached instruction.' },
       ],
+      testimonials: testimonialsByCategory.mindBody,
     },
   
     'womens-fitness': {
@@ -420,6 +469,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['NASM Women\'s Fitness Specialist', 'Pre/Postnatal Fitness Certified', 'Nutrition for Hormonal Health'],
         philosophy: 'Women\'s bodies are not smaller male bodies. They need programs designed around female physiology, hormonal cycles, and real women\'s goals. That\'s all we do here.',
         yearsExp: '7+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Bloom', sessions: '3x/week', features: ['Women-only group classes', 'Basic nutrition guide', 'Cycle-aware scheduling'], highlighted: false },
@@ -433,6 +483,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'What happens if my workout falls during my period?', a: 'Your program is cycle-synced. During menstruation, sessions are lower intensity — restorative yoga, light strength, breathwork. You never have to push through discomfort. Your cycle is part of your program design.' },
         { q: 'Is post-pregnancy training available?', a: 'Yes. We have a dedicated postnatal track that begins at 6 weeks postpartum (with doctor clearance). Diastasis recti screening, pelvic floor rehabilitation, and gradual strength return — all part of the program.' },
       ],
+      testimonials: testimonialsByCategory.specialty,
     },
   
     'senior-fitness': {
@@ -460,6 +511,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['NASM Senior Fitness Specialist', 'ACE Certified Personal Trainer', 'Fall Prevention Specialist'],
         philosophy: 'The best exercise for a 60-year-old is the one they\'ll actually do consistently. I design programs that feel achievable, deliver real results, and make aging feel like an advantage.',
         yearsExp: '8+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Active', sessions: '3x/week', features: ['Senior-only group class', 'Chair yoga available', 'Basic nutrition guide'], highlighted: false },
@@ -473,6 +525,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Can I join if I\'ve recently had surgery or a health event?', a: 'With doctor clearance, yes. We have members recovering from hip replacements, cardiac events, and knee surgeries. Our coaches coordinate with your medical team for a safe return to activity.' },
         { q: 'Is there a Home Visit option?', a: 'Yes. Our Senior Fitness trainers offer in-home sessions for members who prefer not to travel or who need more intensive support. WhatsApp us to discuss home visit availability and pricing.' },
       ],
+      testimonials: testimonialsByCategory.specialty,
     },
   
     'kids-fitness': {
@@ -500,6 +553,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['NASM Youth Fitness Specialist', 'Child CPR/First Aid', 'Sports Conditioning for Youth'],
         philosophy: 'A child who learns to love movement becomes an adult who lives longer. Every game we play, every badge we give, every high-five after a session is an investment in a lifetime of health.',
         yearsExp: '6+ years',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Junior', sessions: '2x/week', features: ['Age-group classes', 'Fun fitness games', 'Monthly parent report'], highlighted: false },
@@ -513,6 +567,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Can Kids Fitness help with sports performance at school?', a: 'Yes, significantly. We focus on coordination, agility, speed, and foundational movement patterns that directly improve cricket, football, basketball, and athletics performance.' },
         { q: 'How do parents track progress?', a: 'You receive a detailed monthly progress report covering fitness improvements, attitude, attendance, and next-month goals. Quarterly parent meetings with the coach are included in the Athlete and Champion plans.' },
       ],
+      testimonials: testimonialsByCategory.specialty,
     },
   
     'kickboxing-martial-arts': {
@@ -540,6 +595,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['National Kickboxing Coach Certification', 'Martial Arts Instructor License', 'Sports First Aid & Safety'],
         philosophy: 'Martial arts gave me discipline, confidence, and a body I\'m proud of. I want every student — from age 8 to 80 — to experience that same transformation.',
         yearsExp: '12+ years competitive + coaching',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Fighter', sessions: '3x/week', features: ['Group kickboxing classes', 'Bag & pad work', 'Basic combinations'], highlighted: false },
@@ -553,6 +609,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'Which martial arts styles are taught?', a: 'The primary focus is Kickboxing (K-1 and Muay Thai influence). We also integrate Karate basics, MMA ground fundamentals for self-defense, and Olympic-style boxing techniques.' },
         { q: 'Where is the Kickboxing Academy located?', a: 'The Rajasthan Kickboxing Academy is located at the 2nd Floor of PowerFit Gym, Deep Mansion, Sector 101, Mansarovar, Jaipur. Contact: +91 7597682600.' },
       ],
+      testimonials: testimonialsByCategory.specialty,
     },
   
     'online-coaching': {
@@ -580,6 +637,7 @@ export const programVisuals: Record<string, ProgramVisual> = {
         certifications: ['NASM-CPT', 'Online Coaching Certification', 'Precision Nutrition L1'],
         philosophy: 'Location is no longer an excuse. I\'ve coached clients from Jaipur to London to a hotel room in Dubai. The only thing that matters is consistency — and I make that easy.',
         yearsExp: '5+ years online + in-studio',
+        photoUrl: 'https://plus.unsplash.com/premium_photo-1666283137652-9f5425ef7bc9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       membershipPlans: [
         { name: 'Remote', sessions: '3x/week live', features: ['3 live video sessions', 'Basic program', 'WhatsApp support'], highlighted: false },
@@ -593,5 +651,6 @@ export const programVisuals: Record<string, ProgramVisual> = {
         { q: 'I live outside Jaipur/Rajasthan. Can I join?', a: 'Yes. Online coaching is available to anyone in India and internationally. 34% of our current online coaching members are from outside Rajasthan.' },
         { q: 'What if I miss a session?', a: 'No session is wasted. Missed live sessions can be rescheduled within the same week. Your program is always progressing — the coach adjusts load and volume if a session is missed.' },
       ],
+      testimonials: testimonialsByCategory.online,
     },
   }

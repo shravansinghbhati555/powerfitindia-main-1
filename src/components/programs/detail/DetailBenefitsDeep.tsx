@@ -10,7 +10,7 @@ export default function DetailBenefitsDeep({ program, theme }: Props) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <section className="py-16 md:py-24" style={{ background: "#0A0A0A" }} aria-label="Program benefits">
+    <section className="py-6 md:py-6" style={{ background: "#0A0A0A" }} aria-label="Program benefits">
       <div className="section-container">
         <motion.h2
           initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
@@ -39,12 +39,10 @@ export default function DetailBenefitsDeep({ program, theme }: Props) {
             {program.benefits.map(b => (
               <div key={b.title} className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
                 <div className="text-white font-bold mb-1">{b.icon} {b.title} — {b.value}</div>
-                <p className="text-zinc-400 text-sm">{b.description}. Based on progressive training methodology and member data tracked across 10,000+ PowerFit members since 2017.</p>
+                <p className="text-zinc-400 text-sm">{b.description}.</p>
               </div>
             ))}
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-green-900/30 border border-green-700/30 text-green-400 text-xs font-bold">
-              ✅ Based on 10,000+ PowerFit member tracking data
-            </div>
+            <div class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-green-900/30 border border-green-700/30 text-green-400 text-xs font-bold">✅ Based on 10,000+ PowerFit member tracking data</div>
           </motion.div>
         )}
       </div>

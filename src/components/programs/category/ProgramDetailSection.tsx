@@ -83,17 +83,20 @@ export default function ProgramDetailSection({ program, index }: { program: Prog
               </div>
             </div>
 
-            <div className="mt-10">
-              <WhatsAppCTA text="💬 WhatsApp to Join" message={waMessage} size="large" className="flex-1" />
+            <div className="mt-8">
+              <WhatsAppCTA text="WhatsApp to Join" message={waMessage} size="default" className="flex-1" />
+              <a href={`/program/${program.slug}`}  className="flex-2 text-right ml-5 font-bold underline-offset-4  hover:underline hover:scale-105 transition-all" >
+                  View Details →
+                </a>
             </div>
             
             </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
-            <h2 className="font-display text-4xl md:text-5xl text-white" itemProp="name">
+          <a href={`/program/${program.slug}`} className="font-display text-4xl md:text-5xl text-white hover:underline underline-offset-4" itemProp="name">
               {program.name}
-            </h2>
+            </a>
             <p className="mt-2 italic" style={{ color: theme.accent }}>
               {program.tagline}
             </p>

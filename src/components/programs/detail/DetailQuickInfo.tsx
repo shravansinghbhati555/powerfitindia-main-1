@@ -14,7 +14,7 @@ export default function DetailQuickInfo({ program }: { program: Program }) {
     <motion.section
       initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }} transition={{ duration: 0.5 }}
-      className="w-full py-5 overflow-x-auto" style={{ background: "#111" }}
+      className="w-full py-5 overflow-x-auto" 
       aria-label="Quick program info"
     >
       <div className="section-container flex items-center gap-4 md:gap-6 min-w-max md:min-w-0 md:justify-center text-sm text-zinc-300">

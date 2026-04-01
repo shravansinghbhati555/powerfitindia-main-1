@@ -29,12 +29,13 @@ const FranchisePage = () => {
       <Navbar />
       <FranchiseHero />
       <BrandJourney />
+      <FounderMessage />
       <WhyInvest />
       <FranchiseModels />
       <ROISection />
       <HowItWorks />
       <TerritoryMap />
-      <FounderMessage />
+      
       <FranchiseTestimonials />
       <WhatsIncluded />
       <FranchiseFAQ />

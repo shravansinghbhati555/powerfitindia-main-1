@@ -10,7 +10,7 @@ export default function DetailJourney({ program, visuals, theme }: Props) {
   const waMsg = encodeURIComponent(`Hi! I want to start my ${program.name} journey at PowerFit.`);
 
   return (
-    <section className="py-16 md:py-24" style={{ background: "#0A0A0A" }} aria-label="90-day journey">
+    <section className="py-6 md:py-6" style={{ background: "#0A0A0A" }} aria-label="90-day journey">
       <div className="section-container">
         <motion.h2
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function DetailJourney({ program, visuals, theme }: Props) {
                   <span className="text-3xl font-black" style={{ color: theme.accent }}>Day {m.day}</span>
                   <span className="text-2xl">{m.icon}</span>
                 </div>
-                <h3 className="text-white font-bold text-lg">{m.title}</h3>
+                <p className="text-white font-bold text-lg">{m.title}</p>
                 <p className="text-zinc-400 text-sm mt-1">{m.desc}</p>
               </div>
             </motion.div>
@@ -59,7 +59,7 @@ export default function DetailJourney({ program, visuals, theme }: Props) {
                 <span className="text-2xl font-black" style={{ color: theme.accent }}>Day {m.day}</span>
                 <span className="text-xl">{m.icon}</span>
               </div>
-              <h3 className="text-white font-bold">{m.title}</h3>
+              <p className="text-white font-bold">{m.title}</p>
               <p className="text-zinc-400 text-sm mt-1">{m.desc}</p>
             </div>
           ))}

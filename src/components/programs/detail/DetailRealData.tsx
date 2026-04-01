@@ -1,87 +1,105 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Program } from "@/data/programs";
+import type { ProgramVisual } from "@/config/programVisuals";
 import type { CategoryTheme } from "@/config/categoryThemes";
-import { useEffect, useRef, useState } from "react";
+import CountUp from "@/components/ui/CountUp";
+import { useParallax } from "@/hooks/useParallax";
 
-function CountUp({ target, suffix, accentColor }: { target: number; suffix: string; accentColor: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [val, setVal] = useState(0);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    if (started) return;
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setStarted(true); }, { threshold: 0.3 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [started]);
-
-  useEffect(() => {
-    if (!started) return;
-    const start = performance.now();
-    const dur = 1800;
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(target * eased);
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [started, target]);
-
-  const display = target >= 10 ? Math.round(val) : Math.round(val * 10) / 10;
-  return <div ref={ref} className="text-5xl md:text-7xl font-black" style={{ color: accentColor }}>{display}{suffix}</div>;
+interface Props {
+  program: Program;
+  theme: CategoryTheme;
+  visuals: ProgramVisual;
 }
 
-function parseStatValue(v: string) {
-  const num = parseFloat(v.replace(/[^0-9.]/g, ""));
-  const suf = v.replace(/[0-9.\s]/g, "");
-  return { num: Number.isFinite(num) ? num : 0, suf };
-}
+export default function DetailRealData({ program, theme, visuals }: Props) {
+  const reduce = useReducedMotion();
+  const { ref, y } = useParallax([-24, 24]);
 
-interface Props { program: Program; theme: CategoryTheme }
-
-export default function DetailRealData({ program, theme }: Props) {
   return (
-    <section className="py-16 md:py-24" style={{ background: "#0D0D0D" }} aria-label="Program real data">
-      <div className="section-container">
-        <div className="flex items-stretch gap-0">
-          <div className="w-2 rounded-full mr-6 hidden md:block" style={{ background: theme.accent }} />
-          <div className="flex-1">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} className="font-display text-3xl md:text-5xl text-white mb-10"
+    <section className="relative overflow-hidden py-10 px-[var(--gutter)]" aria-label="Program real data" style={{ minHeight: 300 }}>
+      <motion.div
+        ref={ref}
+        className="absolute inset-0 scale-110"
+        style={reduce ? undefined : { y }}
+        aria-hidden="true"
+      >
+        <img
+          src={visuals.galleryImages[0]?.url || visuals.heroBg}
+          className="w-full h-full object-cover"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.75) 40%, ${theme.accent}30 100%)`,
+          }}
+        />
+      </motion.div>
+
+      <div className="relative z-10 max-w-[var(--content-max-width)] mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <motion.h2
+            className="text-3xl font-black text-white"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            The Numbers
+          </motion.h2>
+          <motion.div
+            className="hidden sm:flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full"
+            style={{ background: "#00C85320", border: "1px solid #00C85350", color: "#00C853" }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+            Verified Member Data
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {program.realDataStats.map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="relative"
             >
-              The Numbers Behind {program.name}
-            </motion.h2>
+              <motion.div
+                className="h-1 rounded-full mb-4"
+                style={{ background: theme.accent }}
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 + 0.3, duration: 0.6 }}
+              />
 
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
-              {program.realDataStats.map((s, i) => {
-                const { num, suf } = parseStatValue(s.value);
-                return (
-                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                    className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800"
-                  >
-                    <CountUp target={num} suffix={suf} accentColor={theme.accent} />
-                    <div className="text-white font-bold mt-2">{s.metric}</div>
-                    <div className="text-zinc-500 text-sm">In {s.timeframe}</div>
-                    <div className="mt-3 h-2 rounded-full bg-zinc-800 overflow-hidden">
-                      <motion.div initial={{ width: 0 }} whileInView={{ width: "100%" }}
-                        viewport={{ once: true }} transition={{ delay: 0.5 + i * 0.2, duration: 1.2 }}
-                        className="h-full rounded-full" style={{ background: theme.accent }} />
-                    </div>
-                    <div className="text-zinc-600 text-xs italic mt-2">Source: {s.source}</div>
-                  </motion.div>
-                );
-              })}
-            </div>
+              <div className="text-5xl font-black mb-1 tabular-nums" style={{ color: theme.accent }}>
+                <CountUp value={s.value} />
+              </div>
 
-            <div className="rounded-xl bg-green-900/20 border border-green-700/20 p-4 text-green-400 text-sm">
-              ✅ All statistics from real PowerFit member tracking — InBody body composition scans, certified trainer assessments, and member wellness surveys since 2017. 10,000+ members tracked.
-            </div>
-          </div>
+              <div className="text-white font-bold text-base mb-1">{s.metric}</div>
+              <div className="text-zinc-500 text-xs">
+                in {s.timeframe} · {s.source}
+              </div>
+
+              <div className="mt-3 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full rounded-full"
+                  style={{ background: `linear-gradient(to right, ${theme.accent}, ${theme.accent}80)` }}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${70 + i * 10}%` }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15 + 0.5, duration: 1, ease: "easeOut" }}
+                />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

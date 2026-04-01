@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Program } from "@/data/programs";
+import type { CategoryTheme } from "@/config/categoryThemes";
 
-export default function DetailWhatsAppFloat({ program }: { program: Program }) {
+export default function DetailWhatsAppFloat({ program, theme }: { program: Program; theme: CategoryTheme }) {
   const [visible, setVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const waMsg = encodeURIComponent(`Hi PowerFit! I want to join ${program.name}. Please share details.`);
+  const waMsg = useMemo(() => encodeURIComponent(`Hi PowerFit! I want to join ${program.name}. Please share details.`), [program.name]);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 3000);
@@ -20,13 +21,15 @@ export default function DetailWhatsAppFloat({ program }: { program: Program }) {
       rel="noopener noreferrer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="fixed bottom-20 lg:bottom-6 right-4 z-50 flex items-center gap-2 rounded-full bg-green-600 text-white shadow-lg shadow-green-900/40 transition-all duration-300 hover:bg-green-500"
+      className="fixed bottom-24 lg:bottom-6 right-6 z-50 flex items-center gap-2 rounded-full text-white shadow-lg transition-all duration-300"
       style={{
         width: hovered ? 220 : 56,
         height: 56,
         padding: hovered ? "0 20px" : "0",
         justifyContent: "center",
-        animation: "wa-bounce 8s ease-in-out infinite",
+        background: "#25D366",
+        boxShadow: hovered ? `0 0 60px ${theme.accentGlow}` : `0 0 20px ${theme.accentGlow}`,
+        animation: "glowPulse 3s ease-in-out infinite",
       }}
       aria-label={`WhatsApp to join ${program.name}`}
     >

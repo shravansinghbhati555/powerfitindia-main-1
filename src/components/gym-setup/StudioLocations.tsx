@@ -98,7 +98,9 @@ const StudioLocations = () => {
                 <div className="p-6">
                   <div className="flex gap-2 mb-3">
                     <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold">{g.city.toUpperCase()}</span>
-                    {(g as any).specialty && <span className="px-3 py-1 rounded-full bg-primary text-white text-xs font-bold">SPECIALTY STUDIO</span>}
+                    {"specialty" in g && Boolean((g as { specialty?: boolean }).specialty) && (
+                      <span className="px-3 py-1 rounded-full bg-primary text-white text-xs font-bold">SPECIALTY STUDIO</span>
+                    )}
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3 font-['Oswald']">{g.name}</h3>
                   <div className="space-y-2 text-sm text-gray-400 mb-5">

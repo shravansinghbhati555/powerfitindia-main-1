@@ -80,9 +80,7 @@ export default function ProgramCompareTable({ programs }: { programs: Program[] 
           </table>
         </div>
 
-        <p className="mt-4 text-center text-sm text-zinc-500">
-          Program detail pages (`/programs/[slug]`) are marked as coming soon — this table still drives enquiries via WhatsApp.
-        </p>
+       
       </div>
     </section>
   );

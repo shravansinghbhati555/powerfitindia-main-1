@@ -14,55 +14,51 @@ export default function DetailRelatedPrograms({ program, theme }: Props) {
   }
 
   return (
-    <section className="py-16 md:py-24" style={{ background: "#0D0D0D" }} aria-label="Related programs">
-      <div className="section-container">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} className="font-display text-3xl md:text-5xl text-white mb-10"
-        >
-          You Might Also Like
-        </motion.h2>
+    <section className="py-10 overflow-hidden" style={{ background: "#111" }} aria-label="Related programs">
+      <div className="px-[var(--gutter)] max-w-[var(--content-max-width)] mx-auto mb-5 flex items-end justify-between gap-4">
+        <h2 className="text-2xl font-black text-white">You Might Also Like</h2>
+        <Link to="/programs" className="text-xs font-bold text-zinc-400 hover:text-white transition-colors">
+          Browse all →
+        </Link>
+      </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          {related.map((p, i) => (
-            <motion.div key={p.id}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-            >
-              <Link to={`/programs/${p.slug}`}
-                className="block bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden hover:border-zinc-600 transition-all group">
-                <div className="relative h-40 overflow-hidden">
-                  <img src={p.imagePath} alt={`${p.name} at PowerFit`} loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black/40" />
+      <div className="flex gap-4 px-[var(--gutter)] overflow-x-auto pb-4 snap-x snap-mandatory">
+        {related.map((p, i) => (
+          <motion.div
+            key={p.id}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="shrink-0 snap-start"
+          >
+            <Link to={`/program/${p.slug}`} className="block w-64 h-[240px] rounded-2xl overflow-hidden relative group border border-white/10">
+              <img
+                src={p.imagePath}
+                alt={`${p.name} program PowerFit India`}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <div className="text-xs font-bold mb-1" style={{ color: theme.accent }}>
+                  {p.category}
                 </div>
-                <div className="p-5">
-                  <h3 className="text-white font-bold text-lg">{p.name}</h3>
-                  <p className="text-zinc-500 text-sm mt-1 line-clamp-1">{p.tagline}</p>
-                  <div className="flex gap-2 mt-3">
-                    <span className="rounded-full px-2 py-1 bg-zinc-800 text-xs text-zinc-300">{p.intensity}</span>
-                    <span className="rounded-full px-2 py-1 bg-zinc-800 text-xs text-zinc-300">{p.duration}</span>
-                  </div>
-                  <div className="mt-3 font-bold text-sm" style={{ color: theme.accent }}>
-                    {p.benefits[0]?.value} {p.benefits[0]?.title}
-                  </div>
-                  <div className="mt-2 text-sm font-bold" style={{ color: theme.accent }}>
-                    View Program →
-                  </div>
+                <div className="text-white font-black text-base">{p.name}</div>
+                <div className="text-zinc-400 text-xs mt-1 line-clamp-1">{p.tagline}</div>
+                <div className="mt-2 text-xs font-bold" style={{ color: theme.accent }}>
+                  {p.benefits[0]?.value} {p.benefits[0]?.title} →
                 </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
 
-        <div className="flex flex-wrap gap-4 justify-center text-sm">
-          <Link to={`/programs/${program.categoryId}`} className="font-bold hover:underline" style={{ color: theme.accent }}>
-            View all {program.category} programs →
-          </Link>
-          <Link to="/programs" className="text-zinc-400 font-bold hover:text-white transition-colors">
-            Browse all programs →
-          </Link>
-        </div>
+      <div className="px-[var(--gutter)] max-w-[var(--content-max-width)] mx-auto mt-2">
+        <Link to={`/programs/${program.categoryId}`} className="text-xs font-bold underline" style={{ color: theme.accent }}>
+          View all {program.category} programs →
+        </Link>
       </div>
     </section>
   );
