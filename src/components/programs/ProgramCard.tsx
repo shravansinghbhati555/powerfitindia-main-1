@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { Program } from "@/data/programs";
+import { MostPopularBadge, MostPopularCrown, MostPopularRibbon } from "@/components/ui/MostPopularBadge";
 
 export interface ProgramCardProps {
   program: Program;
@@ -22,12 +23,16 @@ export default function ProgramCard({ program, index, categoryColor, onOpen }: P
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      whileHover={{ y: -8, boxShadow: hoverShadow }}
-      className="relative bg-zinc-900 rounded-2xl overflow-hidden cursor-pointer group border border-white/5 program-card-pulse"
+      whileHover={{ y: -8, boxShadow: program.isMostPopular ? "0 0 40px rgba(234,179,8,0.25)" : hoverShadow }}
+      className={`relative bg-zinc-900 rounded-2xl overflow-hidden cursor-pointer group border program-card-pulse ${
+        program.isMostPopular ? "border-yellow-400/60 shadow-[0_0_30px_rgba(234,179,8,0.2)]" : "border-white/5"
+      }`}
       onClick={() => onOpen(program)}
       style={{ willChange: "transform", boxShadow: "0 0 0 rgba(232,0,14,0)" }}
     >
+      {program.isMostPopular && <MostPopularCrown />}
       <div className="relative h-48 overflow-hidden">
+        {program.isMostPopular && <MostPopularRibbon />}
         <img
           src={program.imagePath}
           alt={`${program.name} at PowerFit India gym`}
@@ -37,8 +42,8 @@ export default function ProgramCard({ program, index, categoryColor, onOpen }: P
         />
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-black/40 to-transparent" />
 
-        <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-bold text-white border border-white/10">
-          {program.intensity}
+        <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-bold text-white border border-white/10 z-10">
+          {program.isMostPopular ? <MostPopularBadge size="sm" animated={false} className="!py-0.5" /> : program.intensity}
         </div>
 
         <div className="absolute top-3 right-3 flex gap-1">

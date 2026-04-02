@@ -9,6 +9,7 @@ import EquipmentCarousel from "@/components/gym-setup/EquipmentCarousel";
 import WhyPowerFitSetup from "@/components/gym-setup/WhyPowerFitSetup";
 import SetupTestimonials from "@/components/gym-setup/SetupTestimonials";
 import QuoteForm from "@/components/gym-setup/QuoteForm";
+import GymSetupShopSection from "@/components/gym-setup/GymSetupShopSection";
 import StudioLocations from "@/components/gym-setup/StudioLocations";
 import SetupFAQ from "@/components/gym-setup/SetupFAQ";
 import BottomCTA from "@/components/gym-setup/BottomCTA";
@@ -86,6 +87,7 @@ const GymSetupPage = () => (
       <WhyPowerFitSetup />
       <SetupTestimonials />
       <QuoteForm />
+      <GymSetupShopSection />
       <StudioLocations />
       <SetupFAQ />
       <BottomCTA />

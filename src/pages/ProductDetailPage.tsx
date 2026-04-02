@@ -9,7 +9,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const ProductDetailPage = () => {
-  const { handle } = useParams<{ handle: string }>();
+  const { handle, productHandle } = useParams<{ handle?: string; productHandle?: string }>();
+  const resolvedHandle = productHandle || handle;
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
@@ -20,7 +21,7 @@ const ProductDetailPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const data = await storefrontApiRequest(STOREFRONT_PRODUCT_BY_HANDLE_QUERY, { handle });
+        const data = await storefrontApiRequest(STOREFRONT_PRODUCT_BY_HANDLE_QUERY, { handle: resolvedHandle });
         if (data?.data?.product) {
           setProduct(data.data.product);
         }
@@ -30,8 +31,8 @@ const ProductDetailPage = () => {
         setLoading(false);
       }
     };
-    if (handle) fetchProduct();
-  }, [handle]);
+    if (resolvedHandle) fetchProduct();
+  }, [resolvedHandle]);
 
   const handleAddToCart = async () => {
     if (!product) return;
@@ -123,7 +124,7 @@ const ProductDetailPage = () => {
               <h1 className="font-display text-4xl md:text-5xl text-foreground">{product.title}</h1>
               {selectedVariant && (
                 <p className="font-display text-3xl text-primary mt-3">
-                  {selectedVariant.price.currencyCode} {parseFloat(selectedVariant.price.amount).toFixed(2)}
+                  ₹{parseFloat(selectedVariant.price.amount).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                 </p>
               )}
 

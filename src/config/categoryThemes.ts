@@ -34,12 +34,12 @@ export const categoryThemes: Record<CategoryThemeId, CategoryTheme> = {
     heroTagline: "Iron. Sweat. Power.",
     heroHeadline: "Build The Strongest Version of Yourself.",
     heroSub:
-      "Three elite programs. One goal — maximum strength, maximum muscle, zero guesswork. Backed by real data from 10,000+ members.",
+      "Four elite programs. One goal — maximum strength, maximum muscle, zero guesswork. Backed by real data from 10,000+ members.",
     heroImage: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop",
     icon: "🏋️",
     animationStyle: "slam",
     particleStyle: "sparks",
-    programs: ["strength-training", "crossfit", "muscle-gain"],
+    programs: ["calisthenics", "strength-training", "crossfit", "muscle-gain"],
     whatsappText: "Hi! I want to know more about Strength & Fitness programs at PowerFit.",
     metaTitle: "Strength Training, CrossFit & Muscle Gain Programs in Jaipur | PowerFit India",
     metaDesc:

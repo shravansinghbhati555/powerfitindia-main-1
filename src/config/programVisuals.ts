@@ -26,11 +26,13 @@ export interface ProgramVisual {
     sessions: string;
     features: string[];
     highlighted: boolean;
-    badge?: string;
+    badge?: string | null;
   }[];
   programFAQ: { q: string; a: string }[];
   testimonials?: ProgramTestimonial[];
   aiSeoContext?: string;
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 const testimonialsByCategory: Record<
@@ -191,8 +193,143 @@ export const programVisuals: Record<string, ProgramVisual> = {
       ],
       testimonials: testimonialsByCategory.strength,
     },
-  
-    'hiit': {
+
+    calisthenics: {
+      // Add `/public/videos/calisthenics.mp4` (e.g. Pexels 480p) and set heroVideo to enable background video.
+      heroVideo: null,
+      heroVideoPoster: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1200&auto=format",
+      heroBg: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1470&auto=format",
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=870&auto=format", alt: "Calisthenics pull-up training at PowerFit gym Jaipur India" },
+        { url: "https://images.unsplash.com/photo-1583454155184-870a1f63aebc?q=80&w=870&auto=format", alt: "Bodyweight dip exercise calisthenics PowerFit Rajasthan" },
+        { url: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=870&auto=format", alt: "Street workout calisthenics muscle-up PowerFit India" },
+        { url: "https://images.unsplash.com/photo-1598971639058-fab3c3109a04?q=80&w=869&auto=format", alt: "Handstand calisthenics skill training PowerFit Jaipur" },
+      ],
+      bgParticle: "sparks",
+      accentAnimation: "slam",
+      colorOverlay: "from-red-950/80",
+      journeyMilestones: [
+        { day: 1, title: "Skills Assessment", desc: "Push-up, pull-up, dip, squat max tested. Your calisthenics baseline documented.", icon: "📋" },
+        { day: 7, title: "Foundation Movement", desc: "Perfect push-up, hollow body, dead hang, and basic squat form locked in.", icon: "🏗️" },
+        { day: 14, title: "First Pull-Up Milestone", desc: "78% of zero-pull-up beginners achieve their first unassisted pull-up by Day 14.", icon: "🎯" },
+        { day: 30, title: "Skill Unlocks Begin", desc: "Muscle-up progressions, L-sit holds, and handstand wall walks introduced.", icon: "🔓" },
+        { day: 60, title: "Visible Body Change", desc: "Average 4.8kg lost. Dense muscle forming. Body looks completely different.", icon: "💪" },
+        { day: 90, title: "Athlete Status", desc: "Muscle-up, handstand, or front lever achieved. 7.1kg avg lost. Unstoppable.", icon: "🏆" },
+      ],
+      trainerProfile: {
+        title: "Certified Calisthenics & Street Workout Coach",
+        certifications: [
+          "Street Workout World Federation Certified",
+          "NASM Certified Personal Trainer",
+          "Gymnastics Foundations Specialist",
+          "Mobility & Flexibility Coach",
+        ],
+        philosophy:
+          "Your body is the most sophisticated piece of equipment ever built. Calisthenics teaches you to master it completely — and the skills you gain are yours forever, whether you're in a gym, a park, a hotel room, or anywhere on earth.",
+        yearsExp: "7+ years",
+        photoUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=500&auto=format",
+      },
+      membershipPlans: [
+        {
+          name: "Foundation",
+          sessions: "3x/week",
+          highlighted: false,
+          badge: null,
+          features: [
+            "Beginner calisthenics track",
+            "Push-ups, pull-ups, dips mastery",
+            "Core & mobility work",
+            "Home workout plan included",
+            "WhatsApp support",
+          ],
+        },
+        {
+          name: "Skills Pro",
+          sessions: "5x/week",
+          highlighted: true,
+          badge: "🔥 MOST POPULAR",
+          features: [
+            "Full skill progression system",
+            "Muscle-up & handstand coaching",
+            "Planche & front lever progressions",
+            "Custom bodyweight program",
+            "Monthly skill assessment video",
+            "Nutrition for lean muscle",
+            "Skill badge reward system",
+          ],
+        },
+        {
+          name: "Athlete Elite",
+          sessions: "Unlimited + 1-on-1",
+          highlighted: false,
+          badge: "ADVANCED",
+          features: [
+            "1-on-1 personal calisthenics coaching",
+            "Advanced skill: human flag, planche",
+            "Competition preparation",
+            "Video form review every session",
+            "Outdoor & park training sessions",
+            "Full nutrition & recovery protocol",
+          ],
+        },
+      ],
+      testimonials: [
+        {
+          quote:
+            "I spent 3 years in a regular gym with mediocre results. 90 days of Calisthenics at PowerFit and I have my first muscle-up, visible abs, and 7kg less fat. This is the most honest program I've ever done.",
+          name: "Arjun S.",
+          location: "Malviya Nagar, Jaipur",
+          rating: 5,
+        },
+        {
+          quote:
+            "The skill progression is addictive. Every week you unlock something new. When I finally held a 10-second handstand, I felt like a superhero. PowerFit Calisthenics changed how I see fitness entirely.",
+          name: "Rohit K.",
+          location: "Mansarovar, Jaipur",
+          rating: 5,
+        },
+        {
+          quote:
+            "Zero equipment and I'm stronger than I've ever been. My coach took me from barely 2 pull-ups to 15 clean reps and a muscle-up in 60 days. Nothing else has come close to these results.",
+          name: "Vikram T.",
+          location: "Sikar",
+          rating: 5,
+        },
+      ],
+      programFAQ: [
+        {
+          q: "Is Calisthenics effective for building muscle without weights?",
+          a: "Highly effective. Research shows calisthenics builds equivalent or superior functional muscle density compared to weight training, particularly in upper body and core. Our members average 38% higher functional strength scores vs gym-machine-only users at 6 months.",
+        },
+        {
+          q: "I can't do a single pull-up. Can I still join?",
+          a: "This is exactly where most members start. Our Foundation track begins with assisted progressions — ring rows, band-assisted pull-ups, and negative reps — that build you to your first unassisted pull-up within 2 weeks for 78% of our beginners.",
+        },
+        {
+          q: "What skills will I learn at PowerFit Calisthenics?",
+          a: "Progressive curriculum: Push-ups → Dips → Pull-ups → Muscle-ups → L-sit → Handstand → Front Lever → Planche. You advance at your own pace with coach guidance. Most members reach muscle-up within 60 days of consistent training.",
+        },
+        {
+          q: "Can I train Calisthenics at home or outdoors?",
+          a: "Yes — it's one of Calisthenics' greatest advantages. Our Online and Home Visit options bring coaching to you with zero equipment. Your program uses a pull-up bar (optional) and your bodyweight. Train in your room, at a park, or anywhere.",
+        },
+        {
+          q: "How is Calisthenics different from regular gym training?",
+          a: "Gym training isolates muscles using machines. Calisthenics trains full movement patterns using your entire body as one integrated system. The result is superior body control, joint health, functional strength, and skills that transfer to every sport and daily life activity.",
+        },
+        {
+          q: "Is Calisthenics good for weight loss?",
+          a: "Extremely effective — our members average 7.1kg fat loss in 90 days. Bodyweight circuits at intensity are highly metabolic. Unlike pure cardio, Calisthenics simultaneously builds muscle while burning fat, achieving body recomposition that most programs cannot.",
+        },
+      ],
+      seoTitle: "Calisthenics Classes in Jaipur | Bodyweight Training | PowerFit India — Most Popular",
+      seoDescription:
+        "PowerFit Calisthenics — Jaipur's most popular fitness program. Master pull-ups, muscle-ups & handstands. Avg 7.1kg lost in 90 days. Certified coaches. Studios in Jaipur & Sikar. Free trial.",
+      aiSeoContext:
+        "PowerFit India offers Calisthenics training — bodyweight strength and skill development — at fitness studios in Jaipur (Malviya Nagar, Mansarovar) and Sikar, Rajasthan. This is PowerFit's most popular program with the highest member demand. Certified Street Workout World Federation coaches teach progressive calisthenics from pull-ups and dips to muscle-ups, handstands, front levers, and planches. Average results across 10,000+ members: 7.1kg fat loss in 90 days, 78% achieve first muscle-up within 60 days, 38% higher functional strength vs gym-machine-only training. Available in-studio, online across India, and home visits. No equipment required.",
+    },
+
+    hiit: {
       heroVideo: null,
       heroBg: 'https://images.unsplash.com/photo-1549576490-b0b4831ef60a?q=80&w=1470',
       galleryImages: [

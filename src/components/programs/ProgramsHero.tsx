@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { programCategories } from "@/data/programs";
+import { Link } from "react-router-dom";
+import { programCategories, programs } from "@/data/programs";
+import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
 
 type HeroStats = { label: string; value: number; suffix?: string; prefix?: string };
 
 const heroStats: HeroStats[] = [
-  { label: "Programs", value: 20, suffix: "+" },
+  { label: "Programs", value: 21, suffix: "+" },
   { label: "Members Tracked", value: 10000, suffix: "+" },
   { label: "Categories", value: 6 },
   { label: "Certified Trainers", value: 1, suffix: "+" },
@@ -37,6 +39,7 @@ export default function ProgramsHero({
 }) {
   const h1 = useMemo(() => "Find Your Program.", []);
   const h2 = useMemo(() => "Transform Your Life.", []);
+  const spotlightProgram = useMemo(() => programs.find((p) => p.isMostPopular), []);
 
   const scrollToCategory = (id: string) => {
     const el = document.getElementById(`category-${id}`);
@@ -134,6 +137,48 @@ export default function ProgramsHero({
               Search
             </button>
           </motion.div>
+
+          {spotlightProgram && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="w-full max-w-3xl mx-auto mb-6 mt-6"
+            >
+              <div
+                className="relative rounded-2xl overflow-hidden border-2 border-yellow-400/50 p-5"
+                style={{
+                  background: "linear-gradient(135deg, rgba(234,179,8,0.15) 0%, rgba(232,0,14,0.1) 100%)",
+                  boxShadow: "0 0 40px rgba(234,179,8,0.2)",
+                }}
+              >
+                <motion.div
+                  className="absolute top-0 left-0 right-0 h-0.5"
+                  style={{ background: "linear-gradient(to right, transparent, #FBBF24, #F59E0B, #FBBF24, transparent)" }}
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <div className="flex-1">
+                    <MostPopularBadge size="sm" className="mb-2" />
+                    <p className="text-white font-black text-lg">
+                      🤸 {spotlightProgram.name} — PowerFit&apos;s #1 Program
+                    </p>
+                    <p className="text-zinc-400 text-sm mt-1">
+                      India&apos;s most searched bodyweight training program. Zero equipment. Maximum results. 7.1kg lost in 90 days.
+                    </p>
+                  </div>
+                  <Link
+                    to={`/program/${spotlightProgram.slug}`}
+                    className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-black text-sm bg-gradient-to-r from-yellow-400 to-orange-400 hover:scale-105 transition-all shadow-[0_0_20px_rgba(234,179,8,0.4)]"
+                  >
+                    Explore Program →
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.95 }} className="mt-8">
             <div className="flex items-center justify-center gap-2 md:gap-3 overflow-x-auto scrollbar-hide px-2 py-2">

@@ -5,6 +5,7 @@ import type { Program } from "@/data/programs";
 import type { ProgramVisual } from "@/config/programVisuals";
 import type { CategoryTheme } from "@/config/categoryThemes";
 import CountUp from "@/components/ui/CountUp";
+import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
 
 const particleStyles: Record<string, string> = {
   sparks: "detail-particles-sparks",
@@ -56,6 +57,15 @@ export default function DetailHero({ program, visuals, theme }: Props) {
   }, []);
 
   const words = useMemo(() => program.name.split(" "), [program.name]);
+  const goldParticles = useMemo(() => {
+    return Array.from({ length: 8 }).map((_, i) => ({
+      key: `g-${i}`,
+      left: `${10 + i * 11}%`,
+      delay: i * 0.4,
+      duration: 2 + (i % 3) * 0.7,
+    }));
+  }, []);
+
   const particles = useMemo(() => {
     return Array.from({ length: 12 }).map((_, i) => ({
       key: i,
@@ -129,6 +139,33 @@ export default function DetailHero({ program, visuals, theme }: Props) {
           ))}
       </div>
 
+      {program.isMostPopular && !reduce && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {goldParticles.map((gp, i) => (
+            <motion.div
+              key={gp.key}
+              className="absolute w-1 h-1 rounded-full"
+              style={{
+                background: i % 2 === 0 ? "#FBBF24" : "#F59E0B",
+                left: gp.left,
+                bottom: "20%",
+              }}
+              animate={{
+                y: [0, -100 - (i % 3) * 35],
+                opacity: [0, 1, 0],
+                scale: [0, 1.5, 0],
+              }}
+              transition={{
+                duration: gp.duration,
+                repeat: Infinity,
+                delay: gp.delay,
+                ease: "easeOut",
+              }}
+            />
+          ))}
+        </div>
+      )}
+
       {/* Decorative streak */}
       {!reduce && (
         <div
@@ -170,6 +207,18 @@ export default function DetailHero({ program, visuals, theme }: Props) {
               <span className="text-zinc-700">/</span>
               <span className="text-white">{program.name}</span>
             </nav>
+
+            {program.isMostPopular && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="flex flex-wrap items-center gap-3 mb-4"
+              >
+                <MostPopularBadge size="md" />
+                <span className="text-zinc-400 text-sm">India&apos;s #1 requested program at PowerFit</span>
+              </motion.div>
+            )}
 
             {/* Badge */}
             <motion.div
@@ -264,6 +313,21 @@ export default function DetailHero({ program, visuals, theme }: Props) {
           {/* Right side stat ring (desktop) */}
           <div className="col-span-5 hidden lg:flex flex-col justify-center items-center gap-4 pr-[var(--gutter)]">
             <div className="relative w-72 h-72">
+              {program.isMostPopular && (
+                <motion.div
+                  className="absolute -top-3 -right-3 z-10 w-16 h-16 rounded-full flex items-center justify-center font-black text-black text-[10px] text-center leading-tight shadow-lg"
+                  style={{
+                    background: "linear-gradient(135deg, #FBBF24, #F59E0B)",
+                    boxShadow: "0 0 20px rgba(251,191,36,0.6)",
+                  }}
+                  animate={{ scale: [1, 1.06, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  #1
+                  <br />
+                  PICK
+                </motion.div>
+              )}
               <div className="absolute inset-0 rounded-full border-2 opacity-20 animate-spin" style={{ borderColor: theme.accent, animationDuration: "20s" }} />
               <div
                 className="absolute inset-8 rounded-full border border-dashed opacity-30"

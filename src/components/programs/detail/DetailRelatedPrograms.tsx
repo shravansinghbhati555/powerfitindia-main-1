@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 import { programs } from "@/data/programs";
 import type { Program } from "@/data/programs";
 import type { CategoryTheme } from "@/config/categoryThemes";
+import { MostPopularCrown } from "@/components/ui/MostPopularBadge";
 
 interface Props { program: Program; theme: CategoryTheme }
 
 export default function DetailRelatedPrograms({ program, theme }: Props) {
-  let related = programs.filter(p => p.categoryId === program.categoryId && p.id !== program.id).slice(0, 3);
+  let related = programs.filter((p) => p.categoryId === program.categoryId && p.id !== program.id);
   if (related.length < 2) {
-    const others = programs.filter(p => p.id !== program.id && p.categoryId !== program.categoryId).slice(0, 3 - related.length);
+    const others = programs.filter((p) => p.id !== program.id && p.categoryId !== program.categoryId);
     related = [...related, ...others];
   }
+  const sortedRelated = [
+    ...related.filter((p) => p.isMostPopular),
+    ...related.filter((p) => !p.isMostPopular),
+  ].slice(0, 4);
 
   return (
     <section className="py-10 overflow-hidden" style={{ background: "#111" }} aria-label="Related programs">
@@ -23,15 +28,16 @@ export default function DetailRelatedPrograms({ program, theme }: Props) {
       </div>
 
       <div className="flex gap-4 px-[var(--gutter)] overflow-x-auto pb-4 snap-x snap-mandatory">
-        {related.map((p, i) => (
+        {sortedRelated.map((p, i) => (
           <motion.div
             key={p.id}
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="shrink-0 snap-start"
+            className="shrink-0 snap-start relative"
           >
+            {p.isMostPopular && <MostPopularCrown compact />}
             <Link to={`/program/${p.slug}`} className="block w-64 h-[240px] rounded-2xl overflow-hidden relative group border border-white/10">
               <img
                 src={p.imagePath}

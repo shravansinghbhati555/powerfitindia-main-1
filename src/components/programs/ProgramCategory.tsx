@@ -83,6 +83,11 @@ export default function ProgramCategory({
     return () => window.clearTimeout(t);
   }, [category.id, inView]);
 
+  const sortedPrograms = useMemo(
+    () => [...programs].sort((a, b) => Number(!!b.isMostPopular) - Number(!!a.isMostPopular)),
+    [programs],
+  );
+
   const bgFx = useMemo(() => {
     if (category.id === "cardio") {
       return (
@@ -180,7 +185,7 @@ export default function ProgramCategory({
         )}
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {programs.map((p, i) => {
+          {sortedPrograms.map((p, i) => {
             const intro = getCardIntro(category.id, i);
             const glow = category.id === "mind-body" ? "0 20px 60px rgba(124,58,237,0.20)" : undefined;
             return (

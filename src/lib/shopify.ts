@@ -1,128 +1,101 @@
 import { toast } from "sonner";
+import { createStorefrontApiClient } from "@shopify/storefront-api-client";
+import * as q from "@/lib/queries";
 
-const SHOPIFY_API_VERSION = '2025-07';
-const SHOPIFY_STORE_PERMANENT_DOMAIN = 'powerfit-gym-store.myshopify.com';
-const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-const SHOPIFY_STOREFRONT_TOKEN = 'b07268c7e5b677b2f1c4e4216ec05935';
+const SHOPIFY_STORE_DOMAIN = import.meta.env.VITE_SHOPIFY_STORE_DOMAIN as string | undefined;
+const SHOPIFY_STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN as string | undefined;
+const SHOPIFY_API_VERSION = (import.meta.env.VITE_SHOPIFY_API_VERSION as string | undefined) || "2024-10";
 
-export interface ShopifyProduct {
-  node: {
-    id: string;
-    title: string;
-    description: string;
-    handle: string;
-    priceRange: {
-      minVariantPrice: {
-        amount: string;
-        currencyCode: string;
+if (!SHOPIFY_STORE_DOMAIN) {
+  // eslint-disable-next-line no-console
+  console.warn("Missing VITE_SHOPIFY_STORE_DOMAIN. Copy .env.example → .env and set values.");
+}
+if (!SHOPIFY_STOREFRONT_TOKEN) {
+  // eslint-disable-next-line no-console
+  console.warn("Missing VITE_SHOPIFY_STOREFRONT_TOKEN. Copy .env.example → .env and set values.");
+}
+
+export const shopifyClient = createStorefrontApiClient({
+  storeDomain: SHOPIFY_STORE_DOMAIN || "example.myshopify.com",
+  apiVersion: SHOPIFY_API_VERSION,
+  publicAccessToken: SHOPIFY_STOREFRONT_TOKEN || "missing-token",
+});
+
+export interface ShopifyProductNode {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  descriptionHtml?: string;
+  tags: string[];
+  productType: string;
+  featuredImage?: { url: string; altText: string | null } | null;
+  images?: { edges: { node: { url: string; altText: string | null } }[] };
+  priceRange: {
+    minVariantPrice: { amount: string; currencyCode: string };
+    maxVariantPrice?: { amount: string; currencyCode: string };
+  };
+  compareAtPriceRange?: { minVariantPrice: { amount: string; currencyCode: string } };
+  variants: {
+    edges: Array<{
+      node: {
+        id: string;
+        title: string;
+        price: { amount: string; currencyCode: string };
+        compareAtPrice?: { amount: string; currencyCode: string } | null;
+        availableForSale: boolean;
+        quantityAvailable?: number;
+        selectedOptions: Array<{ name: string; value: string }>;
       };
-    };
-    images: {
-      edges: Array<{
-        node: {
-          url: string;
-          altText: string | null;
-        };
-      }>;
-    };
-    variants: {
-      edges: Array<{
-        node: {
-          id: string;
-          title: string;
-          price: {
-            amount: string;
-            currencyCode: string;
-          };
-          availableForSale: boolean;
-          selectedOptions: Array<{
-            name: string;
-            value: string;
-          }>;
-        };
-      }>;
-    };
-    options: Array<{
-      name: string;
-      values: string[];
     }>;
   };
+  options?: Array<{ name: string; values: string[] }>;
+}
+
+// Back-compat: existing shop pages/store use `{ node: ... }` shape
+export interface ShopifyProduct {
+  node: ShopifyProductNode;
 }
 
 export async function storefrontApiRequest(query: string, variables: Record<string, unknown> = {}) {
-  const response = await fetch(SHOPIFY_STOREFRONT_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-
-  if (response.status === 402) {
-    toast.error("Shopify: Payment required", {
-      description: "Shopify API access requires an active billing plan. Visit https://admin.shopify.com to upgrade.",
-    });
-    return;
+  try {
+    const res = await shopifyClient.request(query, { variables });
+    if ((res as any)?.errors?.length) {
+      throw new Error((res as any).errors?.[0]?.message || "Shopify error");
+    }
+    return res;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Failed to call Shopify";
+    if (message.toLowerCase().includes("payment") || message.includes("402")) {
+      toast.error("Shopify: Payment required", {
+        description: "Shopify Storefront API access may require an active plan. Check Shopify admin billing and token permissions.",
+      });
+      return;
+    }
+    throw err;
   }
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  const data = await response.json();
-
-  if (data.errors) {
-    throw new Error(`Error calling Shopify: ${data.errors.map((e: { message: string }) => e.message).join(', ')}`);
-  }
-
-  return data;
 }
 
+// Back-compat exports used by current pages/stores
 export const STOREFRONT_PRODUCTS_QUERY = `
   query GetProducts($first: Int!, $query: String) {
-    products(first: $first, query: $query) {
+    products(first: $first, query: $query, sortKey: BEST_SELLING) {
       edges {
         node {
-          id
-          title
-          description
-          handle
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          images(first: 5) {
-            edges {
-              node {
-                url
-                altText
-              }
-            }
-          }
+          id handle title description tags productType
+          featuredImage { url altText }
+          images(first: 5) { edges { node { url altText } } }
+          priceRange { minVariantPrice { amount currencyCode } }
           variants(first: 10) {
             edges {
               node {
-                id
-                title
-                price {
-                  amount
-                  currencyCode
-                }
-                availableForSale
-                selectedOptions {
-                  name
-                  value
-                }
+                id title availableForSale
+                price { amount currencyCode }
+                selectedOptions { name value }
               }
             }
           }
-          options {
-            name
-            values
-          }
+          options { name values }
         }
       }
     }
@@ -132,45 +105,22 @@ export const STOREFRONT_PRODUCTS_QUERY = `
 export const STOREFRONT_PRODUCT_BY_HANDLE_QUERY = `
   query GetProductByHandle($handle: String!) {
     product(handle: $handle) {
-      id
-      title
-      description
-      handle
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-      }
-      images(first: 10) {
-        edges {
-          node {
-            url
-            altText
-          }
-        }
-      }
+      id handle title description descriptionHtml tags productType
+      featuredImage { url altText }
+      images(first: 10) { edges { node { url altText } } }
+      priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } }
+      compareAtPriceRange { minVariantPrice { amount currencyCode } }
       variants(first: 30) {
         edges {
           node {
-            id
-            title
-            price {
-              amount
-              currencyCode
-            }
-            availableForSale
-            selectedOptions {
-              name
-              value
-            }
+            id title availableForSale quantityAvailable
+            price { amount currencyCode }
+            compareAtPrice { amount currencyCode }
+            selectedOptions { name value }
           }
         }
       }
-      options {
-        name
-        values
-      }
+      options { name values }
     }
   }
 `;
@@ -224,6 +174,9 @@ export const CART_LINES_REMOVE_MUTATION = `
     }
   }
 `;
+
+// Also export the new shared query strings (for new hooks/pages)
+export const queries = q;
 
 function formatCheckoutUrl(checkoutUrl: string): string {
   try {

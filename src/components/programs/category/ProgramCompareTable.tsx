@@ -1,6 +1,8 @@
+import { useMemo } from "react";
 import type { Program } from "@/data/programs";
 import { useCategoryTheme } from "@/components/programs/category/CategoryThemeProvider";
 import WhatsAppCTA from "@/components/programs/category/WhatsAppCTA";
+import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
 
 function topStat(p: Program) {
   const first = p.realDataStats?.[0];
@@ -10,9 +12,14 @@ function topStat(p: Program) {
 
 export default function ProgramCompareTable({ programs }: { programs: Program[] }) {
   const theme = useCategoryTheme();
-  if (programs.length === 0) return null;
 
-  const columns = programs.slice(0, 3);
+  const columns = useMemo(() => {
+    if (programs.length === 0) return [];
+    const sorted = [...programs].sort((a, b) => Number(!!b.isMostPopular) - Number(!!a.isMostPopular));
+    return sorted.slice(0, Math.min(4, programs.length));
+  }, [programs]);
+
+  if (programs.length === 0) return null;
   const features = [
     { label: "Duration", get: (p: Program) => p.duration },
     { label: "Intensity", get: (p: Program) => p.intensity },
@@ -30,7 +37,7 @@ export default function ProgramCompareTable({ programs }: { programs: Program[] 
         </h2>
 
         <div className="mt-10 overflow-x-auto">
-          <table className="min-w-[860px] w-full border-separate border-spacing-0 rounded-2xl overflow-hidden">
+          <table className="min-w-[1080px] w-full border-separate border-spacing-0 rounded-2xl overflow-hidden">
             <thead>
               <tr>
                 <th className="text-left bg-zinc-950 text-zinc-400 text-xs uppercase tracking-widest px-5 py-4 border border-white/10 rounded-tl-2xl">
@@ -39,12 +46,24 @@ export default function ProgramCompareTable({ programs }: { programs: Program[] 
                 {columns.map((p, i) => (
                   <th
                     key={p.id}
-                    className={`text-left text-white font-black px-5 py-4 border border-white/10 ${i === columns.length - 1 ? "rounded-tr-2xl" : ""}`}
-                    style={{ background: theme.accent }}
+                    className={`text-left font-black px-5 py-4 border border-white/10 ${i === columns.length - 1 ? "rounded-tr-2xl" : ""} ${
+                      p.isMostPopular ? "text-yellow-100" : "text-white"
+                    }`}
+                    style={
+                      p.isMostPopular
+                        ? { background: "linear-gradient(135deg, rgba(234,179,8,0.2), rgba(232,0,14,0.1))" }
+                        : { background: theme.accent }
+                    }
                   >
-                    <a href={`/program/${p.slug}`} className="hover:underline underline-offset-4">
-                      {p.name}
-                    </a>
+                    <div className="text-center">
+                      {p.isMostPopular && (
+                        <MostPopularBadge size="sm" animated={false} className="mx-auto mb-1 justify-center !text-[10px]" />
+                      )}
+                      <a href={`/program/${p.slug}`} className="hover:underline underline-offset-4 block">
+                        <span className={p.isMostPopular ? "text-yellow-300" : undefined}>{p.name}</span>
+                      </a>
+                      {p.isMostPopular && <div className="text-zinc-500 text-xs font-semibold mt-0.5">#1 Program</div>}
+                    </div>
                   </th>
                 ))}
               </tr>

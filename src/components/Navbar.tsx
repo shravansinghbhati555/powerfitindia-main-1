@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CartDrawer } from "@/components/CartDrawer";
+import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
 
 const navLinks = [
   { label: "Franchise", href: "/franchise" },
@@ -106,8 +107,31 @@ const Navbar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-4 w-64 bg-dark-card border border-dark-foreground/10 rounded-xl overflow-hidden shadow-2xl shadow-dark/50"
+                      className="absolute top-full left-0 mt-4 w-80 bg-dark-card border border-dark-foreground/10 rounded-xl overflow-hidden shadow-2xl shadow-dark/50"
                     >
+                      {link.label === "Programs" && (
+                        <div className="border-b border-zinc-800 pb-3 mb-1 px-2 pt-2">
+                          <Link
+                            to="/program/calisthenics"
+                            onClick={() => setMegaOpen(null)}
+                            className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all hover:scale-[1.02] group"
+                            style={{
+                              background: "linear-gradient(135deg, rgba(234,179,8,0.15), rgba(232,0,14,0.1))",
+                              border: "1px solid rgba(234,179,8,0.3)",
+                            }}
+                          >
+                            <span className="text-2xl">🤸</span>
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-white font-black text-sm">Calisthenics</span>
+                                <MostPopularBadge size="sm" animated={false} className="!py-0.5 !text-[10px]" />
+                              </div>
+                              <div className="text-zinc-500 text-xs">India&apos;s #1 bodyweight training program</div>
+                            </div>
+                            <span className="text-yellow-400 font-bold text-xs shrink-0">#1</span>
+                          </Link>
+                        </div>
+                      )}
                       {link.items?.map((item, i) => (
                         <motion.a
                           key={item.label}

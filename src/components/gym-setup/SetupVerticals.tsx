@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { getToPathname } from "@remix-run/router";
 
 const verticals = [
   {
     id: "home",
+    handle: "home-gym-setup",
     icon: "🏠",
     tag: "MOST POPULAR",
     title: "Home Gym Setup",
@@ -23,6 +25,7 @@ const verticals = [
   },
   {
     id: "office",
+    handle: "corporate-gym-setup",
     icon: "🏢",
     tag: "BOOST PRODUCTIVITY",
     title: "Corporate / Office Gym Setup",
@@ -42,6 +45,7 @@ const verticals = [
   },
   {
     id: "society",
+    handle: "society-gym-setup",
     icon: "🏘️",
     tag: "INDIA'S #1 CHOICE",
     title: "Society & Apartment Gym Setup",
@@ -120,13 +124,17 @@ const SetupVerticals = () => {
                     ))}
                   </ul>
                 </div>
-
                 <button
                   onClick={() => scrollToQuote(v.id)}
-                  className="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all text-sm"
+                  className="w-[calc(50%-24px)] py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all text-sm"
                 >
-                  {v.cta}
+                  Get Free Quote
                 </button>
+                <a href={`/shop/${v.handle}`}
+                  className="w-[calc(50%-24px)] py-3 px-6 ml-10 bg-secondary text-primary font-bold rounded-lg hover:bg-secondary/90 transition-all text-sm"
+                >
+                  Explore Range →
+                </a>
               </div>
             </motion.div>
           ))}
