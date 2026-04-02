@@ -204,6 +204,7 @@ export const programs: Program[] = [
     slug: "calisthenics",
   },
 
+
   // ════════════════════════════════════════
   // CATEGORY 2: CARDIO & ENDURANCE
   // ════════════════════════════════════════

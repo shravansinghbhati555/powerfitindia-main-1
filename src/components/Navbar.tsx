@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CartDrawer } from "@/components/CartDrawer";
 import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
 
 const navLinks = [
   { label: "Franchise", href: "/franchise" },
   { label: "Gym Setup", href: "/gym-setup" },
+  { label: "Membership", href: "/membership" },
   {
     label: "Programs",
     href: "/programs",
@@ -27,6 +28,8 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const location = useLocation();
+  const isMembershipPage = location.pathname.startsWith("/membership");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState<string | null>(null);
@@ -59,6 +62,7 @@ const Navbar = () => {
             ? "bg-dark/98 backdrop-blur-xl shadow-2xl shadow-dark/50 py-0"
             : "bg-transparent py-1"
         }`}
+        style={{ top: isMembershipPage ? 40 : undefined }}
       >
         {/* Red sweep underline on scroll */}
         <motion.div
@@ -159,7 +163,7 @@ const Navbar = () => {
               <CartDrawer />
             </div>
             <motion.a
-              href="#contact"
+              href="/membership"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
               className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-full label-text font-bold transition-all hover:shadow-lg hover:shadow-primary/30"

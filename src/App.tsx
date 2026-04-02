@@ -24,6 +24,7 @@ import MindBodyPage from "./pages/programs/MindBodyPage.tsx";
 import SpecialtyPage from "./pages/programs/SpecialtyPage.tsx";
 import OnlinePage from "./pages/programs/OnlinePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import MembershipPage from "./pages/MembershipPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const AppContent = () => {
       <Route path="/programs/specialty" element={<SpecialtyPage />} />
       <Route path="/programs/online" element={<OnlinePage />} />
       <Route path="/program/:slug" element={<ProgramDetailPage />} />
+      <Route path="/membership" element={<MembershipPage />} />
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
