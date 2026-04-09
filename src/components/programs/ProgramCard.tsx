@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import type { Program } from "@/data/programs";
 import { MostPopularBadge, MostPopularCrown, MostPopularRibbon } from "@/components/ui/MostPopularBadge";
 
@@ -94,12 +95,13 @@ export default function ProgramCard({ program, index, categoryColor, onOpen }: P
           </span>
         </div>
 
-        <a href={`/program/${program.slug}`}
-          type="button"
+        <Link
+          to={`/program/${program.slug}`}
+          onClick={(e) => e.stopPropagation()}
           className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
         >
           View Program Details <span className="group-hover:translate-x-1 transition-transform">→</span>
-        </a>
+        </Link>
       </div>
 
       <span className="sr-only" itemProp="provider">

@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CategoryThemeProvider from "@/components/programs/category/CategoryThemeProvider";
@@ -162,12 +163,12 @@ export default function StrengthPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <a
-                    href="/program/calisthenics"
+                  <Link
+                    to="/program/calisthenics"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-black bg-gradient-to-r from-yellow-400 to-orange-400 hover:scale-105 transition-all shadow-[0_0_25px_rgba(234,179,8,0.4)]"
                   >
                     👑 View Full Program
-                  </a>
+                  </Link>
                   <a
                     href={`https://wa.me/918619527263?text=${encodeURIComponent("Hi! I want to join the Calisthenics program at PowerFit. Please share details.")}`}
                     target="_blank"

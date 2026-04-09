@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
 type BillingPeriod = "Monthly" | "Quarterly" | "Annual";
@@ -102,7 +102,7 @@ export default function MembershipDecoyPricing() {
           { text: "Priority batch booking", included: true },
           { text: "Towel service", included: false },
         ],
-        cta: "💬 Join Elite — Best Value",
+        cta: "Join Elite — Best Value",
         whatsappMsg: "Hi PowerFit! I want the Elite membership. Please share current pricing and joining details.",
         savingsVsPremium: "₹12,000/year",
         anchorNote: "83% of members choose this",
@@ -139,22 +139,6 @@ export default function MembershipDecoyPricing() {
   );
 
   const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly");
-  const [timeLeftSec, setTimeLeftSec] = useState(22 * 60 + 0);
-
-  useEffect(() => {
-    const t = window.setInterval(() => {
-      setTimeLeftSec((s) => (s <= 0 ? 0 : s - 1));
-    }, 1000);
-    return () => window.clearInterval(t);
-  }, []);
-
-  const timerLabel = useMemo(() => {
-    const m = Math.floor(timeLeftSec / 60);
-    const s = timeLeftSec % 60;
-    const mm = String(m).padStart(2, "0");
-    const ss = String(s).padStart(2, "0");
-    return `${mm}:${ss}`;
-  }, [timeLeftSec]);
 
   const TierCard = ({ tier, index }: { tier: MembershipTier; index: number }) => {
     const current = getTierPrice(tier, billingPeriod);
@@ -170,15 +154,13 @@ export default function MembershipDecoyPricing() {
         className="relative"
       >
         {tier.highlighted && (
-          <motion.div
+          <div
             aria-hidden="true"
             className="absolute -inset-[2px] rounded-3xl -z-10"
             style={{
               background:
                 "linear-gradient(135deg, rgba(232,0,14,0.95), rgba(255,107,0,0.65), rgba(232,0,14,0.95))",
-              backgroundSize: "200% 200%",
               filter: "blur(0px)",
-              animation: "goldShimmer 2.8s linear infinite",
             }}
           />
         )}
@@ -208,16 +190,13 @@ export default function MembershipDecoyPricing() {
           )}
 
           {tier.savingsVsPremium && (
-            <motion.div
-              className="absolute -top-3 -right-3 z-10 w-20 h-20 rounded-full bg-yellow-400 text-black font-black text-xs shadow-lg flex items-center justify-center text-center"
-              style={{ animation: "savingsPop 0.55s ease-out both" }}
-            >
+            <div className="absolute -top-3 -right-3 z-10 w-20 h-20 rounded-full bg-yellow-400 text-black font-black text-xs shadow-lg flex items-center justify-center text-center">
               <div className="leading-tight">
                 <div className="text-base">💰</div>
                 <div>Save</div>
                 <div className="text-[11px]">{tier.savingsVsPremium}</div>
               </div>
-            </motion.div>
+            </div>
           )}
 
           <div className="flex items-start justify-between gap-4">
@@ -286,15 +265,12 @@ export default function MembershipDecoyPricing() {
               viewport={{ once: true }}
             >
               <div className="text-red-400 text-xs font-black tracking-widest uppercase">
-                Next batch slot closing in
+                Weekly intake is capped
               </div>
-              <div
-                className="text-white font-black text-3xl tabular-nums"
-                style={{ animation: "urgencyPulse 1.6s ease-in-out infinite" }}
-              >
-                {timerLabel}
+              <div className="text-white font-black text-lg md:text-xl leading-snug mt-1">
+                Message us to check this week’s remaining slots
               </div>
-              <div className="text-zinc-400 text-xs mt-1">Limited spaces for Jaipur + Sikar</div>
+              <div className="text-zinc-400 text-xs mt-2">Jaipur + Sikar studios</div>
             </motion.div>
           )}
 
@@ -337,9 +313,7 @@ export default function MembershipDecoyPricing() {
                 : "bg-[#25D366] text-white"
             }`}
           >
-            <motion.span animate={tier.highlighted ? { x: [0, 3, 0] } : undefined} transition={{ duration: 1, repeat: Infinity }}>
-              💬
-            </motion.span>
+            <span aria-hidden="true">💬</span>
             {tier.cta}
           </a>
         </div>

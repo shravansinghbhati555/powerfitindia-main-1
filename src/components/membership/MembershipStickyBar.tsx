@@ -22,7 +22,7 @@ export default function MembershipStickyBar() {
     return () => window.removeEventListener("scroll", handle);
   }, []);
 
-  const topOffsetPx = 40 + 56; // urgency(40) + navbar height(56)
+  const topOffsetPx =  56; // urgency(40) + navbar height(56)
 
   return (
     <>

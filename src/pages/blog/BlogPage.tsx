@@ -93,6 +93,7 @@ export default function BlogPage() {
                 {hasNextPage && (
                   <div className="mt-10 flex justify-center">
                     <button
+                      type="button"
                       onClick={() => loadMore()}
                       className="px-6 py-3 rounded-xl bg-white/10 border border-white/10 text-sm font-black hover:bg-white/15 transition-colors"
                     >

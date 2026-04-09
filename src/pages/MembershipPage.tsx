@@ -35,8 +35,9 @@ export default function MembershipPage() {
         />
       </Helmet>
 
-      <MembershipUrgencyBanner />
       <Navbar />
+      {/* <MembershipUrgencyBanner /> */}
+
       <MembershipStickyBar />
 
       <main className="bg-[#0A0A0A] pt-[96px] pb-24 lg:pb-0">

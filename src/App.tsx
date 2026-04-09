@@ -25,13 +25,24 @@ import SpecialtyPage from "./pages/programs/SpecialtyPage.tsx";
 import OnlinePage from "./pages/programs/OnlinePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import MembershipPage from "./pages/MembershipPage.tsx";
+import GymsPage from "./pages/GymsPage.tsx";
+import ScrollToHash from "./components/ScrollToHash.tsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60_000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const AppContent = () => {
   useCartSync();
   return (
-    <Routes>
+    <>
+      <ScrollToHash />
+      <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/shop/:collectionHandle" element={<CollectionPage />} />
@@ -58,10 +69,12 @@ const AppContent = () => {
       <Route path="/programs/online" element={<OnlinePage />} />
       <Route path="/program/:slug" element={<ProgramDetailPage />} />
       <Route path="/membership" element={<MembershipPage />} />
+      <Route path="/gyms" element={<GymsPage />} />
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
-    </Routes>
+      </Routes>
+    </>
   );
 };
 

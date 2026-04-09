@@ -4,9 +4,9 @@ export default function MembershipUrgencyBanner() {
   const reduce = useReducedMotion();
 
   return (
-    <div className="fixed top-0 left-0 right-0 w-full h-10 bg-red-600 overflow-hidden relative flex items-center z-60">
+    <div className="w-full h-10 bg-red-600 overflow-hidden flex items-center">
       <motion.div
-        className="flex gap-8 whitespace-nowrap absolute left-0 top-0 h-10 items-center"
+        className="flex gap-8 whitespace-nowrap h-10 items-center"
         animate={reduce ? undefined : { x: ["0%", "-50%"] }}
         transition={reduce ? undefined : { duration: 20, repeat: Infinity, ease: "linear" }}
       >

@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { Instagram, Youtube, Facebook, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
+import { SOCIAL_LINKS } from "@/config/site";
 
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-];
+  { icon: Instagram, href: SOCIAL_LINKS.instagram, label: "Instagram" },
+  { icon: Youtube, href: SOCIAL_LINKS.youtube, label: "YouTube" },
+  { icon: Facebook, href: SOCIAL_LINKS.facebook, label: "Facebook" },
+  { icon: Twitter, href: SOCIAL_LINKS.twitter, label: "Twitter" },
+] as const;
 
 const Footer = () => (
   <footer className="section-dark border-t border-dark-foreground/10 overflow-hidden">
@@ -34,6 +36,8 @@ const Footer = () => (
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-10 h-10 rounded-full border border-dark-foreground/10 flex items-center justify-center text-dark-muted hover:text-primary hover:border-primary/50 transition-all social-bounce"
                 >
@@ -47,17 +51,18 @@ const Footer = () => (
             <p className="label-text text-dark-muted mb-4">Quick Links</p>
             <div className="space-y-2.5">
               {[
-                { label: "Franchise", href: "/franchise" },
-                { label: "Gym Setup", href: "/gym-setup" },
-                { label: "Programs", href: "/programs" },
-                { label: "Our Gyms", href: "/gyms" },
-                { label: "About", href: "#about" },
-                { label: "Blog", href: "/blog" },
-                { label: "Contact", href: "#contact" },
+                { label: "Franchise", to: "/franchise" },
+                { label: "Gym Setup", to: "/gym-setup" },
+                { label: "Membership", to: "/membership" },
+                { label: "Programs", to: "/programs" },
+                { label: "Our Gyms", to: "/gyms" },
+                { label: "About", to: "/#about" },
+                { label: "Blog", to: "/blog" },
+                { label: "Contact", to: "/#contact" },
               ].map((l) => (
-                <a key={l.label} href={l.href} className="block font-body text-sm text-dark-muted hover:text-dark-foreground transition-colors">
+                <Link key={l.label} to={l.to} className="block font-body text-sm text-dark-muted hover:text-dark-foreground transition-colors">
                   {l.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -70,10 +75,15 @@ const Footer = () => (
 
             <p className="label-text text-dark-muted mb-4 mt-8">Programs</p>
             <div className="space-y-2">
-              {["Strength", "Cardio", "Yoga", "CrossFit"].map((p) => (
-                <a key={p} href={`/programs/${p.toLowerCase()}`} className="block font-body text-sm text-dark-muted hover:text-dark-foreground transition-colors">
-                  {p}
-                </a>
+              {[
+                { label: "Strength & Muscle", to: "/programs/strength" },
+                { label: "Cardio & Endurance", to: "/programs/cardio" },
+                { label: "Mind & Body", to: "/programs/mind-body" },
+                { label: "Specialty", to: "/programs/specialty" },
+              ].map((p) => (
+                <Link key={p.to} to={p.to} className="block font-body text-sm text-dark-muted hover:text-dark-foreground transition-colors">
+                  {p.label}
+                </Link>
               ))}
             </div>
           </div>
@@ -86,8 +96,12 @@ const Footer = () => (
             © 2026 PowerFit India. All rights reserved. Train Hard. Stay Strong.
           </p>
           <div className="flex gap-6">
-            <a href="/privacy" className="font-body text-xs text-dark-muted hover:text-dark-foreground transition-colors">Privacy Policy</a>
-            <a href="/terms" className="font-body text-xs text-dark-muted hover:text-dark-foreground transition-colors">Terms of Service</a>
+            <Link to="/privacy-policy" className="font-body text-xs text-dark-muted hover:text-dark-foreground transition-colors">
+              Privacy Policy
+            </Link>
+            <Link to="/terms-conditions" className="font-body text-xs text-dark-muted hover:text-dark-foreground transition-colors">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

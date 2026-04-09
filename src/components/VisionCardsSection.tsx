@@ -1,6 +1,9 @@
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+
+const MotionLink = motion(Link);
 
 /* ── Counter helper ─────────────────────────────────────────── */
 const AnimatedStat = ({ text, inView }: { text: string; inView: boolean }) => (
@@ -86,8 +89,8 @@ const VisionCard = ({
   const [hovering, setHovering] = useState(false);
 
   return (
-    <motion.a
-      href="#contact"
+    <MotionLink
+      to="/#contact"
       initial={{ x: 80, opacity: 0 }}
       animate={sectionInView ? { x: 0, opacity: 1 } : {}}
       transition={{ duration: 0.6, delay: 0.5 + index * 0.12, ease: [0.25, 1, 0.5, 1] }}
@@ -113,7 +116,7 @@ const VisionCard = ({
         size={18}
         className="flex-shrink-0 mt-2 text-dark-muted opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary transition-all duration-400"
       />
-    </motion.a>
+    </MotionLink>
   );
 };
 

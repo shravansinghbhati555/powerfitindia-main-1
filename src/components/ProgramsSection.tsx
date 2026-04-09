@@ -1,9 +1,12 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { programs } from "@/data/programs";
 import { categoryThemes, type CategoryThemeId } from "@/config/categoryThemes";
 import ProgramCard from "@/components/programs/ProgramCard";
+
+const MotionLink = motion(Link);
 
 const ProgramsSection = () => {
   const sortedPrograms = useMemo(() => {
@@ -116,13 +119,13 @@ const ProgramsSection = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <motion.a
-              href="/programs"
+            <MotionLink
+              to="/programs"
               whileHover={{ x: 4 }}
               className="inline-flex items-center gap-2 label-text text-primary hover:text-accent transition-colors"
             >
               View all programs <ArrowRight size={14} />
-            </motion.a>
+            </MotionLink>
           </motion.div>
         </div>
       </div>

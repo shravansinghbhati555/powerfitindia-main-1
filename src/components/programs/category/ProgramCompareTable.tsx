@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import type { Program } from "@/data/programs";
 import { useCategoryTheme } from "@/components/programs/category/CategoryThemeProvider";
 import WhatsAppCTA from "@/components/programs/category/WhatsAppCTA";
@@ -59,9 +60,9 @@ export default function ProgramCompareTable({ programs }: { programs: Program[] 
                       {p.isMostPopular && (
                         <MostPopularBadge size="sm" animated={false} className="mx-auto mb-1 justify-center !text-[10px]" />
                       )}
-                      <a href={`/program/${p.slug}`} className="hover:underline underline-offset-4 block">
+                      <Link to={`/program/${p.slug}`} className="hover:underline underline-offset-4 block">
                         <span className={p.isMostPopular ? "text-yellow-300" : undefined}>{p.name}</span>
-                      </a>
+                      </Link>
                       {p.isMostPopular && <div className="text-zinc-500 text-xs font-semibold mt-0.5">#1 Program</div>}
                     </div>
                   </th>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import type { CategoryTheme } from "@/config/categoryThemes";
 import WhatsAppCTA from "@/components/programs/category/WhatsAppCTA";
 import type { Program } from "@/data/programs";
+import { Link } from "react-router-dom";
 
 function textureStyle(bgTexture: string, accent: string) {
   switch (bgTexture) {
@@ -108,13 +109,13 @@ export default function CategoryHero({ theme, programs }: { theme: CategoryTheme
 
       <div className="relative section-container">
         <div className="text-sm text-zinc-400 mb-4">
-          <a href="/" className="hover:text-white underline underline-offset-4">
+          <Link to="/" className="hover:text-white underline underline-offset-4">
             Home
-          </a>{" "}
+          </Link>{" "}
           &gt;{" "}
-          <a href="/programs" className="hover:text-white underline underline-offset-4">
+          <Link to="/programs" className="hover:text-white underline underline-offset-4">
             Programs
-          </a>{" "}
+          </Link>{" "}
           &gt; <span className="text-white">{theme.label}</span>
         </div>
 

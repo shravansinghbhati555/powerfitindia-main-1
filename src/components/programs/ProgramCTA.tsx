@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function ProgramCTA() {
   return (
@@ -38,29 +39,29 @@ export default function ProgramCTA() {
             >
               💬 WhatsApp Our Trainer
             </a>
-            <a
-              href="/gym-setup#locations"
-              className="rounded-2xl border border-white/20 hover:border-white/40 text-white font-bold py-4 px-5 transition-colors bg-white/0 hover:bg-white/5"
+            <Link
+              to="/gyms"
+              className="rounded-2xl border border-white/20 hover:border-white/40 text-white font-bold py-4 px-5 transition-colors bg-white/0 hover:bg-white/5 inline-flex items-center justify-center text-center"
             >
               📍 Visit a Studio
-            </a>
-            <a
-              href="/contact"
-              className="rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold py-4 px-5 transition-colors"
+            </Link>
+            <Link
+              to="/membership"
+              className="rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold py-4 px-5 transition-colors inline-flex items-center justify-center text-center"
             >
               🎯 Try Free Class
-            </a>
+            </Link>
           </motion.div>
 
           <div className="mt-10 text-sm text-zinc-500">
             Prefer exploring first? Learn about{" "}
-            <a href="/franchise" className="text-white hover:text-primary underline underline-offset-4">
+            <Link to="/franchise" className="text-white hover:text-primary underline underline-offset-4">
               PowerFit franchise
-            </a>{" "}
+            </Link>{" "}
             or see our{" "}
-            <a href="/gym-setup" className="text-white hover:text-primary underline underline-offset-4">
+            <Link to="/gym-setup" className="text-white hover:text-primary underline underline-offset-4">
               gym setup services
-            </a>
+            </Link>
             .
           </div>
         </div>

@@ -4,6 +4,7 @@ import BenefitsTile from "@/components/programs/category/BenefitsTile";
 import RealDataBadge from "@/components/programs/category/RealDataBadge";
 import WhatsAppCTA from "@/components/programs/category/WhatsAppCTA";
 import { useCategoryTheme } from "@/components/programs/category/CategoryThemeProvider";
+import { Link } from "react-router-dom";
 
 export default function ProgramDetailSection({ program, index }: { program: Program; index: number }) {
   const theme = useCategoryTheme();
@@ -85,18 +86,21 @@ export default function ProgramDetailSection({ program, index }: { program: Prog
 
             <div className="mt-8">
               <WhatsAppCTA text="WhatsApp to Join" message={waMessage} size="default" className="flex-1" />
-              <a href={`/program/${program.slug}`}  className="flex-2 text-right ml-5 font-bold underline-offset-4  hover:underline hover:scale-105 transition-all" >
-                  View Details →
-                </a>
+              <Link
+                to={`/program/${program.slug}`}
+                className="flex-2 text-right ml-5 font-bold underline-offset-4 hover:underline hover:scale-105 transition-all"
+              >
+                View Details →
+              </Link>
             </div>
             
             </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}>
-          <a href={`/program/${program.slug}`} className="font-display text-4xl md:text-5xl text-white hover:underline underline-offset-4" itemProp="name">
+          <Link to={`/program/${program.slug}`} className="font-display text-4xl md:text-5xl text-white hover:underline underline-offset-4" itemProp="name">
               {program.name}
-            </a>
+            </Link>
             <p className="mt-2 italic" style={{ color: theme.accent }}>
               {program.tagline}
             </p>

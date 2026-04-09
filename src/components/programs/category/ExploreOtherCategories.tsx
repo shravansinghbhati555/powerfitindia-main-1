@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { categoryThemes, type CategoryThemeId } from "@/config/categoryThemes";
 
 const blurb: Record<CategoryThemeId, string> = {
@@ -19,10 +20,10 @@ export default function ExploreOtherCategories({ current }: { current: CategoryT
           {ids.map((id) => {
             const t = categoryThemes[id];
             return (
-              <a
+              <Link
                 key={id}
-                href={`/programs/${id}`}
-                className="rounded-3xl bg-zinc-950 border border-white/10 p-6 transition-all hover:-translate-y-1"
+                to={`/programs/${id}`}
+                className="block rounded-3xl bg-zinc-950 border border-white/10 p-6 transition-all hover:-translate-y-1"
                 style={{ boxShadow: `0 0 0 rgba(0,0,0,0)` }}
               >
                 <div className="text-4xl">{t.icon}</div>
@@ -31,7 +32,7 @@ export default function ExploreOtherCategories({ current }: { current: CategoryT
                 <div className="mt-5 font-bold underline underline-offset-4" style={{ color: t.accent }}>
                   Explore →
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>

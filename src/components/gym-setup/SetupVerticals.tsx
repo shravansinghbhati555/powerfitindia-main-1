@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { getToPathname } from "@remix-run/router";
+import { Link } from "react-router-dom";
 
 const verticals = [
   {
@@ -125,16 +125,18 @@ const SetupVerticals = () => {
                   </ul>
                 </div>
                 <button
+                  type="button"
                   onClick={() => scrollToQuote(v.id)}
                   className="w-[calc(50%-24px)] py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all text-sm"
                 >
                   Get Free Quote
                 </button>
-                <a href={`/shop/${v.handle}`}
-                  className="w-[calc(50%-24px)] py-3 px-6 ml-10 bg-secondary text-primary font-bold rounded-lg hover:bg-secondary/90 transition-all text-sm"
+                <Link
+                  to={`/shop/${v.handle}`}
+                  className="inline-flex w-[calc(50%-24px)] items-center justify-center py-3 px-6 ml-10 bg-secondary text-primary font-bold rounded-lg hover:bg-secondary/90 transition-all text-sm"
                 >
                   Explore Range →
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}

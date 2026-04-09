@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 import type { Program } from "@/data/programs";
 import ProgramCard from "@/components/programs/ProgramCard";
 
@@ -175,7 +176,9 @@ export default function ProgramCategory({
             <h2 className="text-4xl font-black text-white">{category.label}</h2>
           </div>
           <div className="ml-auto h-px flex-1 max-w-xs" style={{ background: `linear-gradient(to right, ${category.color}, transparent)` }} />
-          <a href={`/programs/${category.id}`} className="text-zinc-500 text-sm hover:text-primary transition-colors">View All {category.count} Programs</a>
+          <Link to={`/programs/${category.id}`} className="text-zinc-500 text-sm hover:text-primary transition-colors">
+            View All {category.count} Programs
+          </Link>
         </motion.div>
 
         {category.id === "strength" && flash && (

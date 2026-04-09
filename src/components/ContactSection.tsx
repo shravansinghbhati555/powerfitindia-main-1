@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { MessageCircle, Send, MapPin, Phone, ArrowRight } from "lucide-react";
+
+const MotionLink = motion(Link);
 
 const FreeTrialBanner = () => (
   <section className="relative py-16 md:py-20 overflow-hidden">
@@ -20,15 +23,15 @@ const FreeTrialBanner = () => (
         <p className="font-body text-primary-foreground/80 text-base md:text-lg mb-8 max-w-lg mx-auto">
           Join this week — next batch starts Monday. Limited spots available.
         </p>
-        <motion.a
-          href="#contact"
+        <MotionLink
+          to="/#contact"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="inline-flex items-center gap-3 bg-dark text-dark-foreground px-10 py-5 rounded-full label-text font-bold transition-all hover:bg-dark-card group"
         >
           Claim Your Spot
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-        </motion.a>
+        </MotionLink>
       </motion.div>
     </div>
   </section>

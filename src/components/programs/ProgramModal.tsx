@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import type { Program } from "@/data/programs";
 
 export default function ProgramModal({
@@ -173,12 +174,13 @@ export default function ProgramModal({
                 >
                   💬 Enquire on WhatsApp
                 </a>
-                <a
-                  href="/contact"
+                <Link
+                  to="/membership"
+                  onClick={onClose}
                   className="w-full text-center bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition-colors"
                 >
                   Try Free Class
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

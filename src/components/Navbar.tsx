@@ -1,35 +1,35 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CartDrawer } from "@/components/CartDrawer";
 import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
 
+const MotionLink = motion(Link);
+
 const navLinks = [
-  { label: "Franchise", href: "/franchise" },
-  { label: "Gym Setup", href: "/gym-setup" },
-  { label: "Membership", href: "/membership" },
+  { label: "Franchise", to: "/franchise" },
+  { label: "Gym Setup", to: "/gym-setup" },
+  { label: "Membership", to: "/membership" },
   {
     label: "Programs",
-    href: "/programs",
+    to: "/programs",
     mega: true,
     items: [
-      { label: "Strength & Muscle", href: "/programs/strength" },
-      { label: "Cardio & Endurance", href: "/programs/cardio" },
-      { label: "Mind & Body", href: "/programs/mind-body" },
-      { label: "Specialty", href: "/programs/specialty" },
-      { label: "Online Coaching", href: "/programs/online" },
+      { label: "Strength & Muscle", to: "/programs/strength" },
+      { label: "Cardio & Endurance", to: "/programs/cardio" },
+      { label: "Mind & Body", to: "/programs/mind-body" },
+      { label: "Specialty", to: "/programs/specialty" },
+      { label: "Online Coaching", to: "/programs/online" },
     ],
   },
-  { label: "Our Gyms", href: "/gyms" },
-  { label: "About", href: "#about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "Our Gyms", to: "/gyms" },
+  { label: "About", to: "/#about" },
+  { label: "Blog", to: "/blog" },
+  { label: "Contact", to: "/#contact" },
 ];
 
 const Navbar = () => {
-  const location = useLocation();
-  const isMembershipPage = location.pathname.startsWith("/membership");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState<string | null>(null);
@@ -62,7 +62,6 @@ const Navbar = () => {
             ? "bg-dark/98 backdrop-blur-xl shadow-2xl shadow-dark/50 py-0"
             : "bg-transparent py-1"
         }`}
-        style={{ top: isMembershipPage ? 40 : undefined }}
       >
         {/* Red sweep underline on scroll */}
         <motion.div
@@ -73,10 +72,10 @@ const Navbar = () => {
         />
 
         <div className="section-container flex items-center justify-between h-14 md:h-16">
-          <a href="/" className="font-display text-2xl md:text-3xl  relative z-10">
+          <Link to="/" className="font-display text-2xl md:text-3xl relative z-10">
             <span className="text-primary red-glow-text">POWER</span>
             <span className="text-dark-foreground">FIT</span>
-          </a>
+          </Link>
 
           <div className="hidden lg:flex items-center gap-6" ref={megaRef}>
             {navLinks.map((link) => (
@@ -94,13 +93,13 @@ const Navbar = () => {
                     <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-300" />
                   </button>
                 ) : (
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.to}
                     className="label-text text-dark-foreground/60 hover:text-dark-foreground transition-colors duration-200 relative group"
                   >
                     {link.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-300" />
-                  </a>
+                  </Link>
                 )}
 
                 {/* Mega menu dropdown */}
@@ -137,16 +136,17 @@ const Navbar = () => {
                         </div>
                       )}
                       {link.items?.map((item, i) => (
-                        <motion.a
+                        <MotionLink
                           key={item.label}
-                          href={item.href}
+                          to={item.to}
+                          onClick={() => setMegaOpen(null)}
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: i * 0.05, duration: 0.2 }}
                           className="block px-5 py-3 label-text text-dark-muted hover:text-dark-foreground hover:bg-primary/10 transition-all duration-200 border-b border-dark-foreground/5 last:border-0"
                         >
                           {item.label}
-                        </motion.a>
+                        </MotionLink>
                       ))}
                     </motion.div>
                   )}
@@ -162,14 +162,14 @@ const Navbar = () => {
             <div className="text-dark-foreground">
               <CartDrawer />
             </div>
-            <motion.a
-              href="/membership"
+            <MotionLink
+              to="/membership"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
               className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-full label-text font-bold transition-all hover:shadow-lg hover:shadow-primary/30"
             >
               Get Started
-            </motion.a>
+            </MotionLink>
           </div>
 
           <button
@@ -201,14 +201,14 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
                   >
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.to}
                       onClick={() => setMobileOpen(false)}
                       className="block font-display text-5xl text-dark-foreground hover:text-primary transition-colors py-2 border-b border-dark-foreground/5"
                     >
                       {link.label}
                       {link.mega && <span className="text-primary text-2xl ml-2">+</span>}
-                    </a>
+                    </Link>
                   </motion.div>
                 ))}
                 <motion.div
@@ -225,8 +225,8 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               </div>
-              <motion.a
-                href="#contact"
+              <MotionLink
+                to="/#contact"
                 onClick={() => setMobileOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -234,7 +234,7 @@ const Navbar = () => {
                 className="mt-10 inline-block text-center bg-primary text-primary-foreground px-8 py-4 rounded-full label-text font-bold red-pulse"
               >
                 Start Your Journey
-              </motion.a>
+              </MotionLink>
             </div>
           </motion.div>
         )}

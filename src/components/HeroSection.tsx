@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight, Play, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+const MotionLink = motion(Link);
 
 /* ---- Stamped text animation ---- */
 const StampedText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
@@ -262,23 +265,23 @@ const HeroSection = () => {
               transition={{ delay: 2.1, duration: 0.5 }}
               className="flex flex-col sm:flex-row flex-wrap gap-4"
             >
-              <motion.a
-                href="#contact"
+              <MotionLink
+                to="/#contact"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
                 className="group flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:shadow-xl hover:shadow-primary/30 animate-pulse-glow"
               >
                 Start Free Trial
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </motion.a>
-              <motion.a
-                href="/programs"
+              </MotionLink>
+              <MotionLink
+                to="/programs"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
                 className="group flex items-center justify-center gap-3 border border-dark-foreground/20 text-dark-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:border-primary hover:text-primary"
               >
                 Explore Programs
-              </motion.a>
+              </MotionLink>
               <motion.button
                 onClick={() => setVideoModalOpen(true)}
                 whileHover={{ scale: 1.05 }}
