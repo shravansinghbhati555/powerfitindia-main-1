@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCollection, useCollections } from "@/hooks/useShopify";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const gymSetupCollectionMeta: Record<
   string,
@@ -143,14 +144,13 @@ export default function GymSetupShopSection() {
                   >
                     <Link to={`/product/${p.handle}`} className="block group">
                       <div className="relative aspect-[4/3] overflow-hidden">
-                        {img && (
-                          <img
-                            src={img.url}
-                            alt={img.altText || p.title}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                          />
-                        )}
+                        <PowerFitImage
+                          src={img?.url}
+                          alt={img?.altText || p.title}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          priority={i < 3}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                         {onSale && (
                           <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-black bg-red-600 text-white">

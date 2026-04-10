@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import type { Program } from "@/data/programs";
 import type { ProgramVisual } from "@/config/programVisuals";
 import type { CategoryTheme } from "@/config/categoryThemes";
@@ -26,7 +27,12 @@ export default function DetailTrainer({ program, visuals, theme }: Props) {
             {/* Photo placeholder */}
             <div className="md:col-span-2 relative min-h-[280px] bg-zinc-800 flex items-center justify-center overflow-hidden">
               {tp.photoUrl ? (
-                <img src={tp.photoUrl} alt={`${program.name} trainer at PowerFit`} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                <PowerFitImage
+                  src={tp.photoUrl}
+                  alt={`${program.name} trainer at PowerFit`}
+                  sizes="(max-width: 768px) 100vw, 280px"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
               ) : (
                 <div className="text-7xl">🏋️</div>
               )}

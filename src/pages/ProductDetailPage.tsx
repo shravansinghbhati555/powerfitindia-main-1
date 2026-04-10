@@ -7,6 +7,7 @@ import { useCartStore, type ShopifyProduct } from "@/stores/cartStore";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const ProductDetailPage = () => {
   const { handle, productHandle } = useParams<{ handle?: string; productHandle?: string }>();
@@ -91,9 +92,11 @@ const ProductDetailPage = () => {
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
               <div className="aspect-square bg-secondary rounded-xl overflow-hidden mb-3">
                 {images[selectedImage]?.node ? (
-                  <img
+                  <PowerFitImage
                     src={images[selectedImage].node.url}
                     alt={images[selectedImage].node.altText || product.title}
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    priority={selectedImage === 0}
                     className="w-full h-full object-cover"
                   />
                 ) : (
@@ -112,7 +115,7 @@ const ProductDetailPage = () => {
                         i === selectedImage ? "border-primary" : "border-transparent"
                       }`}
                     >
-                      <img src={img.node.url} alt="" className="w-full h-full object-cover" />
+                      <PowerFitImage src={img.node.url} alt="" sizes="64px" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>

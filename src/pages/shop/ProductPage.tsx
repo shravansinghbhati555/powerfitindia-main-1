@@ -8,6 +8,9 @@ import NotFound from "@/pages/NotFound";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useProduct, useProductSearch } from "@/hooks/useShopify";
 import { useCartStore } from "@/stores/cartStore";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
+
+const MotionPowerFitImage = motion(PowerFitImage);
 
 function formatINR(amount: string) {
   const n = Number.parseFloat(amount);
@@ -97,10 +100,12 @@ export default function ProductPage() {
                   <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
                     <div className="relative aspect-square">
                       {images[activeImage]?.url ? (
-                        <motion.img
+                        <MotionPowerFitImage
                           key={images[activeImage].url}
                           src={images[activeImage].url}
                           alt={images[activeImage].altText || product!.title}
+                          sizes="(max-width: 1024px) 100vw, 45vw"
+                          priority={activeImage === 0}
                           className="absolute inset-0 w-full h-full object-cover"
                           initial={{ opacity: 0.4 }}
                           animate={{ opacity: 1 }}
@@ -123,7 +128,7 @@ export default function ProductPage() {
                             i === activeImage ? "border-red-500" : "border-transparent"
                           }`}
                         >
-                          <img src={img.url} alt="" className="w-full h-full object-cover" />
+                          <PowerFitImage src={img.url} alt="" sizes="64px" className="w-full h-full object-cover" />
                         </button>
                       ))}
                     </div>
@@ -283,7 +288,14 @@ export default function ProductPage() {
                           className="shrink-0 w-64 snap-start rounded-2xl border border-white/10 bg-zinc-950 overflow-hidden hover:border-white/20 transition-colors"
                         >
                           <div className="relative h-40">
-                            {img && <img src={img.url} alt={img.altText || p.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />}
+                            {img && (
+                              <PowerFitImage
+                                src={img.url}
+                                alt={img.altText || p.title}
+                                sizes="256px"
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
+                            )}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                           </div>
                           <div className="p-4">

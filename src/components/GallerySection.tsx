@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
+
+const MotionPowerFitImage = motion(PowerFitImage);
 
 const items = [
   { img: gallery1, title: "Iron Temple", tags: ["Strength"] },
@@ -46,10 +49,11 @@ const GallerySection = () => {
               onClick={() => setSelected(i)}
               className="relative overflow-hidden rounded-2xl aspect-square cursor-pointer group shutter-flash"
             >
-              <img
+              <PowerFitImage
                 src={item.img}
                 alt={item.title}
-                loading="lazy"
+                sizes="(max-width: 768px) 50vw, 33vw"
+                priority={i < 3}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               {/* Red overlay on hover */}
@@ -84,12 +88,13 @@ const GallerySection = () => {
             >
               <X size={32} />
             </motion.button>
-            <motion.img
+            <MotionPowerFitImage
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               src={items[selected].img}
               alt={items[selected].title}
+              sizes="100vw"
               className="max-w-full max-h-[80vh] rounded-2xl object-contain"
             />
           </motion.div>

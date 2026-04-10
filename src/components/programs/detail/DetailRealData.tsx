@@ -3,6 +3,7 @@ import type { Program } from "@/data/programs";
 import type { ProgramVisual } from "@/config/programVisuals";
 import type { CategoryTheme } from "@/config/categoryThemes";
 import CountUp from "@/components/ui/CountUp";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import { useParallax } from "@/hooks/useParallax";
 
 interface Props {
@@ -23,12 +24,12 @@ export default function DetailRealData({ program, theme, visuals }: Props) {
         style={reduce ? undefined : { y }}
         aria-hidden="true"
       >
-        <img
+        <PowerFitImage
           src={visuals.galleryImages[0]?.url || visuals.heroBg}
           className="w-full h-full object-cover"
           alt=""
           aria-hidden="true"
-          loading="lazy"
+          sizes="100vw"
         />
         <div
           className="absolute inset-0"

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Play, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const MotionLink = motion(Link);
@@ -136,11 +137,12 @@ const LazyHeroVideo = () => {
   return (
     <div ref={containerRef} className="w-full h-full">
       {/* Mobile: static poster image only */}
-      <img
+      <PowerFitImage
         src="https://assets.mixkit.co/videos/23635/23635-thumb-720-0.jpg"
         alt="Dark gym with fitness equipment"
         className="block md:hidden w-full h-full object-cover"
-        loading="lazy"
+        sizes="100vw"
+        priority
       />
       {/* Desktop: lazy-loaded video */}
       <video

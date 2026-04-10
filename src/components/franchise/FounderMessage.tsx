@@ -1,6 +1,9 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
+
+const MotionPowerFitImage = motion(PowerFitImage);
 
 const fullText = `When I started PowerFit in 2017, I had a simple belief — that world-class fitness should be accessible to every Indian, not just the elite. What I didn't expect was how many people would share that belief and want to build it with me.
 
@@ -34,11 +37,13 @@ const FounderMessage = () => {
             transition={{ duration: 1.2 }}
             className="relative overflow-hidden rounded-2xl border-2 border-primary/20"
           >
-            <motion.img
+            <MotionPowerFitImage
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               src="https://powerfitindia.com/cdn/shop/files/WhatsApp_Image_2026-02-07_at_10.42.21_PM.jpg?v=1770614966&width=700"
               alt="Founder of PowerFit India"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
               className="w-full h-[400px] object-cover"
             />
             <div className="absolute bottom-4 left-4 bg-dark/80 backdrop-blur px-4 py-2 rounded-lg">

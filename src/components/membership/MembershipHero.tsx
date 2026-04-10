@@ -1,5 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
+
+/** Unsplash — free to use (Unsplash License). Dark gym floor, strong membership landing vibe. */
+const HERO_BG =
+  "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=2400&q=85";
 
 const WordSlamLine = ({
   text,
@@ -40,8 +45,6 @@ const WHATSAPP = "918619527263";
 
 export default function MembershipHero() {
   const reduce = useReducedMotion();
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const waMsg = useMemo(
     () =>
@@ -51,43 +54,26 @@ export default function MembershipHero() {
     [],
   );
 
-  useEffect(() => {
-    if (!videoRef.current) return;
-    const el = videoRef.current;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (reduce) return;
-        if (entry?.isIntersecting) el.play().catch(() => {});
-        else el.pause();
-      },
-      { threshold: 0.35 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [reduce]);
-
   return (
     <section
       className="relative min-h-[calc(100vh-96px)] flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: "#0A0A0A" }}
     >
-      {/* Background video (desktop) / poster (mobile) */}
-      <div className="absolute inset-0 opacity-[0.35]">
-        <img
-          src="/images/membership-hero-poster.jpg"
+      {/* Full-bleed stock background — fast, no local assets */}
+      <div className="absolute inset-0">
+        <PowerFitImage
+          src={HERO_BG}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover md:hidden"
+          priority
+          sizes="100vw"
+          width={2400}
+          height={1600}
+          className="absolute inset-0 w-full h-full object-cover object-center scale-105 md:scale-100"
+          style={{ opacity: 0.42 }}
         />
-        <video
-          ref={videoRef}
-          src="/videos/membership-hero.mp4"
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onLoadedData={() => setVideoLoaded(true)}
-          className="absolute inset-0 w-full h-full object-cover hidden md:block transition-opacity duration-700"
-          style={{ opacity: videoLoaded ? 1 : 0 }}
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/50 to-black/70"
+          aria-hidden="true"
         />
       </div>
 

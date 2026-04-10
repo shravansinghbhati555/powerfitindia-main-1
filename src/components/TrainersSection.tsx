@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import trainer1 from "@/assets/trainer-1.jpg";
 import trainer2 from "@/assets/trainer-2.jpg";
 import trainer3 from "@/assets/trainer-3.jpg";
@@ -37,10 +38,11 @@ const TrainersSection = () => (
             transition={{ delay: i * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="group relative rounded-2xl overflow-hidden cursor-pointer aspect-[3/4]"
           >
-            <img
+            <PowerFitImage
               src={t.img}
               alt={t.name}
-              loading="lazy"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              priority={i < 2}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/30 to-transparent" />

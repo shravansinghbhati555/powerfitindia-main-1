@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const verticals = [
   {
@@ -101,7 +102,7 @@ const SetupVerticals = () => {
               onMouseEnter={() => setExpanded(v.id)}
               onMouseLeave={() => setExpanded(null)}
             >
-              <img src={v.bg} alt={v.bgAlt} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+              <PowerFitImage src={v.bg} alt={v.bgAlt} sizes="(max-width: 768px) 100vw, 33vw" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/65 group-hover:bg-black/75 transition-all duration-300" />
               
               {/* Tag */}

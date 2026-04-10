@@ -25,6 +25,9 @@ type MembershipTier = {
 
 const WA_PHONE = "918619527263";
 
+/** Same column/stack order for every billing period */
+const TIER_DISPLAY_ORDER = ["basic", "elite", "premium"] as const;
+
 function formatINR(n: number) {
   return Math.round(n).toLocaleString("en-IN");
 }
@@ -59,7 +62,8 @@ export default function MembershipDecoyPricing() {
         tagline: "For those who want everything",
         monthlyPrice: 3499,
         quarterlyPrice: 2999,
-        annualPrice: 2449,
+        /** Annual = same effective rate as Elite; 50% off vs Premium monthly anchor (first year offer). */
+        annualPrice: 1749,
         accentColor: "#9333EA",
         badge: null,
         highlighted: false,
@@ -75,8 +79,9 @@ export default function MembershipDecoyPricing() {
           { text: "Priority batch booking", included: true },
           { text: "Towel service", included: true },
         ],
-        cta: "Ask About Premium",
-        whatsappMsg: "Hi! I want the Premium membership at PowerFit. Please share details and pricing.",
+        cta: "Claim Premium — 50% Off Yr 1",
+        whatsappMsg:
+          "Hi! I want the Premium membership with the 50% off first year on annual billing (same rate as Elite). Please share how to lock this in.",
         anchorNote: "All-inclusive — for the committed",
       },
       {
@@ -119,7 +124,7 @@ export default function MembershipDecoyPricing() {
         badge: null,
         highlighted: false,
         features: [
-          { text: "Access 1 studio (nearest)", included: true },
+          { text: "Access all 5 studios", included: true },
           { text: "Core programs (6 of 13)", included: true },
           { text: "Personal trainer", included: false },
           { text: "Unlimited group classes", included: true },
@@ -138,12 +143,16 @@ export default function MembershipDecoyPricing() {
     [],
   );
 
-  const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly");
+  const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Annual");
 
   const TierCard = ({ tier, index }: { tier: MembershipTier; index: number }) => {
     const current = getTierPrice(tier, billingPeriod);
     const savingsPercent = calcSavingsPercent(tier, billingPeriod);
     const isElite = tier.id === "elite";
+    const isPremiumAnnualPromo = tier.id === "premium" && billingPeriod === "Annual";
+    /** On annual billing, Premium (50% off yr 1) is the visual hero; Elite uses the standard card treatment. */
+    const showEliteSpotlight = tier.highlighted && billingPeriod !== "Annual";
+    const showPremiumSpotlight = isPremiumAnnualPromo;
 
     return (
       <motion.div
@@ -151,9 +160,20 @@ export default function MembershipDecoyPricing() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: index * 0.08, duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-        className="relative"
+        className={`relative ${showPremiumSpotlight ? "lg:scale-[1.05] z-10" : showEliteSpotlight ? "lg:scale-[1.04]" : ""}`}
       >
-        {tier.highlighted && (
+        {showPremiumSpotlight && (
+          <div
+            aria-hidden="true"
+            className="absolute -inset-[2px] rounded-3xl -z-10 opacity-95"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(147,51,234,0.92), rgba(234,179,8,0.55), rgba(147,51,234,0.88))",
+              filter: "blur(0px)",
+            }}
+          />
+        )}
+        {showEliteSpotlight && (
           <div
             aria-hidden="true"
             className="absolute -inset-[2px] rounded-3xl -z-10"
@@ -167,13 +187,37 @@ export default function MembershipDecoyPricing() {
 
         <div
           className={`rounded-3xl p-6 md:p-7 border relative ${
-            tier.highlighted
-              ? "border-yellow-400/60 bg-zinc-900/60 shadow-[0_0_60px_rgba(232,0,14,0.18)]"
-              : "border-white/10 bg-zinc-950/40"
-          } ${tier.highlighted ? "transform lg:scale-[1.04]" : ""}`}
-          style={tier.highlighted ? { boxShadow: `0 0 40px rgba(232,0,14,0.15)` } : undefined}
+            showPremiumSpotlight
+              ? "border-violet-300/50 bg-gradient-to-b from-violet-950/50 to-zinc-950/90 shadow-[0_0_56px_rgba(147,51,234,0.22)]"
+              : showEliteSpotlight
+                ? "border-yellow-400/60 bg-zinc-900/60 shadow-[0_0_60px_rgba(232,0,14,0.18)]"
+                : "border-white/10 bg-zinc-950/40"
+          }`}
+          style={
+            showPremiumSpotlight
+              ? { boxShadow: "0 0 48px rgba(147,51,234,0.2), inset 0 1px 0 rgba(255,255,255,0.06)" }
+              : showEliteSpotlight
+                ? { boxShadow: "0 0 40px rgba(232,0,14,0.15)" }
+                : undefined
+          }
         >
-          {tier.highlighted && tier.badge && (
+          {showPremiumSpotlight && (
+            <motion.div
+              className="absolute -top-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 px-5 py-2 rounded-full font-black text-sm text-white shadow-lg shadow-violet-900/40 border border-violet-300/30"
+              style={{
+                background: "linear-gradient(135deg, rgba(147,51,234,0.98), rgba(109,40,217,0.95))",
+              }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3 }}
+            >
+              <span aria-hidden="true">✦</span>
+              <span>50% OFF — 1ST YEAR</span>
+            </motion.div>
+          )}
+
+          {showEliteSpotlight && tier.badge && (
             <motion.div
               className="absolute -top-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 px-5 py-2 rounded-full text-white font-black text-sm shadow-[0_0_30px_rgba(232,0,14,0.35)]"
               style={{
@@ -189,7 +233,7 @@ export default function MembershipDecoyPricing() {
             </motion.div>
           )}
 
-          {tier.savingsVsPremium && (
+          {tier.savingsVsPremium && billingPeriod !== "Annual" && (
             <div className="absolute -top-3 -right-3 z-10 w-20 h-20 rounded-full bg-yellow-400 text-black font-black text-xs shadow-lg flex items-center justify-center text-center">
               <div className="leading-tight">
                 <div className="text-base">💰</div>
@@ -205,10 +249,18 @@ export default function MembershipDecoyPricing() {
                 <div
                   className="w-10 h-10 rounded-2xl flex items-center justify-center text-2xl"
                   style={{
-                    background: tier.highlighted
-                      ? "linear-gradient(135deg, rgba(232,0,14,0.28), rgba(232,0,14,0.1))"
-                      : "rgba(255,255,255,0.04)",
-                    border: `1px solid ${tier.highlighted ? "rgba(234,179,8,0.25)" : "rgba(255,255,255,0.08)"}`,
+                    background: showPremiumSpotlight
+                      ? "linear-gradient(135deg, rgba(147,51,234,0.35), rgba(147,51,234,0.12))"
+                      : showEliteSpotlight
+                        ? "linear-gradient(135deg, rgba(232,0,14,0.28), rgba(232,0,14,0.1))"
+                        : "rgba(255,255,255,0.04)",
+                    border: `1px solid ${
+                      showPremiumSpotlight
+                        ? "rgba(196,181,253,0.45)"
+                        : showEliteSpotlight
+                          ? "rgba(234,179,8,0.25)"
+                          : "rgba(255,255,255,0.08)"
+                    }`,
                   }}
                 >
                   {tier.emoji}
@@ -233,9 +285,11 @@ export default function MembershipDecoyPricing() {
               <span className="text-zinc-400 text-lg font-bold mt-2">₹</span>
               <span
                 className={`font-black leading-none ${
-                  tier.highlighted ? "text-7xl text-white" : "text-5xl text-zinc-300"
+                  showPremiumSpotlight || showEliteSpotlight ? "text-7xl text-white" : "text-5xl text-zinc-300"
                 }`}
-                style={{ color: tier.highlighted ? undefined : tier.accentColor }}
+                style={{
+                  color: showPremiumSpotlight || showEliteSpotlight ? undefined : tier.accentColor,
+                }}
               >
                 {formatINR(current)}
               </span>
@@ -247,12 +301,18 @@ export default function MembershipDecoyPricing() {
             )}
 
             {billingPeriod !== "Monthly" && (
-              <div className="flex items-center justify-center gap-2 mt-1">
+              <div className="flex items-center justify-center gap-2 mt-1 flex-wrap">
                 <span className="text-zinc-600 text-xs line-through">
                   ₹{formatINR(tier.monthlyPrice)}/mo
                 </span>
                 <span className="text-green-400 text-xs font-bold">Save {savingsPercent}%</span>
               </div>
+            )}
+
+            {isPremiumAnnualPromo && (
+              <p className="text-violet-200/90 text-xs font-bold mt-2 px-2 leading-snug">
+                Same ₹{formatINR(current)}/mo as Elite on annual — full Premium perks (trainer 3×/wk, guests, towels).
+              </p>
             )}
           </motion.div>
 
@@ -308,9 +368,11 @@ export default function MembershipDecoyPricing() {
             target="_blank"
             rel="noopener noreferrer"
             className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-black text-base transition-all hover:scale-[1.02] ${
-              tier.highlighted
-                ? "bg-red-600 hover:bg-red-500 text-white shadow-[0_0_30px_rgba(232,0,14,0.4)]"
-                : "bg-[#25D366] text-white"
+              isPremiumAnnualPromo
+                ? "bg-gradient-to-r from-violet-600 to-violet-500 hover:from-violet-500 hover:to-violet-400 text-white shadow-[0_0_28px_rgba(147,51,234,0.35)] border border-violet-400/20"
+                : showEliteSpotlight
+                  ? "bg-red-600 hover:bg-red-500 text-white shadow-[0_0_30px_rgba(232,0,14,0.4)]"
+                  : "bg-[#25D366] text-white"
             }`}
           >
             <span aria-hidden="true">💬</span>
@@ -320,9 +382,6 @@ export default function MembershipDecoyPricing() {
       </motion.div>
     );
   };
-
-  const mobileOrder = ["elite", "premium", "basic"] as const;
-  const desktopOrder = ["premium", "elite", "basic"] as const;
 
   const tiersById = useMemo(() => {
     const m = new Map(membershipTiers.map((t) => [t.id, t] as const));
@@ -374,23 +433,22 @@ export default function MembershipDecoyPricing() {
               }`}
             >
               {period}
-              {period === "Annual" && <span className="ml-1.5 text-xs text-yellow-400 font-black">-30%</span>}
+              {period === "Annual" && <span className="ml-1.5 text-xs text-yellow-400 font-black">Save more</span>}
             </button>
           ))}
         </div>
 
         {/* Desktop */}
         <div className="hidden lg:grid grid-cols-3 gap-6 items-stretch">
-          {desktopOrder.map((id, i) => {
+          {TIER_DISPLAY_ORDER.map((id, i) => {
             const tier = tiersById.get(id);
             if (!tier) return null;
             return <TierCard key={tier.id} tier={tier} index={i} />;
           })}
         </div>
 
-        {/* Mobile (Elite first) */}
         <div className="lg:hidden flex flex-col gap-6">
-          {mobileOrder.map((id, i) => {
+          {TIER_DISPLAY_ORDER.map((id, i) => {
             const tier = tiersById.get(id);
             if (!tier) return null;
             return <TierCard key={tier.id} tier={tier} index={i} />;
@@ -405,8 +463,9 @@ export default function MembershipDecoyPricing() {
           viewport={{ once: true }}
         >
           <p className="text-zinc-400 text-sm leading-relaxed">
-            💡 <strong className="text-white">83% of new members choose Elite</strong> because it includes personal training + nutrition coaching —
-            the two factors that <strong className="text-white">3x your results</strong> vs training alone. Basic is great to start, but most members upgrade.
+            💡 <strong className="text-white">83% start with Elite monthly</strong> — best balance of coaching + price.
+            On <strong className="text-violet-300">annual billing</strong>,{" "}
+            <strong className="text-white">Premium is 50% off year one</strong> (same effective rate as Elite) with every Premium perk included. Basic is great to start; most upgrade later.
           </p>
         </motion.div>
 

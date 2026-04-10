@@ -17,6 +17,9 @@ import StickyEnquireBar from "@/components/programs/category/StickyEnquireBar";
 import { categoryThemes } from "@/config/categoryThemes";
 import { programs } from "@/data/programs";
 import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
+
+const MotionPowerFitImage = motion(PowerFitImage);
 
 const theme = categoryThemes.strength;
 
@@ -181,9 +184,10 @@ export default function StrengthPage() {
               </div>
 
               <div className="relative hidden lg:block">
-                <motion.img
+                <MotionPowerFitImage
                   src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=870&auto=format"
                   alt="Calisthenics training at PowerFit Jaipur — most popular program"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
                   className="w-full h-72 object-cover rounded-2xl"
                   initial={{ scale: 1.1 }}
                   whileInView={{ scale: 1 }}

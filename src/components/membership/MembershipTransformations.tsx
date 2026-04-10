@@ -1,7 +1,11 @@
 import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import CountUp from "@/components/ui/CountUp";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import { useParallax } from "@/hooks/useParallax";
+
+const STATS_BG =
+  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80";
 
 export default function MembershipTransformations() {
   const reduce = useReducedMotion();
@@ -76,7 +80,7 @@ export default function MembershipTransformations() {
         style={{ y: reduce ? 0 : y, opacity: 0.25 }}
         aria-hidden="true"
       >
-        <img src="/images/membership-stats-bg.jpg" alt="" className="w-full h-full object-cover" />
+        <PowerFitImage src={STATS_BG} alt="" sizes="100vw" className="w-full h-full object-cover" />
       </motion.div>
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 45%, rgba(10,10,10,1) 100%)" }} />
 

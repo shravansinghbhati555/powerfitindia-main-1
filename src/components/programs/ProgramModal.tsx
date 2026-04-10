@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import type { Program } from "@/data/programs";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 export default function ProgramModal({
   program,
@@ -60,9 +61,11 @@ export default function ProgramModal({
             </button>
 
             <div className="relative h-[250px]">
-              <img
+              <PowerFitImage
                 src={program.imagePath}
                 alt={`${program.name} at PowerFit India gym`}
+                sizes="860px"
+                priority
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-black/40 to-black/20" />

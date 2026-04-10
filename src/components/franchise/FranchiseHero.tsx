@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const StampedText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   const chars = useMemo(() => text.split(""), [text]);
@@ -30,11 +31,12 @@ const FranchiseHero = () => (
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: "#0A0A0A" }}>
     {/* Dark gym background */}
     <div className="absolute inset-0">
-      <img
+      <PowerFitImage
         src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80"
         alt="Premium dark gym interior with modern fitness equipment"
+        sizes="100vw"
+        priority
         className="w-full h-full object-cover opacity-25"
-        loading="eager"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/80 via-[#0A0A0A]/60 to-[#0A0A0A]" />
     </div>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const WA_PHONE = "918619527263";
 
@@ -127,11 +128,12 @@ export default function MembershipWhoIsThisFor() {
                 transition={{ delay: i * 0.08, type: "spring" }}
                 whileHover={{ y: -8, boxShadow: "0 20px 60px rgba(232,0,14,0.3)" }}
               >
-                <img
+                <PowerFitImage
                   src={seg.imageSrc}
                   alt={seg.imageAlt}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  priority={i < 3}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10" />
 
@@ -183,11 +185,12 @@ export default function MembershipWhoIsThisFor() {
                 transition={{ delay: i * 0.08, type: "spring" }}
                 whileHover={{ y: -8, boxShadow: "0 20px 60px rgba(232,0,14,0.3)" }}
               >
-                <img
+                <PowerFitImage
                   src={seg.imageSrc}
                   alt={seg.imageAlt}
+                  sizes="280px"
+                  priority={i < 2}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10" />
                 <div className="absolute inset-0 flex flex-col justify-end p-5">

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const dayInLife = [
   {
@@ -92,11 +93,12 @@ export default function MembershipDayInLife() {
                   className="relative rounded-2xl overflow-hidden h-48"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <img
+                  <PowerFitImage
                     src={item.imageSrc}
                     alt={item.imageAlt}
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    priority={i < 2}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/40" />
                   <div

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const heroImages = [
   { src: "/gym-hero-1.jpg", alt: "Premium dark-lit PowerFit gym interior with red accent lighting" },
@@ -113,15 +114,16 @@ const GymSetupHero = () => {
         {/* Right morphing images */}
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden hidden lg:block">
           {heroImages.map((img, i) => (
-            <img
+            <PowerFitImage
               key={i}
               src={img.src}
               alt={img.alt}
               width={1280}
               height={720}
+              priority={i === 0}
+              sizes="(max-width: 1024px) 0px, 45vw"
               className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
               style={{ opacity: activeImg === i ? 1 : 0 }}
-              {...(i === 0 ? {} : { loading: "lazy" as const })}
             />
           ))}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />

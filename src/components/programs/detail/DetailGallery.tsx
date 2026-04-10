@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import type { Program } from "@/data/programs";
 import type { ProgramVisual } from "@/config/programVisuals";
 import type { CategoryTheme } from "@/config/categoryThemes";
@@ -37,11 +38,18 @@ export default function DetailGallery({ program, visuals, theme }: Props) {
             transition={{ delay: i * 0.1, duration: 0.7 }}
             whileHover={{ scale: 1.05, zIndex: 10 }}
           >
-            <img
+            <PowerFitImage
               src={img.url}
               alt={img.alt}
+              sizes={
+                i === 0
+                  ? "(max-width: 768px) 100vw, 55vw"
+                  : i === 3
+                    ? "(max-width: 768px) 100vw, 45vw"
+                    : "(max-width: 768px) 50vw, 23vw"
+              }
+              priority={i === 0}
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-              loading="lazy"
             />
             <div className="absolute inset-0 bg-black/30 hover:bg-black/10 transition-colors duration-300" />
           </motion.div>

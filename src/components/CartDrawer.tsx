@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,12 @@ export const CartDrawer = () => {
                     <div key={item.variantId} className="flex gap-4 p-2 rounded-lg border border-border">
                       <div className="w-16 h-16 bg-secondary rounded-md overflow-hidden flex-shrink-0">
                         {item.product.node.images?.edges?.[0]?.node && (
-                          <img src={item.product.node.images.edges[0].node.url} alt={item.product.node.title} className="w-full h-full object-cover" />
+                          <PowerFitImage
+                            src={item.product.node.images.edges[0].node.url}
+                            alt={item.product.node.title}
+                            sizes="64px"
+                            className="w-full h-full object-cover"
+                          />
                         )}
                       </div>
                       <div className="flex-1 min-w-0">

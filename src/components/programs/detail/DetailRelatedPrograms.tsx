@@ -4,6 +4,7 @@ import { programs } from "@/data/programs";
 import type { Program } from "@/data/programs";
 import type { CategoryTheme } from "@/config/categoryThemes";
 import { MostPopularCrown } from "@/components/ui/MostPopularBadge";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 interface Props { program: Program; theme: CategoryTheme }
 
@@ -39,11 +40,11 @@ export default function DetailRelatedPrograms({ program, theme }: Props) {
           >
             {p.isMostPopular && <MostPopularCrown compact />}
             <Link to={`/program/${p.slug}`} className="block w-64 h-[240px] rounded-2xl overflow-hidden relative group border border-white/10">
-              <img
+              <PowerFitImage
                 src={p.imagePath}
                 alt={`${p.name} program PowerFit India`}
+                sizes="256px"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">

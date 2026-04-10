@@ -6,6 +6,7 @@ import type { ProgramVisual } from "@/config/programVisuals";
 import type { CategoryTheme } from "@/config/categoryThemes";
 import CountUp from "@/components/ui/CountUp";
 import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const particleStyles: Record<string, string> = {
   sparks: "detail-particles-sparks",
@@ -84,7 +85,12 @@ export default function DetailHero({ program, visuals, theme }: Props) {
       <div className="absolute inset-0 opacity-[0.3]">
         {visuals.heroVideo ? (
           <>
-            <img src={visuals.heroVideoPoster || visuals.heroBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+            <PowerFitImage
+              src={visuals.heroVideoPoster || visuals.heroBg}
+              alt=""
+              sizes="100vw"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
             <video
               ref={videoRef}
               src={visuals.heroVideo}
@@ -98,12 +104,12 @@ export default function DetailHero({ program, visuals, theme }: Props) {
             />
           </>
         ) : (
-          <img
+          <PowerFitImage
             src={visuals.heroBg}
             alt={`${program.name} at PowerFit India`}
+            sizes="100vw"
+            priority
             className="absolute inset-0 w-full h-full object-cover"
-            loading="eager"
-            fetchPriority="high"
           />
         )}
         {/* Gradient overlays */}

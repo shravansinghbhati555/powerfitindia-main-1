@@ -42,8 +42,9 @@ export default function MembershipPage() {
 
       <main className="bg-[#0A0A0A] pt-[96px] pb-24 lg:pb-0">
         <MembershipHero />
-        <MembershipWhoIsThisFor />
         <MembershipDecoyPricing />
+        
+        <MembershipWhoIsThisFor />
         <MembershipTransformations />
         <MembershipIncluded />
         <MembershipDayInLife />

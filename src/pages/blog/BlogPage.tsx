@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useBlog } from "@/hooks/useShopify";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 function formatDate(date: string) {
   try {
@@ -69,11 +70,11 @@ export default function BlogPage() {
                     >
                       <div className="relative aspect-[16/9] overflow-hidden">
                         {a.image?.url && (
-                          <img
+                          <PowerFitImage
                             src={a.image.url}
                             alt={a.image.altText || a.title}
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
                           />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />

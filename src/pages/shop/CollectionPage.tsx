@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/NotFound";
 import { useCollection } from "@/hooks/useShopify";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 function formatINR(amount: string) {
   const n = Number.parseFloat(amount);
@@ -48,7 +49,9 @@ export default function CollectionPage({ handle }: { handle?: string }) {
       <main className="pt-20">
         {/* Mini hero */}
         <section className="relative h-[300px] overflow-hidden border-b border-white/10">
-          {heroImg && <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-60" />}
+          {heroImg && (
+            <PowerFitImage src={heroImg} alt="" sizes="100vw" className="absolute inset-0 w-full h-full object-cover opacity-60" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
           <div className="relative z-10 max-w-[var(--content-max-width)] mx-auto px-[var(--gutter)] h-full flex flex-col justify-center">
             <div className="flex items-center gap-2 text-xs text-zinc-400">
@@ -129,7 +132,12 @@ export default function CollectionPage({ handle }: { handle?: string }) {
                       <Link to={`/products/${p.handle}`} className="block group">
                         <div className="relative aspect-[4/3] overflow-hidden">
                           {img ? (
-                            <img src={img.url} alt={img.altText || p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                            <PowerFitImage
+                              src={img.url}
+                              alt={img.altText || p.title}
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
                           ) : (
                             <div className="absolute inset-0 bg-white/5" />
                           )}

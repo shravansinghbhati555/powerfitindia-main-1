@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import type { Program } from "@/data/programs";
 import { MostPopularBadge, MostPopularCrown, MostPopularRibbon } from "@/components/ui/MostPopularBadge";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 export interface ProgramCardProps {
   program: Program;
@@ -34,11 +35,11 @@ export default function ProgramCard({ program, index, categoryColor, onOpen }: P
       {program.isMostPopular && <MostPopularCrown />}
       <div className="relative h-48 overflow-hidden">
         {program.isMostPopular && <MostPopularRibbon />}
-        <img
+        <PowerFitImage
           src={program.imagePath}
           alt={`${program.name} at PowerFit India gym`}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          loading="lazy"
           itemProp="image"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-black/40 to-transparent" />

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/NotFound";
 import { useArticle } from "@/hooks/useShopify";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 function formatDate(date: string) {
   try {
@@ -36,7 +37,15 @@ export default function ArticlePage() {
 
       <main className="pt-20">
         <section className="relative h-[380px] overflow-hidden border-b border-white/10">
-          {article?.image?.url && <img src={article.image.url} alt="" className="absolute inset-0 w-full h-full object-cover opacity-70" />}
+          {article?.image?.url && (
+            <PowerFitImage
+              src={article.image.url}
+              alt=""
+              sizes="100vw"
+              priority
+              className="absolute inset-0 w-full h-full object-cover opacity-70"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
           <div className="relative z-10 max-w-[var(--content-max-width)] mx-auto px-[var(--gutter)] h-full flex flex-col justify-end pb-10">
             <div className="text-xs text-zinc-300">

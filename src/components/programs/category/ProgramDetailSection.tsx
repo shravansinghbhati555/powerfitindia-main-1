@@ -5,6 +5,7 @@ import RealDataBadge from "@/components/programs/category/RealDataBadge";
 import WhatsAppCTA from "@/components/programs/category/WhatsAppCTA";
 import { useCategoryTheme } from "@/components/programs/category/CategoryThemeProvider";
 import { Link } from "react-router-dom";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 export default function ProgramDetailSection({ program, index }: { program: Program; index: number }) {
   const theme = useCategoryTheme();
@@ -28,11 +29,12 @@ export default function ProgramDetailSection({ program, index }: { program: Prog
             viewport={{ once: true, amount: 0.2 }}
             className="relative rounded-3xl overflow-hidden border border-white/10 min-h-[320px]"
           >
-            <img
+            <PowerFitImage
               src={program.imagePath}
               alt={`${program.name} class at PowerFit Jaipur gym`}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority={index < 2}
               className="absolute inset-0 w-full object-contain"
-              loading="lazy"
               itemProp="image"
             />
             <motion.div

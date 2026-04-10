@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const WA_PHONE = "918619527263";
 
@@ -91,11 +92,12 @@ export default function MembershipLocations() {
               whileHover={{ y: -6, boxShadow: "0 18px 60px rgba(232,0,14,0.12)" }}
             >
               <div className="relative h-40">
-                <img
+                <PowerFitImage
                   src={studio.imageSrc}
                   alt={`${studio.name} gym membership`}
+                  sizes="320px"
+                  priority={i < 2}
                   className="w-full h-full object-cover transition-transform duration-500"
-                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="absolute top-3 left-3 flex flex-col gap-1">

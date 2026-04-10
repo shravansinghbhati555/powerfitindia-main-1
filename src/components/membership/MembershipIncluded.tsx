@@ -1,5 +1,12 @@
-import { motion } from "framer-motion";
-import { useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+
+/** Pexels — free stock video (Pexels License). Gym / training floor. */
+const INCLUDED_VIDEO_SRC =
+  "https://videos.pexels.com/video-files/3191574/3191574-hd_1920_1080_25fps.mp4";
+/** Unsplash — poster + fallback feel */
+const INCLUDED_POSTER =
+  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&q=80";
 
 const includedFeatures = [
   { icon: "🏋️", title: "Access to All Studios", desc: "Train at any PowerFit location in Jaipur or Sikar — same membership, all 5 studios." },
@@ -16,6 +23,25 @@ const includedFeatures = [
 
 export default function MembershipIncluded() {
   const reduce = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || reduce) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduce]);
 
   return (
     <section className="py-16 md:py-24" style={{ background: "#0A0A0A" }}>
@@ -58,14 +84,16 @@ export default function MembershipIncluded() {
 
           <div className="relative rounded-3xl overflow-hidden h-full min-h-[360px]" style={{ background: "#0F0F0F" }}>
             <video
+              ref={videoRef}
               autoPlay={!reduce}
               muted
               loop
               playsInline
-              poster="/images/membership-included-poster.jpg"
-              className="w-full h-full object-cover opacity-85"
+              preload="metadata"
+              poster={INCLUDED_POSTER}
+              className="w-full h-full object-cover opacity-90 min-h-[360px]"
             >
-              <source src="/videos/membership-included.mp4" type="video/mp4" />
+              <source src={INCLUDED_VIDEO_SRC} type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
 

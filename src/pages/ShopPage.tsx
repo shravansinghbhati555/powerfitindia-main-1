@@ -7,6 +7,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 const ShopPage = () => {
   const [products, setProducts] = useState<Array<{ node: ShopifyProduct }>>([]);
@@ -91,9 +92,11 @@ const ShopPage = () => {
                     >
                       <div className="aspect-square bg-white/5 overflow-hidden">
                         {image ? (
-                          <img
+                          <PowerFitImage
                             src={image.url}
                             alt={image.altText || product.node.title}
+                            sizes="(max-width: 768px) 50vw, 300px"
+                            priority={i < 4}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           />
                         ) : (

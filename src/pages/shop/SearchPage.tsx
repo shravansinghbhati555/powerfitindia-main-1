@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useProductSearch } from "@/hooks/useShopify";
+import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
 function formatINR(amount: string) {
   const n = Number.parseFloat(amount);
@@ -85,7 +86,14 @@ export default function SearchPage() {
                       className="rounded-2xl border border-white/10 bg-zinc-950 overflow-hidden hover:border-white/20 transition-colors"
                     >
                       <div className="relative aspect-[4/3]">
-                        {img && <img src={img.url} alt={img.altText || p.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />}
+                        {img && (
+                          <PowerFitImage
+                            src={img.url}
+                            alt={img.altText || p.title}
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                            className="absolute inset-0 w-full h-full object-cover"
+                          />
+                        )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                       </div>
                       <div className="p-4">
