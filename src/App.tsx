@@ -26,6 +26,8 @@ import OnlinePage from "./pages/programs/OnlinePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import MembershipPage from "./pages/MembershipPage.tsx";
 import GymsPage from "./pages/GymsPage.tsx";
+import PrivacyPolicyPage from "./pages/legal/PrivacyPolicyPage.tsx";
+import TermsConditionsPage from "./pages/legal/TermsConditionsPage.tsx";
 import ScrollToHash from "./components/ScrollToHash.tsx";
 
 const queryClient = new QueryClient({
@@ -57,8 +59,8 @@ const AppContent = () => {
 
       {/* Shopify pages */}
       <Route path="/about" element={<ShopifyPageRenderer handle="about-us" />} />
-      <Route path="/privacy-policy" element={<ShopifyPageRenderer handle="privacy-policy" />} />
-      <Route path="/terms-conditions" element={<ShopifyPageRenderer handle="terms-conditions" />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms-conditions" element={<TermsConditionsPage />} />
       <Route path="/franchise" element={<FranchisePage />} />
       <Route path="/gym-setup" element={<GymSetupPage />} />
       <Route path="/programs" element={<Programs />} />
