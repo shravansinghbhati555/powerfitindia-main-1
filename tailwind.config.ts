@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["class"],
@@ -98,7 +99,26 @@ export default {
         "fade-up": "fade-up 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "72ch",
+            color: "#d4d4d8",
+          },
+        },
+        invert: {
+          css: {
+            "--tw-prose-body": "#d4d4d8",
+            "--tw-prose-headings": "#ffffff",
+            "--tw-prose-links": "#f87171",
+            "--tw-prose-bold": "#ffffff",
+            "--tw-prose-bullets": "#ef4444",
+            "--tw-prose-hr": "rgba(255,255,255,0.12)",
+            "--tw-prose-quotes": "#e4e4e7",
+          },
+        },
+      },
     },
   },
-  plugins: [animate],
+  plugins: [animate, typography],
 } satisfies Config;

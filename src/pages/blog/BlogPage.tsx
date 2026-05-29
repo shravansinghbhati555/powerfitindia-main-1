@@ -1,291 +1,141 @@
+import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useEffect, useState } from "react";
-import { PowerFitImage } from "@/components/ui/PowerFitImage";
- 
-function formatDate(date: string) {
-  try {
-    return new Date(date).toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" });
-  } catch {
-    return date;
-  }
-}
- 
-// Function to strip HTML tags and get plain text excerpt
-const stripHtml = (html: string) => {
-  const temp = document.createElement("div");
-  temp.innerHTML = html;
-  return temp.textContent || temp.innerText || "";
-};
- 
-// Function to get first image from HTML content
-const getFirstImageFromHtml = (html: string) => {
-  const imgRegex = /<img[^>]+src="([^">]+)"/;
-  const match = html.match(imgRegex);
-  return match ? match[1] : null;
-};
- 
+import BlogCard from "@/components/blog/BlogCard";
+import FeaturedSlider from "@/components/blog/FeaturedSlider";
+import CategoryFilter from "@/components/blog/CategoryFilter";
+import NewsletterSection from "@/components/blog/NewsletterSection";
+import { BLOG_CATEGORIES, type BlogCategory, type BlogArticle } from "@/types/blog";
+import { fetchBlogArticles, matchArticleCategory, uniqueTags } from "@/lib/blog";
+
+const suggestions = ["protein diet", "home workout", "fat loss plateau", "muscle recovery"];
+
 export default function BlogPage() {
   const { blogHandle } = useParams<{ blogHandle?: string }>();
-  const handle = blogHandle || "news";
-  const [articles, setArticles] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [hasNextPage, setHasNextPage] = useState(false);
+  const handle = blogHandle || "blogs";
+
+  const [articles, setArticles] = useState<BlogArticle[]>([]);
   const [cursor, setCursor] = useState<string | null>(null);
- 
-  const fetchArticles = async (afterCursor: string | null = null) => {
-    try {
-      const query = {
-        query: `query {
-          blogs(first: 10) {
-            nodes {
-              id
-              title
-              handle
-              articles(first: 10${afterCursor ? `, after: "${afterCursor}"` : ""}) {
-                nodes {
-                  id
-                  title
-                  handle
-                  excerpt
-                  contentHtml
-                  publishedAt
-                }
-                pageInfo {
-                  hasNextPage
-                  endCursor
-                }
-              }
-            }
-          }
-        }`
-      };
- 
-      const response = await fetch(
-        "https://powerfit-gym-store.myshopify.com/api/2025-04/graphql.json",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Shopify-Storefront-Access-Token": "b8ed5ef23e599def7abc7b01e48841d2",
-          },
-          body: JSON.stringify(query),
-        }
-      );
- 
-      const data = await response.json();
-      console.log("API Response:", data);
-     
-      if (data.errors) {
-        console.error("GraphQL Errors:", data.errors);
-        throw new Error(data.errors[0].message);
-      }
-     
-      const allArticlesList = [];
-      let nextPageExists = false;
-      let endCursorValue = null;
-     
-      if (data.data?.blogs?.nodes) {
-        data.data.blogs.nodes.forEach((blog: any) => {
-          if (blog.articles?.nodes) {
-            blog.articles.nodes.forEach((article: any) => {
-              const imageUrl = getFirstImageFromHtml(article.contentHtml || "");
-              let excerptText = article.excerpt;
-              if (!excerptText && article.contentHtml) {
-                const plainText = stripHtml(article.contentHtml);
-                excerptText = plainText.substring(0, 150) + "...";
-              }
-             
-              allArticlesList.push({
-                id: article.id,
-                title: article.title,
-                handle: article.handle,
-                excerpt: excerptText,
-                contentHtml: article.contentHtml,
-                publishedAt: article.publishedAt,
-                image: imageUrl ? { url: imageUrl, altText: article.title } : null,
-                author: { name: "PowerFit" },
-                blog: { handle: blog.handle, title: blog.title }
-              });
-            });
-           
-            if (blog.articles?.pageInfo) {
-              nextPageExists = blog.articles.pageInfo.hasNextPage;
-              endCursorValue = blog.articles.pageInfo.endCursor;
-            }
-          }
-        });
-      }
-     
-      console.log("Articles parsed:", allArticlesList.length);
-      return { articles: allArticlesList, hasNextPage: nextPageExists, endCursor: endCursorValue };
-    } catch (error) {
-      console.error("Fetch error:", error);
-      throw error;
-    }
-  };
- 
-  const loadMore = async () => {
-    if (!hasNextPage || loading) return;
-   
-    setLoading(true);
-    try {
-      const result = await fetchArticles(cursor);
-      setArticles(prev => [...prev, ...result.articles]);
-      setHasNextPage(result.hasNextPage);
-      setCursor(result.endCursor);
-    } catch (error) {
-      console.error("Error loading more:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
- 
+  const [hasNext, setHasNext] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState<BlogCategory | "All">("All");
+  const [query, setQuery] = useState("");
+  const [debounced, setDebounced] = useState("");
+
   useEffect(() => {
-    async function loadInitialArticles() {
+    const timer = window.setTimeout(() => setDebounced(query.trim().toLowerCase()), 280);
+    return () => window.clearTimeout(timer);
+  }, [query]);
+
+  useEffect(() => {
+    const run = async () => {
       setLoading(true);
-      try {
-        const result = await fetchArticles(null);
-        console.log("Initial load result:", result.articles.length);
-        setArticles(result.articles);
-        setHasNextPage(result.hasNextPage);
-        setCursor(result.endCursor);
-      } catch (error) {
-        console.error("Error loading articles:", error);
-        setArticles([]);
-      } finally {
-        setLoading(false);
-      }
-    }
- 
-    loadInitialArticles();
-  }, []);
- 
-  if (loading && articles.length === 0) {
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] text-white">
-        <Navbar />
-        <div className="py-20 text-center text-zinc-400">Loading articles…</div>
-        <Footer />
-      </div>
-    );
-  }
- 
+      const result = await fetchBlogArticles(handle, 12);
+      setArticles(result.articles);
+      setHasNext(result.hasNextPage);
+      setCursor(result.endCursor);
+      setLoading(false);
+    };
+    run();
+  }, [handle]);
+
+  const visible = useMemo(() => {
+    return articles.filter((article) => {
+      const categoryOk = matchArticleCategory(article, category);
+      const searchOk = !debounced || `${article.title} ${article.excerpt} ${article.tags.join(" ")}`.toLowerCase().includes(debounced);
+      return categoryOk && searchOk;
+    });
+  }, [articles, category, debounced]);
+
+  const loadMore = async () => {
+    if (!hasNext || loading) return;
+    setLoading(true);
+    const result = await fetchBlogArticles(handle, 9, cursor);
+    setArticles((prev) => [...prev, ...result.articles]);
+    setHasNext(result.hasNextPage);
+    setCursor(result.endCursor);
+    setLoading(false);
+  };
+
+  const tags = uniqueTags(articles);
+
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#1f2937_0%,_#070707_40%,_#040404_100%)] text-white">
       <Helmet>
-        <title>Fitness Blog | PowerFit India</title>
-        <meta name="description" content="PowerFit India fitness blog: training tips, gym setup guides, and nutrition. Powered by Shopify." />
+        <title>PowerFit Fitness Knowledge Hub | Blog</title>
+        <meta name="description" content="Premium fitness editorial stories on weight loss, strength training, nutrition, and gym transformation by PowerFit India." />
         <link rel="canonical" href={`https://powerfitindia.com/blog${blogHandle ? `/${blogHandle}` : ""}`} />
       </Helmet>
- 
+
       <Navbar />
- 
-      <main className="pt-20">
-        <section className="relative h-[300px] md:h-[350px] border-b border-white/10 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-          <div className="relative z-10 max-w-[var(--content-max-width)] mx-auto px-[var(--gutter)] h-full flex flex-col justify-center">
-            <h1 className="text-4xl md:text-5xl font-black">PowerFit Fitness Blog</h1>
-            <p className="mt-2 text-zinc-400 text-sm md:text-base max-w-2xl">
-              Training tips, gym setup guides, and nutrition insights — published from Shopify into the PowerFit site.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link to="/blog" className="px-4 py-2 rounded-full text-xs font-bold bg-white/10 border border-white/10 hover:bg-white/15 transition-colors">
-                Latest
+      <main className="space-y-10 px-4 pb-16 pt-20 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <FeaturedSlider articles={articles} />
+        </div>
+
+        <section className="mx-auto max-w-7xl space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-xl font-bold md:text-3xl">Trending in Fitness</h2>
+            <div className="flex gap-2 overflow-x-auto">
+              {["Most Read", "Fat loss", "Muscle", "Nutrition", "Transformation"].map((pill) => <span key={pill} className="rounded-full border border-white/20 bg-black/40 px-3 py-1 text-xs text-zinc-300">{pill}</span>)}
+            </div>
+          </div>
+          <div className="flex snap-x gap-4 overflow-x-auto pb-2">
+            {articles.slice(0, 8).map((article) => (
+              <Link key={article.id} to={`/blog/${article.blog.handle}/${article.handle}`} className="w-72 shrink-0 snap-start rounded-2xl border border-white/10 bg-zinc-950/70 p-4">
+                <p className="line-clamp-2 text-sm font-semibold">{article.title}</p>
+                <p className="mt-2 text-xs text-zinc-400">{article.readingTime} min read</p>
               </Link>
-              <Link to={`/blog/${handle}`} className="px-4 py-2 rounded-full text-xs font-bold bg-white/10 border border-white/10 hover:bg-white/15 transition-colors">
-                {handle}
-              </Link>
-              <a
-                href={`https://wa.me/918619527263?text=${encodeURIComponent("Hi! Please subscribe me to PowerFit fitness tips on WhatsApp.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full text-xs font-black bg-[#25D366] hover:scale-105 transition-transform"
-              >
-                WhatsApp tips
-              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl space-y-5">
+          <CategoryFilter categories={["All", ...BLOG_CATEGORIES]} active={category} onSelect={setCategory} />
+          <div className="rounded-3xl border border-white/10 bg-black/35 p-4">
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search with AI suggestions: 'best HIIT for fat loss'" className="h-12 w-full rounded-2xl border border-white/20 bg-black/50 px-4 text-sm outline-none ring-red-500/40 focus:ring" />
+            <div className="mt-3 flex flex-wrap gap-2">
+              {[...suggestions, ...tags.slice(0, 6)].map((tag) => <button type="button" onClick={() => setQuery(tag)} key={tag} className="rounded-full bg-zinc-900 px-3 py-1 text-xs text-zinc-300">{tag}</button>)}
             </div>
           </div>
         </section>
- 
-        <section className="py-10">
-          <div className="max-w-[1200px] mx-auto px-4">
-            {articles.length === 0 && !loading ? (
-              <div className="py-20 text-center text-zinc-400">
-                <p>No articles found.</p>
-                <p className="text-sm mt-2">Check console for details</p>
-              </div>
-            ) : (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {articles.map((a) => (
-                    <Link
-                      key={a.id}
-                      to={`/blog/${a.blog.handle}/${a.handle}`}
-                      className="border border-white/10 bg-zinc-950 overflow-hidden hover:border-white/20 transition-colors group"
-                    >
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        {a.image?.url && (
-                          <PowerFitImage
-                            src={a.image.url}
-                            alt={a.image.altText || a.title}
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-                        <div className="absolute bottom-3 left-3 right-3">
-                          <div className="text-xs text-zinc-300">{formatDate(a.publishedAt)} · {a.author?.name}</div>
-                          <div className="mt-1 text-white font-black line-clamp-2 text-lg">{a.title}</div>
-                        </div>
-                      </div>
-                      <div className="p-5">
-                        <div className="text-zinc-400 text-sm line-clamp-3 leading-relaxed">{a.excerpt || "Read more →"}</div>
-                        <div className="mt-4 text-red-400 text-sm font-black flex items-center gap-1 group-hover:gap-2 transition-all">
-                          Read More
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
- 
-                {hasNextPage && (
-                  <div className="mt-12 flex justify-center">
-                    <button
-                      type="button"
-                      onClick={() => loadMore()}
-                      className="px-8 py-3 bg-white/10 border border-white/10 text-sm font-black hover:bg-white/15 transition-colors"
-                    >
-                      Load more articles
-                    </button>
-                  </div>
-                )}
- 
-                <div className="mt-16 border border-white/10 bg-gradient-to-r from-red-950/30 via-black/40 to-black/40 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div>
-                    <div className="text-white font-black text-xl">Get weekly tips on WhatsApp</div>
-                    <div className="text-zinc-400 text-sm mt-1">Short, actionable fitness guidance from PowerFit.</div>
-                  </div>
-                  <a
-                    href={`https://wa.me/918619527263?text=${encodeURIComponent("Hi! Subscribe me to PowerFit weekly fitness tips.")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-8 py-3 bg-[#25D366] text-white font-black hover:scale-105 transition-transform"
-                  >
-                    Subscribe on WhatsApp
-                  </a>
-                </div>
-              </>
-            )}
+
+        <section className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {visible.map((article, index) => (
+              <motion.div key={article.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ delay: index * 0.04 }}>
+                <BlogCard article={article} featured={index % 7 === 0} />
+              </motion.div>
+            ))}
+          </div>
+
+          {hasNext ? (
+            <div className="mt-10 text-center">
+              <button type="button" onClick={loadMore} className="rounded-full border border-white/20 bg-zinc-900 px-8 py-3 text-sm font-semibold hover:border-red-400/40">Load more stories</button>
+            </div>
+          ) : null}
+        </section>
+
+        <section className="mx-auto max-w-7xl">
+          <NewsletterSection />
+        </section>
+
+        <section className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-white/10 bg-zinc-950/70 p-6"><h3 className="text-2xl font-bold">Transformation Stories</h3><p className="mt-2 text-sm text-zinc-300">Real journeys from PowerFit members in Jaipur and Sikar.</p></div>
+          <div className="rounded-3xl border border-white/10 bg-zinc-950/70 p-6"><h3 className="text-2xl font-bold">Fitness Tools</h3><p className="mt-2 text-sm text-zinc-300">BMI Calculator, Calorie Calculator, Workout Planner, and Membership recommendations.</p></div>
+        </section>
+
+        <section className="mx-auto max-w-7xl rounded-3xl border border-white/10 bg-black/40 p-6">
+          <h2 className="text-2xl font-black md:text-4xl">Fitness Knowledge Hub</h2>
+          <p className="mt-3 text-zinc-300">Explore long-tail guides on strength training for beginners, HIIT routines for busy professionals, recovery protocols, and nutrition science for sustainable fat loss.</p>
+          <div className="mt-4 flex flex-wrap gap-2 text-xs text-zinc-400">
+            {["best gym workout plan in india", "how to lose fat without losing muscle", "home workout for women", "protein intake calculator"].map((kw) => <span key={kw} className="rounded-full border border-white/20 px-3 py-1">{kw}</span>)}
           </div>
         </section>
       </main>
- 
       <Footer />
     </div>
   );
