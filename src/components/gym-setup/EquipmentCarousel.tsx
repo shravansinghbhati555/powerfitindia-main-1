@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
+ 
 const equipment = [
   { icon: "🏋️", name: "Free Weights", desc: "Dumbbells, Barbells, Kettlebells, Weight Plates (rubber coated)" },
   { icon: "🔩", name: "Strength Machines", desc: "Smith Machine, Cable Crossover, Lat Pulldown, Leg Press, Hack Squat" },
