@@ -20,24 +20,21 @@ export default function ShopifyPageRenderer({ handle }: { handle: string }) {
       <Navbar />
 
       <main className="pt-20">
-        <div className="bg-zinc-900 border-b border-white/10 py-12 px-[var(--gutter)]">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-black text-white">{page?.title || "Loading…"}</h1>
-            <p className="text-zinc-500 text-sm mt-2">
+        <div className="border-b border-white/10 bg-zinc-900 px-[var(--gutter)] py-12">
+          <div className="mx-auto max-w-4xl">
+            <h1 className="text-4xl font-black text-white">{page?.title || "Loading..."}</h1>
+            <p className="mt-2 text-sm text-zinc-500">
               {page?.updatedAt ? `Last updated: ${new Date(page.updatedAt).toLocaleDateString("en-IN")}` : ""}
             </p>
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-[var(--gutter)] py-12">
+        <div className="mx-auto max-w-4xl px-[var(--gutter)] py-12">
           {loading ? (
-            <div className="py-10 text-center text-zinc-400">Loading…</div>
+            <div className="py-10 text-center text-zinc-400">Loading...</div>
           ) : (
             <div
-              className="prose prose-invert prose-red prose-lg max-w-none
-                         prose-headings:text-white prose-p:text-zinc-300
-                         prose-a:text-red-400 prose-strong:text-white
-                         prose-ul:text-zinc-300 prose-li:marker:text-red-500"
+              className="prose prose-invert prose-lg max-w-none prose-a:text-red-400 prose-headings:text-white prose-li:marker:text-red-500 prose-p:text-zinc-300 prose-strong:text-white prose-ul:text-zinc-300"
               dangerouslySetInnerHTML={{ __html: page?.body || "" }}
             />
           )}
@@ -48,4 +45,3 @@ export default function ShopifyPageRenderer({ handle }: { handle: string }) {
     </div>
   );
 }
-

@@ -29,6 +29,7 @@ import GymsPage from "./pages/GymsPage.tsx";
 import PrivacyPolicyPage from "./pages/legal/PrivacyPolicyPage.tsx";
 import TermsConditionsPage from "./pages/legal/TermsConditionsPage.tsx";
 import ScrollToHash from "./components/ScrollToHash.tsx";
+import GlobalSEO from "./components/GlobalSEO.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,6 +44,7 @@ const AppContent = () => {
   useCartSync();
   return (
     <>
+      <GlobalSEO />
       <ScrollToHash />
       <Routes>
       <Route path="/" element={<Index />} />
@@ -95,3 +97,4 @@ const App = () => (
 );
 
 export default App;
+

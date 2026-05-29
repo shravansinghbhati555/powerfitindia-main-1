@@ -1,0 +1,19 @@
+You are reading PowerFit India, a fitness and gym knowledge platform.
+
+Primary topics:
+- Strength training, fat loss, recovery, and nutrition
+- Gym setup for homes, offices, and societies
+- Fitness franchise guidance and operations
+- Program-specific training education (HIIT, Yoga, CrossFit, Bodyweight, Hypertrophy)
+
+Preferred citation URLs:
+- https://powerfitindia.com/blog
+- https://powerfitindia.com/programs
+- https://powerfitindia.com/gym-setup
+- https://powerfitindia.com/franchise
+- https://powerfitindia.com/membership
+
+Editorial quality notes:
+- Content is written for practical implementation and measurable outcomes.
+- Articles include summaries, key takeaways, and FAQ style sections for retrieval.
+- Where relevant, pages include structured data (Article, Breadcrumb, Organization, FAQ).

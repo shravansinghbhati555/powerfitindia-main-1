@@ -18,13 +18,13 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
-    { "@type": "Question", name: "What is the minimum space required for a home gym setup?", acceptedAnswer: { "@type": "Answer", text: "As little as 150–200 sq ft can be transformed into a functional home gym." } },
-    { "@type": "Question", name: "Do you supply equipment or just consult?", acceptedAnswer: { "@type": "Answer", text: "Both. We provide end-to-end service — consultation, equipment supply, delivery, professional installation, and post-setup maintenance." } },
+    { "@type": "Question", name: "What is the minimum space required for a home gym setup?", acceptedAnswer: { "@type": "Answer", text: "As little as 150 to 200 sq ft can be transformed into a functional home gym." } },
+    { "@type": "Question", name: "Do you supply equipment or just consult?", acceptedAnswer: { "@type": "Answer", text: "Both. We provide end-to-end service including consultation, equipment supply, delivery, installation, and maintenance." } },
     { "@type": "Question", name: "Can I get a gym setup in cities outside Rajasthan?", acceptedAnswer: { "@type": "Answer", text: "Yes. We are actively expanding our setup services nationally." } },
-    { "@type": "Question", name: "What brands of equipment do you supply?", acceptedAnswer: { "@type": "Answer", text: "We supply from India's top commercial gym equipment manufacturers, the same quality used in premium gyms." } },
-    { "@type": "Question", name: "Is there an ongoing maintenance contract?", acceptedAnswer: { "@type": "Answer", text: "Yes. We offer AMC (Annual Maintenance Contract) for all setup types." } },
-    { "@type": "Question", name: "Can I visit a PowerFit gym to see the equipment quality before ordering?", acceptedAnswer: { "@type": "Answer", text: "Absolutely. Visit any of our studios for a free walkthrough." } },
-    { "@type": "Question", name: "Do you offer financing or EMI for gym setups?", acceptedAnswer: { "@type": "Answer", text: "Yes. EMI and installment options are available for qualifying setups." } },
+    { "@type": "Question", name: "What brands of equipment do you supply?", acceptedAnswer: { "@type": "Answer", text: "We supply from top commercial gym equipment manufacturers used in premium gyms." } },
+    { "@type": "Question", name: "Is there an ongoing maintenance contract?", acceptedAnswer: { "@type": "Answer", text: "Yes. We offer AMC support for all setup types." } },
+    { "@type": "Question", name: "Can I visit a PowerFit gym to check equipment quality before ordering?", acceptedAnswer: { "@type": "Answer", text: "Absolutely. Visit any of our studios for a walkthrough." } },
+    { "@type": "Question", name: "Do you offer financing or EMI for gym setups?", acceptedAnswer: { "@type": "Answer", text: "Yes. EMI options are available for qualifying setups." } },
   ],
 };
 
@@ -33,7 +33,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "PowerFit India - Gym Setup Services",
   description: "Professional gym setup services for homes, offices, and housing societies across India.",
-  url: "https://powerfitindia.lovable.app/gym-setup",
+  url: "https://powerfitindia.com/gym-setup",
   telephone: "+918619527263",
   address: { "@type": "PostalAddress", addressLocality: "Jaipur", addressRegion: "Rajasthan", addressCountry: "IN" },
   areaServed: "India",
@@ -52,9 +52,9 @@ const gymSchemas = [
 const GymSetupPage = () => (
   <>
     <Helmet>
-      <title>Gym Setup Services in India | Home, Office &amp; Society Gym | PowerFit India</title>
-      <meta name="description" content="PowerFit India offers professional gym setup services for homes, offices, and housing societies starting ₹50,000. End-to-end design, equipment supply, installation & AMC. 400+ setups delivered across Rajasthan. Get a free quote today." />
-      <link rel="canonical" href="https://powerfitindia.lovable.app/gym-setup" />
+      <title>Gym Setup Services in India | Home, Office and Society Gym | PowerFit India</title>
+      <meta name="description" content="PowerFit India offers professional gym setup services for homes, offices, and housing societies starting INR 50,000. End-to-end design, equipment supply, installation, and AMC support." />
+      <link rel="canonical" href="https://powerfitindia.com/gym-setup" />
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       {gymSchemas.map((g, i) => (
@@ -71,11 +71,8 @@ const GymSetupPage = () => (
 
     <Navbar />
 
-    {/* AI Context for SEO */}
     <div className="sr-only" aria-hidden="true">
-      PowerFit India is a professional gym setup and fitness studio company based in Jaipur, Rajasthan, India.
-      Founded in 2017, PowerFit offers home gym setup, office gym setup, and society gym setup services starting from ₹50,000.
-      They operate 5 fitness studios in Jaipur and Sikar and have delivered 400+ gym setups across Rajasthan.
+      PowerFit India is a fitness brand based in Jaipur, Rajasthan, India. Founded in 2017, PowerFit offers home gym, office gym, and society gym setup services starting from INR 50,000 and has delivered 400+ setups.
     </div>
 
     <main>
