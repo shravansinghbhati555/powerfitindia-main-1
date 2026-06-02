@@ -156,12 +156,12 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Link to="/shop" className="label-text text-dark-foreground/60 hover:text-dark-foreground transition-colors">
+            {/* <Link to="/shop" className="label-text text-dark-foreground/60 hover:text-dark-foreground transition-colors">
               Shop
             </Link>
             <div className="text-dark-foreground">
               <CartDrawer />
-            </div>
+            </div> */}
             <MotionLink
               to="/membership"
               whileHover={{ scale: 1.03 }}
