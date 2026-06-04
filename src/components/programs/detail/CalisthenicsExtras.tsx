@@ -119,7 +119,7 @@ export function CalisthenicsSkillTree({ accentColor }: { accentColor: string }) 
         <motion.div className="text-center mt-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <p className="text-zinc-500 text-sm mb-4">Which skill are you working towards? Let our coach build your personal path.</p>
           <a
-            href={`https://wa.me/918619527263?text=${encodeURIComponent(
+            href={`https://wa.me/919116838715?text=${encodeURIComponent(
               "Hi! I want to start Calisthenics at PowerFit and work towards [my goal skill]. Please guide me.",
             )}`}
             target="_blank"

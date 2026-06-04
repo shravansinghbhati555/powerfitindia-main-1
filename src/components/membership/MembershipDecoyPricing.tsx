@@ -23,7 +23,7 @@ type MembershipTier = {
   savingsVsPremium?: string;
 };
 
-const WA_PHONE = "918619527263";
+const WA_PHONE = "919116838715";
 
 /** Same column/stack order for every billing period */
 const TIER_DISPLAY_ORDER = ["basic", "elite", "premium"] as const;

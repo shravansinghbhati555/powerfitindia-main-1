@@ -62,7 +62,7 @@ export default function MembershipFinalCTA() {
           transition={{ delay: 0.1, type: "spring" }}
         >
           <a
-            href={`https://wa.me/918619527263?text=${waMsg}`}
+            href={`https://wa.me/919116838715?text=${waMsg}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 px-10 py-5 rounded-2xl font-black text-lg text-white bg-[#25D366] hover:bg-[#20BA5C] hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(37,211,102,0.3)]"
@@ -70,7 +70,7 @@ export default function MembershipFinalCTA() {
             💬 Join PowerFit Today
           </a>
           <a
-            href="tel:+918619527263"
+            href="tel:+919116838715"
             className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-bold text-lg text-white bg-zinc-800 hover:bg-zinc-700 hover:scale-105 transition-all"
           >
             📞 Call: +91 86195 27263

@@ -42,7 +42,7 @@ export default function TestimonialSlider({ items }: { items: Testimonial[] }) {
                 <a
                   className="mt-5 inline-flex items-center gap-2 text-sm font-bold underline underline-offset-4 hover:opacity-90"
                   style={{ color: theme.accent }}
-                  href={`https://wa.me/918619527263?text=${encodeURIComponent(t.waMessage)}`}
+                  href={`https://wa.me/919116838715?text=${encodeURIComponent(t.waMessage)}`}
                   target="_blank"
                   rel="noreferrer"
                 >

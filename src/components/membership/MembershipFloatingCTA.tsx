@@ -33,7 +33,7 @@ export default function MembershipFloatingCTA() {
 
   return (
     <a
-      href={`https://wa.me/918619527263?text=${waMsg}`}
+      href={`https://wa.me/919116838715?text=${waMsg}`}
       target="_blank"
       rel="noopener noreferrer"
       onMouseEnter={() => setHovered(true)}

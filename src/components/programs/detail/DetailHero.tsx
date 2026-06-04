@@ -291,7 +291,7 @@ export default function DetailHero({ program, visuals, theme }: Props) {
             {/* CTA row */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4 }} className="flex flex-wrap gap-3">
               <a
-                href={`https://wa.me/918619527263?text=${waMsg}`}
+                href={`https://wa.me/919116838715?text=${waMsg}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-black text-white text-sm bg-[#25D366] hover:bg-[#20BA5C] shadow-lg hover:shadow-green-500/30 hover:scale-105 active:scale-95 transition-all duration-200 min-h-[48px]"
@@ -299,7 +299,7 @@ export default function DetailHero({ program, visuals, theme }: Props) {
                 💬 Join {program.name}
               </a>
               <a
-                href={`https://wa.me/918619527263?text=${trialMsg}`}
+                href={`https://wa.me/919116838715?text=${trialMsg}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white text-sm border-2 hover:scale-105 transition-all min-h-[48px]"
@@ -308,7 +308,7 @@ export default function DetailHero({ program, visuals, theme }: Props) {
                 🎯 Free Trial
               </a>
               <a
-                href="tel:+918619527263"
+                href="tel:+919116838715"
                 className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-bold text-white text-sm bg-zinc-800 hover:bg-zinc-700 transition-all min-h-[48px]"
               >
                 📞 Call

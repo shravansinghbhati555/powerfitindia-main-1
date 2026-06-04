@@ -101,7 +101,7 @@ export default function ArticlePage() {
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-4 pb-7 md:px-8 md:pb-10">
             <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-zinc-300"><Link to="/blog" className="hover:text-white">Blog</Link> / {blogHandle}</div>
             <h1 className="max-w-4xl font-['Oswald'] text-3xl font-semibold uppercase tracking-[0.05em] leading-[1.05] md:text-6xl">{article.title}</h1>
-            <p className="mt-3 text-sm text-zinc-300">{new Date(article.publishedAt).toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" })} • {article.readingTime} min • {article.author.name}</p>
+            <p className="mt-3 text-sm text-zinc-300">{new Date(article.publishedAt).toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" })} ï¿½ {article.readingTime} min ï¿½ {article.author.name}</p>
           </motion.div>
         </section>
 
@@ -142,7 +142,7 @@ export default function ArticlePage() {
             <motion.div whileHover={{ scale: 1.01 }} className="mt-8 rounded-3xl border border-white/15 bg-gradient-to-r from-red-900/25 via-black/60 to-black/70 p-6 text-center">
               <h3 className="font-['Oswald'] text-2xl uppercase tracking-[0.06em]">Start Your Transformation</h3>
               <p className="mt-2 text-zinc-300">Book a free trial or consult with a PowerFit coach.</p>
-              <a href={`https://wa.me/918619527263?text=${encodeURIComponent("Hi! I want a personalized fitness plan from PowerFit.")}`} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex rounded-full bg-red-500 px-6 py-3 text-sm font-semibold transition hover:bg-red-400">Get Coaching</a>
+              <a href={`https://wa.me/919116838715?text=${encodeURIComponent("Hi! I want a personalized fitness plan from PowerFit.")}`} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex rounded-full bg-red-500 px-6 py-3 text-sm font-semibold transition hover:bg-red-400">Get Coaching</a>
             </motion.div>
 
             <div className="mt-10">

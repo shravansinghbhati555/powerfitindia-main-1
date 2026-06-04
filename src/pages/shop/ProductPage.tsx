@@ -213,7 +213,7 @@ export default function ProductPage() {
                     </button>
 
                     <a
-                      href={`https://wa.me/918619527263?text=${waMsg}`}
+                      href={`https://wa.me/919116838715?text=${waMsg}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full py-3 rounded-xl bg-[#25D366] text-white font-black text-sm flex items-center justify-center gap-2 hover:scale-[1.01] transition-all"
@@ -222,7 +222,7 @@ export default function ProductPage() {
                     </a>
 
                     <a
-                      href="tel:+918619527263"
+                      href="tel:+919116838715"
                       className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm flex items-center justify-center hover:bg-white/10 transition-colors"
                     >
                       📞 Call for installation quote

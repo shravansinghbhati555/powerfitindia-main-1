@@ -80,7 +80,7 @@ export default function MindBodyPage() {
           <p className="sr-only">
             {`PowerFit India offers ${categoryPrograms.length} ${theme.label} programs at fitness studios in Jaipur and Sikar, Rajasthan. Programs include: ${categoryPrograms
               .map((p) => p.name)
-              .join(", ")}. Free trial available. WhatsApp: +91 8619527263.`}
+              .join(", ")}. Free trial available. WhatsApp: +91 9116838715.`}
           </p>
 
           <CategoryHero theme={theme} programs={categoryPrograms} />

@@ -44,7 +44,7 @@ export default function DetailJourney({ program, visuals, theme }: Props) {
             viewport={{ once: true }} className="text-center mt-8">
             <div className="text-5xl mb-2" style={{ filter: `drop-shadow(0 0 20px ${theme.accent})` }}>🏆</div>
             <p className="text-zinc-300">Ready to start your journey?</p>
-            <a href={`https://wa.me/918619527263?text=${waMsg}`} target="_blank" rel="noopener noreferrer"
+            <a href={`https://wa.me/919116838715?text=${waMsg}`} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-3 px-5 py-2.5 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold transition-colors">
               💬 WhatsApp to Start
             </a>

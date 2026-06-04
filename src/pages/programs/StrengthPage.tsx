@@ -86,7 +86,7 @@ export default function StrengthPage() {
           <p className="sr-only">
             {`PowerFit India offers ${categoryPrograms.length} ${theme.label} programs at fitness studios in Jaipur and Sikar, Rajasthan. Programs include: ${categoryPrograms
               .map((p) => p.name)
-              .join(", ")}. Free trial available. WhatsApp: +91 8619527263.`}
+              .join(", ")}. Free trial available. WhatsApp: +91 9116838715.`}
           </p>
 
           <CategoryHero theme={theme} programs={categoryPrograms} />
@@ -173,7 +173,7 @@ export default function StrengthPage() {
                     👑 View Full Program
                   </Link>
                   <a
-                    href={`https://wa.me/918619527263?text=${encodeURIComponent("Hi! I want to join the Calisthenics program at PowerFit. Please share details.")}`}
+                    href={`https://wa.me/919116838715?text=${encodeURIComponent("Hi! I want to join the Calisthenics program at PowerFit. Please share details.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-[#25D366] hover:scale-105 transition-all"

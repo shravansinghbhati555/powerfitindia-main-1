@@ -65,7 +65,7 @@ const FounderMessage = () => {
             <p className="font-display text-base text-dark-foreground mt-6">— Founder, PowerFit India</p>
 
             <a
-              href="https://wa.me/918619527263"
+              href="https://wa.me/919116838715"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-lg border border-green-500/40 text-green-400 font-body text-sm hover:bg-green-500/10 transition-all"

@@ -50,7 +50,7 @@ export default function MembershipFAQ() {
             <p className="text-zinc-500 text-sm mt-1">{membershipFAQs.length} questions</p>
           </div>
           <a
-            href={`https://wa.me/918619527263?text=${waMsg}`}
+            href={`https://wa.me/919116838715?text=${waMsg}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-bold px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-red-500 transition-colors"

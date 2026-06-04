@@ -76,7 +76,7 @@ const ContactSection = () => {
               <div className="mt-8 space-y-4">
                 {[
                   { icon: Send, text: "hello@powerfitindia.com" },
-                  { icon: Phone, text: "+91 99999 99999" },
+                  { icon: Phone, text: "+91 9116838715" },
                   { icon: MapPin, text: "Mumbai, India" },
                 ].map((item) => (
                   <div key={item.text} className="flex items-center gap-4">
@@ -133,7 +133,7 @@ const ContactSection = () => {
         </div>
 
         <motion.a
-          href="https://wa.me/919999999999"
+          href="https://wa.me/919116838715"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1 }}

@@ -82,7 +82,7 @@ export default function OnlinePage() {
               categoryPrograms.length === 1 ? "" : "s"
             } with live 1-on-1 sessions and custom plans. Program: ${categoryPrograms
               .map((p) => p.name)
-              .join(", ")}. Free trial available. WhatsApp: +91 8619527263.`}
+              .join(", ")}. Free trial available. WhatsApp: +91 9116838715.`}
           </p>
 
           <CategoryHero theme={theme} programs={categoryPrograms} />

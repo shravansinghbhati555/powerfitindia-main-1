@@ -58,7 +58,7 @@ export default function DetailFinalCTA({ program, theme }: Props) {
           transition={{ delay: 0.3 }}
         >
           <a
-            href={`https://wa.me/918619527263?text=${waMsg}`}
+            href={`https://wa.me/919116838715?text=${waMsg}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 py-4 px-6 rounded-xl font-black text-white text-base bg-[#25D366] hover:bg-[#20BA5C] shadow-lg hover:shadow-green-500/30 hover:scale-105 transition-all duration-200"
@@ -66,7 +66,7 @@ export default function DetailFinalCTA({ program, theme }: Props) {
             WhatsApp to Start
           </a>
           <a
-            href="tel:+918619527263"
+            href="tel:+919116838715"
             className="flex items-center justify-center gap-3 py-4 px-6 rounded-xl font-bold text-white text-sm bg-zinc-800 hover:bg-zinc-700 transition-all hover:scale-105"
           >
             Call: +91 86195 27263

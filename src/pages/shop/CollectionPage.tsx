@@ -73,7 +73,7 @@ export default function CollectionPage({ handle }: { handle?: string }) {
                 Search products
               </Link>
               <a
-                href={`https://wa.me/918619527263?text=${encodeURIComponent(`Hi! I want a gym setup quote. I'm browsing the ${collection?.title || collectionHandle} collection.`)}`}
+                href={`https://wa.me/919116838715?text=${encodeURIComponent(`Hi! I want a gym setup quote. I'm browsing the ${collection?.title || collectionHandle} collection.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-[#25D366] text-sm font-black hover:scale-105 transition-transform"
@@ -186,7 +186,7 @@ export default function CollectionPage({ handle }: { handle?: string }) {
                 <div className="text-zinc-400 text-sm">Tell us your space, budget, and city. We’ll suggest a build.</div>
               </div>
               <a
-                href={`https://wa.me/918619527263?text=${encodeURIComponent("Hi! I need a custom gym setup package. My budget is __ and my space is __ sq ft.")}`}
+                href={`https://wa.me/919116838715?text=${encodeURIComponent("Hi! I need a custom gym setup package. My budget is __ and my space is __ sq ft.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#25D366] text-white font-black hover:scale-105 transition-transform"

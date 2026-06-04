@@ -41,7 +41,7 @@ const WordSlamLine = ({
   );
 };
 
-const WHATSAPP = "918619527263";
+const WHATSAPP = "919116838715";
 
 export default function MembershipHero() {
   const reduce = useReducedMotion();

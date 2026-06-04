@@ -35,7 +35,7 @@ const localBusinessSchema = {
   name: "PowerFit India",
   description: "India's fastest-growing gym franchise brand since 2017.",
   url: `${SITE_ORIGIN}/franchise`,
-  telephone: "+918619527263",
+  telephone: "+919116838715",
   address: { "@type": "PostalAddress", addressLocality: "Jaipur", addressRegion: "Rajasthan", addressCountry: "IN" },
 };
 

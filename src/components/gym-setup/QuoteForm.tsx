@@ -96,7 +96,7 @@ const QuoteForm = () => {
             <div className="pt-4 border-t border-white/10">
               <p className="text-gray-400 text-sm mb-3">Prefer to WhatsApp directly?</p>
               <a
-                href="https://wa.me/918619527263?text=Hi%20PowerFit!%20I%20want%20a%20free%20quote%20for%20gym%20setup"
+                href="https://wa.me/919116838715?text=Hi%20PowerFit!%20I%20want%20a%20free%20quote%20for%20gym%20setup"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white font-bold rounded-lg hover:bg-[#20bd5a] transition-all"

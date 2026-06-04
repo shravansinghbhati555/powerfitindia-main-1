@@ -91,7 +91,7 @@ export default function GymSetupShopSection() {
             </p>
           </div>
           <a
-            href={`https://wa.me/918619527263?text=${encodeURIComponent("Hi! I want a custom gym setup package. My space is __ sq ft and my budget is __.")}`}
+            href={`https://wa.me/919116838715?text=${encodeURIComponent("Hi! I want a custom gym setup package. My space is __ sq ft and my budget is __.")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#25D366] text-white font-black hover:scale-105 transition-transform"
@@ -169,7 +169,7 @@ export default function GymSetupShopSection() {
                         </div>
                         <div className="mt-4 flex gap-2">
                           <a
-                            href={`https://wa.me/918619527263?text=${encodeURIComponent(`Hi! I want to ask about ${p.title} for a ${tab.label} setup.`)}`}
+                            href={`https://wa.me/919116838715?text=${encodeURIComponent(`Hi! I want to ask about ${p.title} for a ${tab.label} setup.`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex-1 py-2.5 rounded-xl bg-[#25D366] text-white font-black text-xs text-center hover:scale-[1.01] transition-transform"

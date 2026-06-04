@@ -121,7 +121,7 @@ const StudioLocations = () => {
         {/* WhatsApp CTA strip */}
         <div className="mt-12 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-l-4 border-[#25D366]" style={{ background: "#111" }}>
           <p className="text-gray-300">Not sure which gym is closest to you?</p>
-          <a href="https://wa.me/918619527263?text=Hi!%20Can%20you%20help%20me%20find%20the%20nearest%20PowerFit%20gym%20to%20me%3F" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#25D366] text-white font-bold rounded-lg hover:bg-[#20bd5a] transition-all whitespace-nowrap">
+          <a href="https://wa.me/919116838715?text=Hi!%20Can%20you%20help%20me%20find%20the%20nearest%20PowerFit%20gym%20to%20me%3F" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#25D366] text-white font-bold rounded-lg hover:bg-[#20bd5a] transition-all whitespace-nowrap">
             💬 WhatsApp Our Team
           </a>
         </div>

@@ -8,7 +8,7 @@ const BottomCTA = () => {
         <div className="flex gap-4">
           <button onClick={scrollToQuote} className="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all">Get Free Quote</button>
           <a
-            href="https://wa.me/918619527263?text=Hi%20PowerFit!%20I%20want%20a%20free%20quote%20for%20gym%20setup"
+            href="https://wa.me/919116838715?text=Hi%20PowerFit!%20I%20want%20a%20free%20quote%20for%20gym%20setup"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3 bg-[#25D366] text-white font-bold rounded-lg hover:bg-[#20bd5a] transition-all"

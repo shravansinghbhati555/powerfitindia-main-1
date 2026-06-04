@@ -34,7 +34,7 @@ const localBusinessSchema = {
   name: "PowerFit India - Gym Setup Services",
   description: "Professional gym setup services for homes, offices, and housing societies across India.",
   url: "https://powerfitindia.com/gym-setup",
-  telephone: "+918619527263",
+  telephone: "+919116838715",
   address: { "@type": "PostalAddress", addressLocality: "Jaipur", addressRegion: "Rajasthan", addressCountry: "IN" },
   areaServed: "India",
   foundingDate: "2017",

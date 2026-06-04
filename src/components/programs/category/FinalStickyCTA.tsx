@@ -15,7 +15,7 @@ export default function FinalStickyCTA() {
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <WhatsAppCTA text="WhatsApp Us — Get Started Today" message={theme.whatsappText} size="large" />
         <a
-          href="tel:+918619527263"
+          href="tel:+919116838715"
           className="inline-flex items-center justify-center gap-2 px-8 py-5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl text-lg transition-all hover:scale-105 min-h-[48px]"
         >
           📞 Call: +91 86195 27263

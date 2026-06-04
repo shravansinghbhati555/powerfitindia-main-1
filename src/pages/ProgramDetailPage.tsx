@@ -45,7 +45,7 @@ export default function ProgramDetailPage() {
       "@type": "Organization",
       name: "PowerFit India",
       url: "https://powerfitindia.com",
-      telephone: "+918619527263",
+      telephone: "+919116838715",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Girdhar Marg, Ashok Vihar, Sector 12",

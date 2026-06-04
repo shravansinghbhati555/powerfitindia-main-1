@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const WA_PHONE = "918619527263";
+const WA_PHONE = "919116838715";
 
 export default function MembershipStickyBar() {
   const [showTop, setShowTop] = useState(false);
@@ -70,7 +70,7 @@ export default function MembershipStickyBar() {
         transition={{ duration: 0.25 }}
       >
         <a
-          href="tel:+918619527263"
+          href="tel:+919116838715"
           className="flex-1 inline-flex items-center justify-center gap-2 bg-zinc-800 text-white font-semibold rounded-xl py-3 text-sm"
         >
           📞 Call Now

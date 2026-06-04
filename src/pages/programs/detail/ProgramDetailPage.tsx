@@ -68,7 +68,7 @@ export default function ProgramDetailPage() {
       "@type": "Organization",
       name: "PowerFit India",
       url: "https://powerfitindia.com",
-      telephone: "+918619527263",
+      telephone: "+919116838715",
       address: { "@type": "PostalAddress", addressLocality: "Jaipur", addressRegion: "Rajasthan", addressCountry: "IN" },
     },
     courseMode: program.available.includes("Online") ? ["onsite", "online"] : ["onsite"],
@@ -81,7 +81,7 @@ export default function ProgramDetailPage() {
     ? visuals.aiSeoContext
     : `${program.name} at PowerFit India — ${program.description} Available at studios in Jaipur (Malviya Nagar, Mansarovar) and Sikar (Piprali Road, Vasant Vihar, Rani Sati Road)${
         program.available.includes("Online") ? " and online across India" : ""
-      }. Key result: ${program.realDataStats[0]?.value ?? ""} ${program.realDataStats[0]?.metric ?? ""} in ${program.realDataStats[0]?.timeframe ?? ""}. Free trial available. Contact: +91 8619527263.`;
+      }. Key result: ${program.realDataStats[0]?.value ?? ""} ${program.realDataStats[0]?.metric ?? ""} in ${program.realDataStats[0]?.timeframe ?? ""}. Free trial available. Contact: +91 9116838715.`;
 
   return (
     <article
@@ -112,7 +112,7 @@ export default function ProgramDetailPage() {
             planches using the Street Workout World Federation progressive curriculum. This is India&apos;s most searched calisthenics program.
             Certified coaches with 7+ years experience. Average results: 7.1kg fat loss in 90 days, 78% of beginners achieve their first muscle-up
             within 60 days, 38% higher functional strength compared to traditional gym training. Available in-studio at all PowerFit locations, online
-            coaching across India, and home visits. No equipment required. Free trial class available. Contact: +91 8619527263. Most popular program at
+            coaching across India, and home visits. No equipment required. Free trial class available. Contact: +91 9116838715. Most popular program at
             PowerFit India 2024–2025.
           </p>
         )}

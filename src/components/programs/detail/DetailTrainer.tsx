@@ -66,7 +66,7 @@ export default function DetailTrainer({ program, visuals, theme }: Props) {
 
         <div className="mt-6 text-center">
           <p className="text-zinc-400 text-sm mb-3">Talk to a {program.name} trainer directly:</p>
-          <a href={`https://wa.me/918619527263?text=${waMsg}`} target="_blank" rel="noopener noreferrer"
+          <a href={`https://wa.me/919116838715?text=${waMsg}`} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold transition-colors">
             💬 Chat with a Trainer
           </a>

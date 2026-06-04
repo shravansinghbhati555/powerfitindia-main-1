@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { PowerFitImage } from "@/components/ui/PowerFitImage";
 
-const WA_PHONE = "918619527263";
+const WA_PHONE = "919116838715";
 
 const studios = [
   {

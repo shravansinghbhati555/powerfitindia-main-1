@@ -69,9 +69,9 @@ const Footer = () => (
 
           <div>
             <p className="label-text text-dark-muted mb-4">Contact</p>
-            <p className="font-body text-sm text-dark-muted">hello@powerfitindia.com</p>
-            <p className="font-body text-sm text-dark-muted mt-1.5">+91 99999 99999</p>
-            <p className="font-body text-sm text-dark-muted mt-1.5">Mumbai, India</p>
+            <p className="font-body text-sm text-dark-muted">contact@powerfitindia.com</p>
+            <p className="font-body text-sm text-dark-muted mt-1.5">+91 9116838715</p>
+            <p className="font-body text-sm text-dark-muted mt-1.5">Rajasthan, India</p>
 
             <p className="label-text text-dark-muted mb-4 mt-8">Programs</p>
             <div className="space-y-2">

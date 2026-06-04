@@ -20,7 +20,7 @@ export default function StickyEnquireBar({ whatsappText }: { whatsappText: strin
       className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-zinc-950 border-t border-zinc-800 p-3 flex gap-2 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]"
     >
       <a
-        href="tel:+918619527263"
+        href="tel:+919116838715"
         className="flex-1 flex items-center justify-center gap-2 bg-zinc-800 text-white font-semibold rounded-xl py-3 text-sm min-h-[48px]"
       >
         📞 Call Now

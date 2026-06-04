@@ -64,7 +64,7 @@ export default function DetailGallery({ program, visuals, theme }: Props) {
           <p className="text-zinc-300 text-sm drop-shadow">Real studio moments</p>
         </div>
         <a
-          href={`https://wa.me/918619527263?text=${waMsg}`}
+          href={`https://wa.me/919116838715?text=${waMsg}`}
           target="_blank"
           rel="noopener noreferrer"
           className="px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-[#25D366]/90 backdrop-blur-sm hover:scale-105 transition-all inline-flex items-center gap-2 border"

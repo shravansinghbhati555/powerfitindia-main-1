@@ -19,7 +19,7 @@ export default function WhatsAppCTA({
   size?: "default" | "large";
   className?: string;
 }) {
-  const href = `https://wa.me/918619527263?text=${encodeURIComponent(message)}`;
+  const href = `https://wa.me/919116838715?text=${encodeURIComponent(message)}`;
   const sizeClass = size === "large" ? "px-8 py-5 text-lg" : "px-6 py-4 text-base";
 
   return (

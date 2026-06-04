@@ -99,7 +99,7 @@ const FranchiseHero = () => (
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </button>
         <a
-          href="https://wa.me/918619527263?text=Hi!%20Please%20send%20me%20the%20PowerFit%20franchise%20brochure%20and%20investment%20overview."
+          href="https://wa.me/919116838715?text=Hi!%20Please%20send%20me%20the%20PowerFit%20franchise%20brochure%20and%20investment%20overview."
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-8 py-4 border-2 border-dark-foreground/30 text-dark-foreground font-body font-bold rounded-lg text-base hover:border-primary hover:text-primary transition-all"

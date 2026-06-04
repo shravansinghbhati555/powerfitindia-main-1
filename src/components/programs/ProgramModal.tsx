@@ -25,7 +25,7 @@ export default function ProgramModal({
   const waLink = useMemo(() => {
     if (!program) return "";
     const text = `Hi! I want to join ${program.name} program at PowerFit.`;
-    return `https://wa.me/918619527263?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/919116838715?text=${encodeURIComponent(text)}`;
   }, [program]);
 
   return (

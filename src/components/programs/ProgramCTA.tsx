@@ -32,7 +32,7 @@ export default function ProgramCTA() {
             className="mt-10 grid md:grid-cols-3 gap-3"
           >
             <a
-              href="https://wa.me/918619527263?text=Hi!%20I%20need%20help%20choosing%20the%20right%20fitness%20program%20at%20PowerFit."
+              href="https://wa.me/919116838715?text=Hi!%20I%20need%20help%20choosing%20the%20right%20fitness%20program%20at%20PowerFit."
               target="_blank"
               rel="noreferrer"
               className="rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-5 transition-colors"

@@ -14,7 +14,7 @@ export default function FreeTrial({ programs }: { programs: Program[] }) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = `Hi PowerFit! I want a free trial class.\nName: ${name}\nMobile: ${mobile}\nProgram: ${program || theme.label}`;
-    window.open(`https://wa.me/918619527263?text=${encodeURIComponent(msg)}`, "_blank");
+    window.open(`https://wa.me/919116838715?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   return (

@@ -94,7 +94,7 @@ export default function DetailFAQ({ program, visuals, theme }: Props) {
           <a
             className="font-bold underline"
             style={{ color: theme.accent }}
-            href={`https://wa.me/918619527263?text=${encodeURIComponent(`Hi! I have a question about ${program.name}. Please help me choose the right plan.`)}`}
+            href={`https://wa.me/919116838715?text=${encodeURIComponent(`Hi! I have a question about ${program.name}. Please help me choose the right plan.`)}`}
             target="_blank"
             rel="noopener noreferrer"
           >

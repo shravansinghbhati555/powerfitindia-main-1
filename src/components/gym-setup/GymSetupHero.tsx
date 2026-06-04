@@ -89,7 +89,7 @@ const GymSetupHero = () => {
               See Our Studio Locations
             </button>
             <a
-              href="https://wa.me/918619527263?text=Hi%20PowerFit!%20I%20want%20to%20enquire%20about%20gym%20setup"
+              href="https://wa.me/919116838715?text=Hi%20PowerFit!%20I%20want%20to%20enquire%20about%20gym%20setup"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-[#25D366] text-white font-bold rounded-lg hover:bg-[#20bd5a] transition-all flex items-center gap-2"

@@ -77,7 +77,7 @@ export default function DetailComparePlans({ program, visuals, theme }: Props) {
               </ul>
 
               <a
-                href={`https://wa.me/918619527263?text=${waMsg(plan.name)}`}
+                href={`https://wa.me/919116838715?text=${waMsg(plan.name)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-black text-white transition-all hover:scale-105"
