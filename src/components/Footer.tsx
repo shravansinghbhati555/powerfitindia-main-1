@@ -95,12 +95,15 @@ const Footer = () => (
           <p className="font-body text-xs text-dark-muted">
             © 2026 PowerFit India. All rights reserved. Train Hard. Stay Strong.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <Link to="/privacy-policy" className="font-body text-xs text-dark-muted hover:text-dark-foreground transition-colors">
               Privacy Policy
             </Link>
             <Link to="/terms-conditions" className="font-body text-xs text-dark-muted hover:text-dark-foreground transition-colors">
               Terms of Service
+            </Link>
+            <Link to="/member-consent-policy" className="font-body text-xs text-dark-muted hover:text-dark-foreground transition-colors">
+              Member Consent Policy
             </Link>
           </div>
         </div>

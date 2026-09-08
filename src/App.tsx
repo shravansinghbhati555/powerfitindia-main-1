@@ -28,6 +28,7 @@ import MembershipPage from "./pages/MembershipPage.tsx";
 import GymsPage from "./pages/GymsPage.tsx";
 import PrivacyPolicyPage from "./pages/legal/PrivacyPolicyPage.tsx";
 import TermsConditionsPage from "./pages/legal/TermsConditionsPage.tsx";
+import MemberConsentPolicyPage from "./pages/legal/MemberConsentPolicyPage.tsx";
 import ScrollToHash from "./components/ScrollToHash.tsx";
 import GlobalSEO from "./components/GlobalSEO.tsx";
 
@@ -63,6 +64,8 @@ const AppContent = () => {
       <Route path="/about" element={<ShopifyPageRenderer handle="about-us" />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-conditions" element={<TermsConditionsPage />} />
+      {/* Master Membership Agreement */}
+      <Route path="/member-consent-policy" element={<MemberConsentPolicyPage />} />
       <Route path="/franchise" element={<FranchisePage />} />
       <Route path="/gym-setup" element={<GymSetupPage />} />
       <Route path="/programs" element={<Programs />} />
