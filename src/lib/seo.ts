@@ -1,3 +1,5 @@
+import { BRAND, SITE_ORIGIN, SOCIAL_PROFILES } from "@/config/site";
+
 export function articleSchema(input: {
   headline: string;
   description: string;
@@ -20,7 +22,7 @@ export function articleSchema(input: {
     publisher: {
       "@type": "Organization",
       name: "PowerFit India",
-      logo: { "@type": "ImageObject", url: "https://powerfitindia.com/favicon.ico" },
+      logo: { "@type": "ImageObject", url: BRAND.logoUrl, width: 399, height: 160 },
     },
   };
 }
@@ -50,8 +52,9 @@ export function organizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "PowerFit India",
-    url: "https://powerfitindia.com",
-    sameAs: ["https://www.instagram.com/powerfitindia"],
+    url: SITE_ORIGIN,
+    logo: { "@type": "ImageObject", url: BRAND.logoUrl, width: 399, height: 160 },
+    sameAs: [...SOCIAL_PROFILES],
   };
 }
 

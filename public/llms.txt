@@ -17,3 +17,10 @@ Editorial quality notes:
 - Content is written for practical implementation and measurable outcomes.
 - Articles include summaries, key takeaways, and FAQ style sections for retrieval.
 - Where relevant, pages include structured data (Article, Breadcrumb, Organization, FAQ).
+
+Official social profiles:
+- Facebook: https://www.facebook.com/PowerFitIndia
+- Instagram: https://www.instagram.com/PowerFitIndia
+- YouTube: https://www.youtube.com/PowerFitIndia
+- X: https://www.x.com/PowerFitIndia
+- LinkedIn: https://www.linkedin.com/company/powerfitindia/

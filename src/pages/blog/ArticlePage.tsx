@@ -12,6 +12,7 @@ import RelatedPosts from "@/components/blog/RelatedPosts";
 import { cleanArticleHtml, fetchArticleByHandle, fetchBlogArticles, stripHtml } from "@/lib/blog";
 import type { BlogArticle } from "@/types/blog";
 import { articleSchema, breadcrumbSchema, faqSchema, organizationSchema, toJsonLd } from "@/lib/seo";
+import { BRAND } from "@/config/site";
 
 const staticFaqs = [
   { question: "How often should beginners train each week?", answer: "Most beginners see progress with 3 to 4 structured sessions per week with rest days." },
@@ -83,7 +84,7 @@ export default function ArticlePage() {
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.excerpt} />
         <meta property="og:url" content={url} />
-        <meta property="og:image" content={article.image?.url || "https://powerfitindia.com/placeholder-powerfit.svg"} />
+        <meta property="og:image" content={article.image?.url || BRAND.ogImage} />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{toJsonLd(ldArticle)}</script>
         <script type="application/ld+json">{toJsonLd(ldBreadcrumb)}</script>

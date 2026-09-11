@@ -1,13 +1,22 @@
 import { motion } from "framer-motion";
-import { Instagram, Youtube, Facebook, Twitter } from "lucide-react";
+import { Instagram, Youtube, Facebook, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SOCIAL_LINKS } from "@/config/site";
+import BrandLogo from "@/components/BrandLogo";
+
+/** X has no lucide icon, so the official glyph is inlined. */
+const XIcon = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 const socialLinks = [
   { icon: Instagram, href: SOCIAL_LINKS.instagram, label: "Instagram" },
-  { icon: Youtube, href: SOCIAL_LINKS.youtube, label: "YouTube" },
   { icon: Facebook, href: SOCIAL_LINKS.facebook, label: "Facebook" },
-  { icon: Twitter, href: SOCIAL_LINKS.twitter, label: "Twitter" },
+  { icon: Youtube, href: SOCIAL_LINKS.youtube, label: "YouTube" },
+  { icon: XIcon, href: SOCIAL_LINKS.twitter, label: "X" },
+  { icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: "LinkedIn" },
 ] as const;
 
 const Footer = () => (
@@ -22,16 +31,15 @@ const Footer = () => (
       <div className="section-container py-16 md:py-24">
         <div className="grid lg:grid-cols-4 gap-12">
           <div className="lg:col-span-2">
-            <span className="font-display text-4xl md:text-5xl">
-              <span className="text-primary red-glow-text">POWER</span>
-              <span className="text-dark-foreground">FIT</span>
-            </span>
+            <Link to="/" className="inline-flex items-center" aria-label="PowerFit India home">
+              <BrandLogo className="h-14 md:h-16" />
+            </Link>
             <p className="font-body text-dark-muted text-sm mt-4 max-w-sm leading-relaxed">
               India's fastest-growing fitness empire. From premium gyms to home setups, 
               we build fitness ecosystems that transform lives.
             </p>
 
-            <div className="flex gap-4 mt-6">
+            <div className="flex flex-wrap gap-4 mt-6">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}

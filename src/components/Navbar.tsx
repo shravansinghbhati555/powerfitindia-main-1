@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CartDrawer } from "@/components/CartDrawer";
 import { MostPopularBadge } from "@/components/ui/MostPopularBadge";
+import BrandLogo from "@/components/BrandLogo";
 
 const MotionLink = motion(Link);
 
@@ -72,9 +73,8 @@ const Navbar = () => {
         />
 
         <div className="section-container flex items-center justify-between h-14 md:h-16">
-          <Link to="/" className="font-display text-2xl md:text-3xl relative z-10">
-            <span className="text-primary red-glow-text">POWER</span>
-            <span className="text-dark-foreground">FIT</span>
+          <Link to="/" className="relative z-10 flex items-center" aria-label="PowerFit India home">
+            <BrandLogo priority className="h-10 md:h-12" />
           </Link>
 
           <div className="hidden lg:flex items-center gap-6" ref={megaRef}>

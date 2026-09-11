@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { SITE_ORIGIN } from "@/config/site";
+import { BRAND, SITE_ORIGIN, SOCIAL_PROFILES } from "@/config/site";
 
 const brandDescription =
   "PowerFit India is a premium fitness ecosystem for gym memberships, transformation coaching, gym setup services, and franchise opportunities across India.";
@@ -23,12 +23,14 @@ const organizationSchema = {
   "@type": "Organization",
   name: "PowerFit India",
   url: SITE_ORIGIN,
-  logo: `${SITE_ORIGIN}/favicon.ico`,
-  sameAs: [
-    "https://www.instagram.com/powerfitindia",
-    "https://www.youtube.com/@powerfitindia",
-    "https://www.facebook.com/powerfitindia",
-  ],
+  logo: {
+    "@type": "ImageObject",
+    url: BRAND.logoUrl,
+    width: 399,
+    height: 160,
+  },
+  image: BRAND.ogImage,
+  sameAs: [...SOCIAL_PROFILES],
 };
 
 export default function GlobalSEO() {
@@ -40,7 +42,8 @@ export default function GlobalSEO() {
       <meta name="theme-color" content="#070707" />
       <meta property="og:site_name" content="PowerFit India" />
       <meta property="og:locale" content="en_IN" />
-      <meta name="twitter:site" content="@powerfitindia" />
+      <meta name="twitter:site" content="@PowerFitIndia" />
+      <meta name="twitter:creator" content="@PowerFitIndia" />
       <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
     </Helmet>
