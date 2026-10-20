@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, FileText, Handshake, Lock, ArrowRight } from "lucide-react";
+import { submitFranchiseApplication } from "@/lib/franchiseApplication";
 
 const majorCities = ["Jaipur", "Delhi", "Mumbai", "Bangalore", "Hyderabad", "Pune", "Ahmedabad", "Surat", "Lucknow", "Chandigarh", "Kolkata", "Chennai", "Indore", "Bhopal", "Jodhpur", "Sikar", "Other"];
 const budgetOptions = ["₹60L-80L", "₹80L-1Cr", "₹1Cr–1.5Cr", "₹1.5Cr+"];
@@ -8,6 +9,9 @@ const sourceOptions = ["Social Media", "Google Search", "Friend / Referral", "Ev
 
 const FranchiseForm = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [confirmation, setConfirmation] = useState("");
 
   const [citySearch, setCitySearch] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -17,13 +21,34 @@ const FranchiseForm = () => {
     city.toLowerCase().includes(citySearch.toLowerCase())
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!selectedCity) {
       setCityOpen(true);
       return;
     }
+
+    const data = new FormData(e.currentTarget);
+    setSubmitting(true);
+    setError("");
+    const result = await submitFranchiseApplication({
+      firstName: String(data.get("firstName") || ""),
+      lastName: String(data.get("lastName") || ""),
+      email: String(data.get("email") || ""),
+      mobile: String(data.get("mobile") || ""),
+      whatsapp: data.get("whatsapp") === "yes",
+      city: selectedCity,
+      budget: String(data.get("budget") || ""),
+      message: String(data.get("message") || ""),
+      source: String(data.get("source") || ""),
+    });
+    setSubmitting(false);
+    if (!result.ok) {
+      setError(result.message);
+      return;
+    }
+    setConfirmation(result.message);
     setSubmitted(true);
   };
 
@@ -50,7 +75,9 @@ const FranchiseForm = () => {
               <Handshake className="w-8 h-8 text-primary" />
             </div>
             <h3 className="font-display text-3xl text-dark-foreground mb-4">Application Received!</h3>
-            <p className="font-body text-dark-muted max-w-md mx-auto">We'll review your application and call you within 48 hours. Welcome to the PowerFit family.</p>
+            <p className="font-body text-dark-muted max-w-md mx-auto">
+              {confirmation || "We'll review your application and call you within 48 hours. Welcome to the PowerFit family."}
+            </p>
           </motion.div>
         ) : (
           <div className="grid lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
@@ -83,7 +110,7 @@ const FranchiseForm = () => {
 
               {/* WhatsApp checkbox */}
               <label className="flex items-center gap-2 font-body text-xs text-dark-muted cursor-pointer">
-                <input type="checkbox" className="accent-primary" defaultChecked />
+                <input type="checkbox" name="whatsapp" value="yes" className="accent-primary" defaultChecked />
                 Also reachable on WhatsApp
               </label>
 
@@ -158,7 +185,7 @@ const FranchiseForm = () => {
               {/* Budget */}
               <div>
                 <label className="label-text text-dark-muted block mb-1.5">Available Investment Budget</label>
-                <select className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none">
+                <select name="budget" className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none">
                   {budgetOptions.map((b) => <option key={b} value={b}>{b}</option>)}
                 </select>
               </div>
@@ -180,6 +207,7 @@ const FranchiseForm = () => {
               <div>
                 <label className="label-text text-dark-muted block mb-1.5">Any addiional thought before you want to connect?</label>
                 <textarea
+                  name="message"
                   rows={3}
                   className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none resize-none"
                 />
@@ -188,19 +216,21 @@ const FranchiseForm = () => {
               {/* Source */}
               <div>
                 <label className="label-text text-dark-muted block mb-1.5">How did you hear about us?</label>
-                <select className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none">
+                <select name="source" className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none">
                   <option value="">Select</option>
                   {sourceOptions.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
 
               {/* Submit */}
+              {error ? <p className="font-body text-sm text-red-400">{error}</p> : null}
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.01 }}
-                className="w-full py-4 bg-primary text-primary-foreground font-body font-bold rounded-lg text-base flex items-center justify-center gap-2 animate-pulse-glow hover:bg-primary/90 transition-all"
+                disabled={submitting}
+                whileHover={{ scale: submitting ? 1 : 1.01 }}
+                className="w-full py-4 bg-primary text-primary-foreground font-body font-bold rounded-lg text-base flex items-center justify-center gap-2 animate-pulse-glow hover:bg-primary/90 transition-all disabled:opacity-70"
               >
-                Submit My Application
+                {submitting ? "Sending…" : "Submit My Application"}
                 <ArrowRight className="w-5 h-5" />
               </motion.button>
 
