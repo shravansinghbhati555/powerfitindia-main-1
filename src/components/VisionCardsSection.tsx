@@ -30,7 +30,7 @@ const visionCards = [
       </svg>
     ),
     title: "Global Franchise Network",
-    stat: "500+ Cities Targeted",
+    stat: "200+ Cities Targeted",
     body: "Empowering entrepreneurs to own a PowerFit in every major city in India and beyond — UAE, UK, Southeast Asia in pipeline.",
   },
   {
@@ -68,8 +68,8 @@ const visionCards = [
 ];
 
 const statPills = [
-  { label: "500+ Cities", delay: 0.3 },
-  { label: "3 Continents", delay: 0.45 },
+  { label: "200+ Cities", delay: 0.3 },
+  // { label: "3 Continents", delay: 0.45 },
   { label: "By 2030", delay: 0.6 },
 ];
 
@@ -177,7 +177,7 @@ const VisionCardsSection = () => {
               transition={{ delay: 0.4, duration: 0.5 }}
               className="font-body text-dark-muted text-sm md:text-base leading-relaxed mb-8 max-w-md"
             >
-              By 2030, we envision 500+ PowerFit locations across India and the globe — making
+              By 2030, we envision 200+ PowerFit locations across India and the globe — making
               world-class fitness accessible to every city, every society, every home. Three
               verticals. One unstoppable brand.
             </motion.p>

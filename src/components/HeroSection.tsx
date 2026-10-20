@@ -130,7 +130,7 @@ const LazyHeroVideo = () => {
 
   useEffect(() => {
     if (isVisible && videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     }
   }, [isVisible]);
 
@@ -191,13 +191,13 @@ const YouTubeModal = ({ open, onOpenChange }: { open: boolean; onOpenChange: (v:
 };
 
 const stats = [
-  { value: 500, suffix: "+", label: "Members" },
-  { value: 15, suffix: "+", label: "Locations" },
-  { value: 7, suffix: "+", label: "Years" },
-  { value: 20, suffix: "+", label: "Programs" },
+  { value: 25000, suffix: "+", label: "Members Transformed" },
+  { value: 5, suffix: "+", label: "Locations" },
+  { value: 9, suffix: "+", label: "Years" },
+  { value: 20, suffix: "+", label: "Fitness Programs" },
 ];
 
-const marqueeText = "500+ Members · 15+ Locations · 7+ Years · Expanding Globally · Open a Franchise · Forever Fit Forever Strong · ";
+const marqueeText = "25000+ Members · 5+ Locations · 9+ Years · Expanding Globally · Open a Franchise · Forever Fit Forever Strong · ";
 
 const HeroSection = () => {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -234,17 +234,17 @@ const HeroSection = () => {
               className="inline-block mb-6"
             >
               <span className="label-text text-primary tracking-[0.3em] bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
-                India's #1 Fitness Brand
+                #ZiddJazbaaJunoon
               </span>
             </motion.div>
 
             <h1
               className="font-display text-dark-foreground leading-[0.9]  mb-6"
-              style={{ fontSize: "clamp(2.5rem, 5vw + 1rem, 5rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 4vw + 1rem, 5rem)" }}
             >
-              <StampedText text="India's Fastest" />
+              <StampedText text="Thriving to be India's" />
               <br />
-              <StampedText text="Growing Fitness" delay={0.6} />
+              <StampedText text="Number 1 ecosystem" delay={0.6} />
               <br />
               <span className="gradient-text">
                 <StampedText text="Empire" delay={1.2} />
@@ -257,8 +257,8 @@ const HeroSection = () => {
               transition={{ delay: 1.8, duration: 0.5 }}
               className="font-body text-dark-muted text-base md:text-lg max-w-lg leading-relaxed mb-8"
             >
-              From premium gyms to home setups, we build fitness ecosystems that transform lives. 
-              Join 500+ members across 15+ locations.
+              From premium gyms to gym equipment, gym AI automation and end to end gym setup solutions.
+              Join 25k+ members accross all our location.
             </motion.p>
 
             <motion.div

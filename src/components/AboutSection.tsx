@@ -36,7 +36,7 @@ const AboutSection = () => (
           More Than a <span className="gradient-text">Gym</span>
         </h2>
         <p className="font-body text-dark-muted text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-          We don't just build bodies. We build warriors. Every rep, every set, every drop of sweat 
+          We don't just build bodies. We build warriors. Every rep, every set, every drop of sweat
           is a step toward the strongest version of yourself.
         </p>
       </motion.div>
@@ -73,11 +73,13 @@ const AboutSection = () => (
       </div>
 
       {/* Brand pillars */}
-      <div className="grid sm:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-4 gap-6">
         {[
           { num: "01", title: "Premium Equipment", desc: "Commercial-grade machines, free weights, and functional tools from world-leading brands." },
           { num: "02", title: "Expert Coaching", desc: "Certified trainers with real-world experience who build programs around YOUR goals." },
           { num: "03", title: "Community", desc: "A tribe of driven individuals who push each other to be stronger, together." },
+          { num: "04", title: "Smart Member Analytics", desc: "Track member progress, monitor fitness performance, and make data-driven decisions for better results." },
+
         ].map((item, i) => (
           <motion.div
             key={item.num}

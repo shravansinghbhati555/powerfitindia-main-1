@@ -3,14 +3,27 @@ import { motion } from "framer-motion";
 import { Phone, FileText, Handshake, Lock, ArrowRight } from "lucide-react";
 
 const majorCities = ["Jaipur", "Delhi", "Mumbai", "Bangalore", "Hyderabad", "Pune", "Ahmedabad", "Surat", "Lucknow", "Chandigarh", "Kolkata", "Chennai", "Indore", "Bhopal", "Jodhpur", "Sikar", "Other"];
-const budgetOptions = ["Under ₹10L", "₹10–20L", "₹20–50L", "₹50L+", "International"];
+const budgetOptions = ["₹60L-80L", "₹80L-1Cr", "₹1Cr–1.5Cr", "₹1.5Cr+"];
 const sourceOptions = ["Social Media", "Google Search", "Friend / Referral", "Event / Expo", "News Article", "Other"];
 
 const FranchiseForm = () => {
   const [submitted, setSubmitted] = useState(false);
 
+  const [citySearch, setCitySearch] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [cityOpen, setCityOpen] = useState(false);
+
+  const filteredCities = majorCities.filter((city) =>
+    city.toLowerCase().includes(citySearch.toLowerCase())
+  );
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!selectedCity) {
+      setCityOpen(true);
+      return;
+    }
     setSubmitted(true);
   };
 
@@ -75,21 +88,72 @@ const FranchiseForm = () => {
               </label>
 
               {/* City */}
-              <div>
-                <label className="label-text text-dark-muted block mb-1.5">City You Want to Open In</label>
-                <select className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none">
-                  <option value="">Select city</option>
-                  {majorCities.map((c) => <option key={c} value={c}>{c}</option>)}
-                </select>
+
+              {/* Searchable City Dropdown */}
+              <div className="relative">
+                <label className="label-text text-dark-muted block mb-1.5">
+                  City You Want to Open In
+                </label>
+
+                <input
+                  type="text"
+                  name="city"
+                  value={citySearch}
+                  required
+                  autoComplete="off"
+                  placeholder="Search or select city..."
+                  onFocus={() => setCityOpen(true)}
+                  onChange={(e) => {
+                    setCitySearch(e.target.value);
+                    setSelectedCity("");
+                    setCityOpen(true);
+                  }}
+                  className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none transition-colors"
+                />
+
+                {cityOpen && (
+                  <div className="absolute z-50 mt-1 w-full max-h-56 overflow-y-auto rounded-lg border border-dark-foreground/10 bg-[#111111] shadow-xl">
+                    {filteredCities.length > 0 ? (
+                      filteredCities.map((city) => (
+                        <button
+                          key={city}
+                          type="button"
+                          onClick={() => {
+                            setCitySearch(city);
+                            setSelectedCity(city);
+                            setCityOpen(false);
+                          }}
+                          className={`w-full px-4 py-3 text-left text-sm font-body transition-colors hover:bg-primary/10 hover:text-primary ${selectedCity === city
+                            ? "bg-primary/10 text-primary"
+                            : "text-dark-foreground"
+                            }`}
+                        >
+                          {city}
+                        </button>
+                      ))
+                    ) : (
+                      <p className="px-4 py-3 text-sm text-dark-muted">
+                        No city found.
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {selectedCity === "" && citySearch !== "" && (
+                  <p className="mt-1 text-xs text-dark-muted">
+                    Please select a city from the list.
+                  </p>
+                )}
               </div>
 
+
               {/* Model */}
-              <div>
+              {/* <div>
                 <label className="label-text text-dark-muted block mb-1.5">Preferred Franchise Model</label>
                 <select className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none">
                   {["Not Sure", "Lite", "Studio", "Premium"].map((m) => <option key={m} value={m}>{m}</option>)}
                 </select>
-              </div>
+              </div> */}
 
               {/* Budget */}
               <div>
@@ -100,8 +164,8 @@ const FranchiseForm = () => {
               </div>
 
               {/* Location */}
-              <div>
-                <label className="label-text text-dark-muted block mb-1.5">Do you have a location in mind?</label>
+              {/* <div>
+                <label className="label-text text-dark-muted block mb-1.5">Any addiional thought before you want to connect?</label>
                 <div className="flex gap-4">
                   {["Yes", "No"].map((opt) => (
                     <label key={opt} className="flex items-center gap-2 font-body text-sm text-dark-muted cursor-pointer">
@@ -110,11 +174,11 @@ const FranchiseForm = () => {
                     </label>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               {/* Why */}
               <div>
-                <label className="label-text text-dark-muted block mb-1.5">Why do you want to open a PowerFit franchise?</label>
+                <label className="label-text text-dark-muted block mb-1.5">Any addiional thought before you want to connect?</label>
                 <textarea
                   rows={3}
                   className="w-full px-4 py-3 rounded-lg border border-dark-foreground/10 bg-[#111111] text-dark-foreground font-body text-sm focus:border-primary focus:outline-none resize-none"
