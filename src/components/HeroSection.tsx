@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Play, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import FreeTrialModal from "@/components/FreeTrialModal";
 import { PowerFitImage } from "@/components/ui/PowerFitImage";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -201,6 +202,7 @@ const marqueeText = "25000+ Members · 5+ Locations · 9+ Years · Expanding Glo
 
 const HeroSection = () => {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [trialOpen, setTrialOpen] = useState(false);
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col section-dark overflow-hidden">
@@ -267,15 +269,16 @@ const HeroSection = () => {
               transition={{ delay: 2.1, duration: 0.5 }}
               className="flex flex-col sm:flex-row flex-wrap gap-4"
             >
-              <MotionLink
-                to="/#contact"
+              <motion.button
+                type="button"
+                onClick={() => setTrialOpen(true)}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
                 className="group flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full label-text font-bold transition-all hover:shadow-xl hover:shadow-primary/30 animate-pulse-glow"
               >
                 Start Free Trial
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </MotionLink>
+              </motion.button>
               <MotionLink
                 to="/programs"
                 whileHover={{ scale: 1.03 }}
@@ -338,6 +341,7 @@ const HeroSection = () => {
 
       {/* YouTube Modal */}
       <YouTubeModal open={videoModalOpen} onOpenChange={setVideoModalOpen} />
+      <FreeTrialModal open={trialOpen} onOpenChange={setTrialOpen} />
     </section>
   );
 };

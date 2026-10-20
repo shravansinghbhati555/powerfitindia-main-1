@@ -2,19 +2,43 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import type { Program } from "@/data/programs";
 import { useCategoryTheme } from "@/components/programs/category/CategoryThemeProvider";
+import { submitWebsiteEnquiry } from "@/lib/websiteEnquiry";
 
 export default function FreeTrial({ programs }: { programs: Program[] }) {
   const theme = useCategoryTheme();
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [program, setProgram] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [notice, setNotice] = useState<{ tone: "ok" | "error"; text: string } | null>(null);
 
   const options = useMemo(() => programs.map((p) => p.name), [programs]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Hi PowerFit! I want a free trial class.\nName: ${name}\nMobile: ${mobile}\nProgram: ${program || theme.label}`;
-    window.open(`https://wa.me/919116838715?text=${encodeURIComponent(msg)}`, "_blank");
+    setSubmitting(true);
+    setNotice(null);
+    const chosen = program || theme.label;
+    const result = await submitWebsiteEnquiry({
+      name,
+      mobile,
+      message: `Free trial request for ${chosen}.`,
+      topic: "Free trial",
+    });
+    setSubmitting(false);
+    if (!result.ok) {
+      setNotice({ tone: "error", text: result.message });
+      return;
+    }
+    setName("");
+    setMobile("");
+    setProgram("");
+    setNotice({
+      tone: "ok",
+      text: result.already
+        ? "We already have your enquiry and will be in touch shortly."
+        : "Request received. Our team will contact you shortly.",
+    });
   };
 
   return (
@@ -63,13 +87,25 @@ export default function FreeTrial({ programs }: { programs: Program[] }) {
                 </option>
               ))}
             </select>
+            {notice ? (
+              <p className={`text-sm ${notice.tone === "ok" ? "text-emerald-400" : "text-red-400"}`}>{notice.text}</p>
+            ) : null}
             <button
               type="submit"
-              className="w-full text-white font-black py-4 rounded-xl text-lg transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[52px]"
+              disabled={submitting}
+              className="w-full text-white font-black py-4 rounded-xl text-lg transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[52px] disabled:opacity-70"
               style={{ backgroundColor: theme.accent }}
             >
-              💬 Send Free Trial Request on WhatsApp →
+              {submitting ? "Sending…" : "Request a free class"}
             </button>
+            <a
+              href={`https://wa.me/919116838715?text=${encodeURIComponent("Hi PowerFit! I want a free trial class.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center text-sm text-zinc-400 underline underline-offset-4"
+            >
+              Or message us on WhatsApp
+            </a>
           </form>
 
           <div className="rounded-3xl bg-black/30 border border-white/10 p-6 text-zinc-300">

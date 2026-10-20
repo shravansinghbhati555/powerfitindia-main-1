@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MessageCircle, Send, MapPin, Phone, ArrowRight } from "lucide-react";
+import { submitWebsiteEnquiry } from "@/lib/websiteEnquiry";
 
 const MotionLink = motion(Link);
 
@@ -40,16 +41,37 @@ const FreeTrialBanner = () => (
 const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [shakeFields, setShakeFields] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [notice, setNotice] = useState<{ tone: "ok" | "error"; text: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) {
       setShakeFields(true);
       setTimeout(() => setShakeFields(false), 500);
       return;
     }
-    alert("Thank you! We'll be in touch soon.");
+    setSubmitting(true);
+    setNotice(null);
+    const result = await submitWebsiteEnquiry({
+      name: formData.name,
+      mobile: formData.phone,
+      email: formData.email,
+      message: formData.message,
+      topic: "Contact",
+    });
+    setSubmitting(false);
+    if (!result.ok) {
+      setNotice({ tone: "error", text: result.message });
+      return;
+    }
     setFormData({ name: "", email: "", phone: "", message: "" });
+    setNotice({
+      tone: "ok",
+      text: result.already
+        ? "We already have your enquiry and will be in touch shortly."
+        : "Thank you! We'll be in touch soon.",
+    });
   };
 
   return (
@@ -120,13 +142,19 @@ const ContactSection = () => {
                 onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
                 className="w-full bg-dark text-dark-foreground px-5 py-4 rounded-xl font-body text-sm placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-primary/50 border border-dark-foreground/10 transition-shadow resize-none"
               />
+              {notice ? (
+                <p className={`font-body text-sm ${notice.tone === "ok" ? "text-primary" : "text-red-400"}`}>
+                  {notice.text}
+                </p>
+              ) : null}
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-                className="w-full bg-primary text-primary-foreground py-4 rounded-full label-text font-bold shadow-lg shadow-primary/20 transition-shadow hover:shadow-xl hover:shadow-primary/30"
+                disabled={submitting}
+                whileHover={{ scale: submitting ? 1 : 1.02 }}
+                whileTap={{ scale: submitting ? 1 : 0.97 }}
+                className="w-full bg-primary text-primary-foreground py-4 rounded-full label-text font-bold shadow-lg shadow-primary/20 transition-shadow hover:shadow-xl hover:shadow-primary/30 disabled:opacity-70"
               >
-                Start Your Journey
+                {submitting ? "Sending…" : "Start Your Journey"}
               </motion.button>
             </motion.form>
           </div>
