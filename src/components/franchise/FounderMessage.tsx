@@ -35,7 +35,7 @@ const FounderMessage = () => {
           >
             <MotionPowerFitImage
               src="/founder-powerfit.jpeg"
-              alt="Founder of PowerFit India"
+              alt="Abhishek Tiwari - Founder of PowerFit India"
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="aspect-square w-full max-w-[400px] rounded-full border-2 border-primary/20 object-cover object-[center_20%]"
             />
@@ -58,7 +58,14 @@ const FounderMessage = () => {
                 <span className="inline-block w-0.5 h-4 bg-primary animate-pulse ml-0.5 align-middle" />
               )}
             </div>
-            <p className="font-display text-base text-dark-foreground mt-6">— Founder, PowerFit India</p>
+            <div className="mt-6">
+              <p className="font-display text-xl md:text-2xl text-dark-foreground tracking-wide">
+                Abhishek Tiwari
+              </p>
+              <p className="font-body text-sm italic text-primary font-medium mt-1">
+                Founder, PowerFit India
+              </p>
+            </div>
 
             <a
               href="https://wa.me/919116838715"
