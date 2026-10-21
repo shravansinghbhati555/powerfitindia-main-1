@@ -151,8 +151,8 @@ export default function PrivacyPolicyPage() {
                   <p className="text-white font-semibold">PowerFit India</p>
                   <p>
                     Email:{" "}
-                    <a className="underline underline-offset-4 hover:text-white" href="mailto:hello@powerfitindia.com">
-                      hello@powerfitindia.com
+                    <a className="underline underline-offset-4 hover:text-white" href="mailto:contact@powerfitindia.com">
+                      contact@powerfitindia.com
                     </a>
                   </p>
                   <p>

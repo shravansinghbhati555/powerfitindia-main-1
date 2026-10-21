@@ -97,9 +97,9 @@ const ContactSection = () => {
 
               <div className="mt-8 space-y-4">
                 {[
-                  { icon: Send, text: "hello@powerfitindia.com" },
+                  { icon: Send, text: "contact@powerfitindia.com" },
                   { icon: Phone, text: "+91 9116838715" },
-                  { icon: MapPin, text: "Mumbai, India" },
+                  { icon: MapPin, text: "Jaipur, India" },
                 ].map((item) => (
                   <div key={item.text} className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-dark-card border border-dark-foreground/10 flex items-center justify-center">
@@ -130,9 +130,8 @@ const ContactSection = () => {
                   placeholder={field.placeholder}
                   value={formData[field.name as keyof typeof formData]}
                   onChange={(e) => setFormData((prev) => ({ ...prev, [field.name]: e.target.value }))}
-                  className={`w-full bg-dark text-dark-foreground px-5 py-4 rounded-xl font-body text-sm placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-primary/50 border border-dark-foreground/10 transition-all ${
-                    shakeFields && !formData[field.name as keyof typeof formData] ? "animate-[shake_0.3s_ease-in-out]  border-primary/50" : ""
-                  }`}
+                  className={`w-full bg-dark text-dark-foreground px-5 py-4 rounded-xl font-body text-sm placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-primary/50 border border-dark-foreground/10 transition-all ${shakeFields && !formData[field.name as keyof typeof formData] ? "animate-[shake_0.3s_ease-in-out]  border-primary/50" : ""
+                    }`}
                 />
               ))}
               <textarea

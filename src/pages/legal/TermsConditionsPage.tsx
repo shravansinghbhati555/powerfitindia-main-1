@@ -152,8 +152,8 @@ export default function TermsConditionsPage() {
                 <div className="mt-4 space-y-2 text-sm text-zinc-300 leading-relaxed">
                   <p>
                     Email:{" "}
-                    <a className="underline underline-offset-4 hover:text-white" href="mailto:hello@powerfitindia.com">
-                      hello@powerfitindia.com
+                    <a className="underline underline-offset-4 hover:text-white" href="mailto:contact@powerfitindia.com">
+                      contact@powerfitindia.com
                     </a>
                   </p>
                   <p>

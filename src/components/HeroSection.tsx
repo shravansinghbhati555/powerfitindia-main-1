@@ -242,11 +242,11 @@ const HeroSection = () => {
 
             <h1
               className="font-display text-dark-foreground leading-[0.9]  mb-6"
-              style={{ fontSize: "clamp(2.5rem, 4vw + 1rem, 5rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 3vw + 1rem, 5rem)" }}
             >
               <StampedText text="Thriving to be India's" />
               <br />
-              <StampedText text="Number 1 ecosystem" delay={0.6} />
+              <StampedText text="Number 1 fitness ecosystem" delay={0.6} />
               <br />
               <span className="gradient-text">
                 <StampedText text="Empire" delay={1.2} />

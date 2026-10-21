@@ -74,7 +74,7 @@ const statPills = [
 ];
 
 const marqueeText =
-  "GLOBAL EXPANSION 2026–2030 · 500+ FRANCHISE LOCATIONS · 3 BUSINESS VERTICALS · ZIDD · JAZBAA · JUNOON · FOREVER FIT FOREVER STRONG · ";
+  "GLOBAL EXPANSION 2026–2030 · 200+ FRANCHISE LOCATIONS · 3 BUSINESS VERTICALS · ZIDD · JAZBAA · JUNOON · FOREVER FIT FOREVER STRONG · ";
 
 /* ── Card component ─────────────────────────────────────────── */
 const VisionCard = ({

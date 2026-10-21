@@ -31,24 +31,20 @@ const FounderMessage = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
           {/* Photo */}
           <motion.div
-            initial={{ opacity: 0, scale: 1.1 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="relative overflow-hidden rounded-2xl border-2 border-primary/20"
+            className="relative overflow-hidden rounded-2xl"
           >
             <MotionPowerFitImage
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              src="https://powerfitindia.com/cdn/shop/files/WhatsApp_Image_2026-02-07_at_10.42.21_PM.jpg?v=1770614966&width=700"
+              src="/founder-powerfit.jpeg"
               alt="Founder of PowerFit India"
               sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-              className="w-full h-[400px] object-cover"
+              className="aspect-square w-full max-w-[400px] rounded-full border-2 border-primary/20 object-cover object-[center_20%]"
             />
-            <div className="absolute bottom-4 left-4 bg-dark/80 backdrop-blur px-4 py-2 rounded-lg">
-              <p className="font-display text-sm text-dark-foreground">Founder, PowerFit India</p>
-            </div>
+
+            {/* <div className="absolute bottom-4 left-4 bg-dark/80 backdrop-blur px-4 py-2 rounded-lg">
+                  <p className="font-display text-sm text-dark-foreground">
+                       Founder, PowerFit India
+                  </p>
+            </div> */}
           </motion.div>
 
           {/* Message */}

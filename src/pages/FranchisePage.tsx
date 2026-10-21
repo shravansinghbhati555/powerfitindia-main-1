@@ -70,7 +70,7 @@ const FranchisePage = () => {
       <WhatsIncluded />
       <FranchiseFAQ />
       <FranchiseForm />
-      <FranchiseFooterCTA />
+      {/* <FranchiseFooterCTA /> */}
       <Footer />
     </div>
   );

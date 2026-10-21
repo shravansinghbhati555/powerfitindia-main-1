@@ -324,11 +324,10 @@ const MemberConsentPolicyPage = () => {
                   <button
                     type="button"
                     onClick={() => jumpTo(item.id)}
-                    className={`block w-full border-l-2 py-1.5 pl-3 text-left font-body text-[13px] leading-snug transition-colors ${
-                      activeId === item.id
+                    className={`block w-full border-l-2 py-1.5 pl-3 text-left font-body text-[13px] leading-snug transition-colors ${activeId === item.id
                         ? "border-primary text-dark-foreground"
                         : "border-dark-foreground/10 text-dark-muted hover:border-primary/50 hover:text-dark-foreground/80"
-                    }`}
+                      }`}
                   >
                     <span className="block text-[10px] uppercase tracking-[0.1em] text-primary/70">
                       {item.label}
@@ -413,10 +412,10 @@ const MemberConsentPolicyPage = () => {
           <p className="font-body text-xs leading-relaxed text-dark-muted">
             Questions about this Agreement? Write to us at{" "}
             <a
-              href="mailto:hello@powerfitindia.com"
+              href="mailto:contact@powerfitindia.com"
               className="text-primary transition-colors hover:text-dark-foreground"
             >
-              hello@powerfitindia.com
+              contact@powerfitindia.com
             </a>{" "}
             or speak to your PowerFit branch manager.
           </p>
