@@ -137,7 +137,8 @@ const EKGLine = () => {
   );
 };
 
-/* ---- Full-screen Hero Background Video ---- */
+
+/* ---- Responsive Full-screen Hero Background Video ---- */
 const LazyHeroVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -146,28 +147,19 @@ const LazyHeroVideo = () => {
     if (!video) return;
 
     const playVideo = () => {
-      video.play().catch(() => {
-        // Autoplay may be restricted by the browser.
-      });
+      if (document.visibilityState === "visible") {
+        video.play().catch(() => {
+          // Browser may restrict autoplay.
+        });
+      }
     };
 
     playVideo();
 
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        playVideo();
-      } else {
-        video.pause();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("visibilitychange", playVideo);
 
     return () => {
-      document.removeEventListener(
-        "visibilitychange",
-        handleVisibilityChange
-      );
+      document.removeEventListener("visibilitychange", playVideo);
     };
   }, []);
 
@@ -178,17 +170,22 @@ const LazyHeroVideo = () => {
       muted
       loop
       playsInline
+      webkit-playsinline="true"
       preload="auto"
       aria-hidden="true"
-      className="absolute inset-0 h-full w-full object-cover object-center"
+      className="
+        absolute inset-0
+        h-full w-full
+        object-cover
+        object-[60%_center]
+        sm:object-center
+      "
     >
-      <source
-        src="/videos/Video%20Project.mp4"
-        type="video/mp4"
-      />
+      <source src="/videos/Video%20Project.mp4" type="video/mp4" />
     </video>
   );
 };
+
 
 /* ---- YouTube Modal ---- */
 const YouTubeModal = ({
@@ -246,8 +243,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="section-dark relative isolate flex min-h-screen flex-col overflow-hidden"
-    >
+    className="section-dark relative isolate flex min-h-[100vh] flex-col overflow-hidden">
       {/* Background video: Hero section only */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <LazyHeroVideo />
