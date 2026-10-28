@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -173,13 +172,7 @@ const LazyHeroVideo = () => {
       webkit-playsinline="true"
       preload="auto"
       aria-hidden="true"
-      className="
-        absolute inset-0
-        h-full w-full
-        object-cover
-        object-[60%_center]
-        sm:object-center
-      "
+      className="absolute inset-0 h-full w-full object-cover object-center"
     >
       <source src="/videos/Video%20Project.mp4" type="video/mp4" />
     </video>
@@ -245,7 +238,7 @@ const HeroSection = () => {
       id="hero"
     className="section-dark relative isolate flex min-h-[100vh] flex-col overflow-hidden">
       {/* Background video: Hero section only */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden sm:block">
         <LazyHeroVideo />
 
         {/* Dark overlay */}
@@ -258,8 +251,8 @@ const HeroSection = () => {
       </div>
 
       {/* Main hero content */}
-      <div className="relative z-10 flex flex-1 items-center pt-20 md:pt-24">
-        <div className="section-container relative w-full py-12 lg:py-16">
+      <div className="relative z-10 flex flex-1 items-start pt-12 sm:items-center sm:pt-20 md:pt-24">
+        <div className="section-container relative w-full py-6 sm:py-12 lg:py-16">
           {/* Wireframe dumbbell watermark */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.04]">
             <div
@@ -293,7 +286,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, width: 0 }}
               animate={{ opacity: 1, width: "auto" }}
               transition={{ delay: 0.2, duration: 0.4 }}
-              className="mb-6 inline-block"
+              className="mb-3 inline-block sm:mb-6"
             >
               <span className="label-text rounded-full border border-primary/20 bg-primary/10 px-4 py-2 tracking-[0.3em] text-primary">
                 #ZiddJazbaaJunoon
@@ -301,7 +294,7 @@ const HeroSection = () => {
             </motion.div>
 
             <h1
-              className="font-display mb-6 leading-[0.9] text-dark-foreground"
+              className="font-display mb-1 sm:mb-6 leading-[0.9] text-dark-foreground"
               style={{
                 fontSize: "clamp(2.5rem, 3vw + 1rem, 5rem)",
               }}
@@ -322,26 +315,42 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.8, duration: 0.5 }}
-              className="font-body mb-8 max-w-lg text-base leading-relaxed text-dark-muted md:text-lg"
+              className="font-body mb-3 max-w-lg text-base leading-relaxed text-dark-muted sm:mb-8 md:text-lg"
             >
               From premium gyms to gym equipment, gym AI automation and
               end to end gym setup solutions. Join 25k+ members accross
               all our location.
             </motion.p>
 
+            {/* Mobile video between paragraph and main buttons */}
+            <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-xl sm:hidden">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              >
+                <source src="/videos/Video%20Project.mp4" type="video/mp4" />
+              </video>
+              <div className="pointer-events-none absolute inset-0 bg-black/20" />
+            </div>
+
             {/* CTA buttons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.1, duration: 0.5 }}
-              className="flex flex-col flex-wrap gap-4 sm:flex-row"
+              className="grid grid-cols-2 items-center gap-2 sm:flex sm:flex-row sm:flex-wrap sm:gap-4"
             >
               <motion.button
                 type="button"
                 onClick={() => setTrialOpen(true)}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
-                className="group animate-pulse-glow flex items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 font-bold text-primary-foreground transition-all hover:shadow-xl hover:shadow-primary/30 label-text"
+                className="group animate-pulse-glow flex w-full items-center justify-center gap-1 rounded-full bg-primary px-2 py-3 text-xs font-bold text-primary-foreground transition-all hover:shadow-xl hover:shadow-primary/30 label-text sm:w-auto sm:gap-3 sm:px-8 sm:py-4 sm:text-sm"
               >
                 Start Free Trial
                 <ArrowRight
@@ -354,7 +363,7 @@ const HeroSection = () => {
                 to="/programs"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
-                className="group flex items-center justify-center gap-3 rounded-full border border-dark-foreground/20 px-8 py-4 font-bold text-dark-foreground transition-all hover:border-primary hover:text-primary label-text"
+                className="group flex w-full items-center justify-center gap-1 rounded-full border border-dark-foreground/20 px-2 py-3 text-xs font-bold text-dark-foreground transition-all hover:border-primary hover:text-primary label-text sm:w-auto sm:gap-3 sm:px-8 sm:py-4 sm:text-sm"
               >
                 Explore Programs
               </MotionLink>
@@ -364,7 +373,7 @@ const HeroSection = () => {
                 onClick={() => setVideoModalOpen(true)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group flex cursor-pointer items-center justify-center gap-3 font-bold text-dark-muted transition-colors hover:text-primary label-text"
+                className="group col-span-2 flex cursor-pointer items-center justify-center gap-3 justify-self-center font-bold text-dark-muted transition-colors hover:text-primary label-text sm:col-span-1 sm:justify-self-auto"
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary/60 bg-primary/10 transition-all group-hover:bg-primary/20">
                   <Play
